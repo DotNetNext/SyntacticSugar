@@ -24,7 +24,7 @@ namespace Test.Generation
 
            var   classCode2 = ClassGenerating.DataTableToClass(dt, "classTatabale");
 
-            
+             
 
         }
     }
