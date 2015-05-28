@@ -13,7 +13,7 @@ namespace Test.Generation
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //根据实类生成
             var cg = new cgtest();
             var classCode = ClassGenerating.DynamicToClass(cg, "newclass");
 
@@ -50,16 +50,7 @@ namespace Test.Generation
 
     }
             
-    public class newclass
-    {
-
-        public int id { get; set; }
-
-        public String name { get; set; }
-
-        public Decimal? money { get; set; }
-
-    }
+ 
             
             
     public class cgtest

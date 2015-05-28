@@ -85,7 +85,7 @@ namespace SyntacticSugar
 
 
         /// <summary>
-        /// 通用图片上传类
+        /// 裁剪图片
         /// </summary>
         /// <param name="PostedFile">HttpPostedFile控件</param>
         /// <param name="SavePath">保存路径【sys.config配置路径】</param>
@@ -94,7 +94,7 @@ namespace SyntacticSugar
         /// <param name="cMode">剪切类型</param>
         /// <param name="ext">返回格式</param>
         /// <returns>返回上传信息</returns>
-        public ResponseMessage FileSaveAs(System.Web.HttpPostedFile PostedFile, string SavePath, int oImgWidth, int oImgHeight, CutMode cMode)
+        public ResponseMessage FileCutSaveAs(System.Web.HttpPostedFile PostedFile, string SavePath, int oImgWidth, int oImgHeight, CutMode cMode)
         {
             ResponseMessage rm = new ResponseMessage();
             try
@@ -108,7 +108,7 @@ namespace SyntacticSugar
                 }
 
                 //获取上传文件的大小
-                int PostFileSize = PostedFile.ContentLength / 1024;
+                double PostFileSize = PostedFile.ContentLength / 1024.0 / 1024.0;
 
                 if (PostFileSize > SetAllowSize)
                 {
@@ -129,9 +129,10 @@ namespace SyntacticSugar
                 string sNewfileName = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString("000");
                 string sFName = sNewfileName + sEx;
                 rm.IsError = false;
-                rm.WebPath = sFName;
-                rm.filePath = HttpContext.Current.Server.MapPath(sFName);
+                rm.FileName = sFName;
                 string sFullPath = Path.Combine(SavePath, sFName);
+                rm.filePath = sFullPath;
+                rm.WebPath = "/"+sFullPath.Replace(HttpContext.Current.Server.MapPath("~/"), "").Replace("\\", "/");
                 CreateSmallPhoto(fullPath, oImgWidth, oImgHeight, sFullPath, SetPicWater, SetWordWater, cMode);
                 if (File.Exists(fullPath))
                 {
@@ -199,9 +200,9 @@ namespace SyntacticSugar
                     System.IO.Directory.CreateDirectory(SavePath);
                 }
 
-
-                string fullPath = SavePath.Trim('\\') + "\\" + NewfileName + sEx;
-                rm.WebPath = fullPath.Replace(HttpContext.Current.Server.MapPath("~/"), "").Replace("\\", "//");
+                rm.FileName = NewfileName + sEx;
+                string fullPath = SavePath.Trim('\\') + "\\" + rm.FileName;
+                rm.WebPath = "/"+fullPath.Replace(HttpContext.Current.Server.MapPath("~/"), "").Replace("\\", "/");
                 rm.filePath = fullPath;
                 rm.Size = PostFileSize;
                 PostedFile.SaveAs(fullPath);
@@ -1075,6 +1076,28 @@ namespace SyntacticSugar
             /// 文件大小
             /// </summary>
             public double Size { get; set; }
+            /// <summary>
+            /// 图片名
+            /// </summary>
+            public string FileName { get; set; }
+            /// <summary>
+            /// 图片目录
+            /// </summary>
+            public string Directory
+            {
+                get
+                {
+                    if (WebPath == null) return null;
+                    return WebPath.Replace(FileName, "");
+                }
+            }
+            /// <summary>
+            /// 缩略图路径
+            /// </summary>
+            public string SmallPath(int index)
+            {
+                return string.Format("{0}{1}_{2}{3}", Directory, Path.GetFileNameWithoutExtension(FileName), index, Path.GetExtension(FileName));
+            }
         }
         #endregion
     }
