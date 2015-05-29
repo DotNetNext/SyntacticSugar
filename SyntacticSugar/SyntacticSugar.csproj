@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extenions\IsWhat.cs" />
     <Compile Include="Form\RequestToModel.cs" />
     <Compile Include="Form\UploadFile.cs" />
     <Compile Include="Form\UploadImage.cs" />

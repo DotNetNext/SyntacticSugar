@@ -12,3 +12,10 @@ D:\学习\SyntacticSugar\Test\bin\Test.pdb
 D:\学习\SyntacticSugar\Test\bin\SyntacticSugar.dll
 D:\学习\SyntacticSugar\Test\bin\SyntacticSugar.pdb
 D:\学习\SyntacticSugar\Test\obj\Debug\Test.pdb
+D:\SyntacticSugar\Test\bin\Test.dll
+D:\SyntacticSugar\Test\bin\Test.pdb
+D:\SyntacticSugar\Test\bin\SyntacticSugar.dll
+D:\SyntacticSugar\Test\bin\SyntacticSugar.pdb
+D:\SyntacticSugar\Test\obj\Debug\ResolveAssemblyReference.cache
+D:\SyntacticSugar\Test\obj\Debug\Test.dll
+D:\SyntacticSugar\Test\obj\Debug\Test.pdb

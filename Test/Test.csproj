@@ -64,6 +64,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="Extenions\IsWhatTest.aspx" />
     <Content Include="file\UploadImageTest.aspx" />
     <Content Include="Generation\ClassGeneratingTest.aspx" />
     <Content Include="Styles\Site.css" />
@@ -107,6 +108,13 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Extenions\IsWhatTest.aspx.cs">
+      <DependentUpon>IsWhatTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extenions\IsWhatTest.aspx.designer.cs">
+      <DependentUpon>IsWhatTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="file\UploadImageTest.aspx.cs">
       <DependentUpon>UploadImageTest.aspx</DependentUpon>
