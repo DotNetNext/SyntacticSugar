@@ -49,6 +49,7 @@
     <Compile Include="Generation\ClassGenerating.cs" />
     <Compile Include="TextType\XHtmlElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\PageString.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
