@@ -14,7 +14,7 @@ namespace Test.Extenions
 
             /***扩展函数名细***/
 
-            //【IsArea】  
+            //【IsInRange】  
             int num = 100;
             //以前写法
             if (num > 100 & num < 1000) { }
