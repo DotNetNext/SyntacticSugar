@@ -32,6 +32,16 @@ namespace Test.Extenions
             //更顺手了没有 }
 
 
+            //【IsIn】
+            string value = "a";
+            //以前写法我在很多项目中看到
+            if (value == "a" || value == "b" || value == "c") { 
+            }
+            //现在写法
+            if (value.IsIn("a", "b", "c")) { 
+            
+            }
+
             //【IsHasValue】
             string ss = "";
             //以前写法
