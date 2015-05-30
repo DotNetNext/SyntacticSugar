@@ -22,7 +22,7 @@ namespace SyntacticSugar
         /// <param name="begin">大于等于begin</param>
         /// <param name="end">小于等于end</param>
         /// <returns></returns>
-        public static bool IsArea(this int o, int begin, int end)
+        public static bool IsInRange(this int o, int begin, int end)
         {
             return o >= begin && o <= end;
         }
@@ -33,7 +33,7 @@ namespace SyntacticSugar
         /// <param name="begin">大于等于begin</param>
         /// <param name="end">小于等于end</param>
         /// <returns></returns>
-        public static bool IsArea(this DateTime o, DateTime begin, DateTime end)
+        public static bool IsInRange(this DateTime o, DateTime begin, DateTime end)
         {
             return o >= begin && o <= end;
         }
@@ -70,7 +70,7 @@ namespace SyntacticSugar
         /// 有值?(与IsNullOrEmpty相反)
         /// </summary>
         /// <returns></returns>
-        public static bool IsHasValue(this object o)
+        public static bool IsAnyValue(this object o)
         {
             if (o == null) return false;
             return o.ToString() != "";
@@ -79,7 +79,7 @@ namespace SyntacticSugar
         /// 有值?(与IsNullOrEmpty相反)
         /// </summary>
         /// <returns></returns>
-        public static bool IsHasValue(this IEnumerable<object> o)
+        public static bool IsAnyValue(this IEnumerable<object> o)
         {
             if (o == null || o.Count() == 0) return false;
             return true;

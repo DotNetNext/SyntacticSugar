@@ -19,7 +19,7 @@ namespace Test.Extenions
             //以前写法
             if (num > 100 & num < 1000) { }
             //现在写法
-            if (num.IsArea(100, 1000)) { } //datetime类型也支持
+            if (num.IsInRange(100, 1000)) { } //datetime类型也支持
 
 
 
@@ -37,14 +37,14 @@ namespace Test.Extenions
             //以前写法
             if (!string.IsNullOrEmpty(ss)) { }
             //现在写法
-            if (s.IsHasValue()) { }
+            if (s.IsAnyValue()) { }
 
 
             List<string> list = null;
             //以前写法
             if (list != null && list.Count > 0) { }
             //现在写法
-            if (list.IsHasValue()) { }
+            if (list.IsAnyValue()) { }
 
 
 
