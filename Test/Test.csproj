@@ -67,10 +67,6 @@
     <Content Include="Extenions\IsWhatTest.aspx" />
     <Content Include="file\UploadImageTest.aspx" />
     <Content Include="Generation\ClassGeneratingTest.aspx" />
-    <Content Include="Styles\Site.css" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="UI\PageStringTest.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
