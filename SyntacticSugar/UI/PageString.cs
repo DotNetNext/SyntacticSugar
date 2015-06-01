@@ -15,6 +15,18 @@ namespace SyntacticSugar
     public class PageString
     {
         private ParamsModel _params;
+        public PageString()
+        {
+            _params = new ParamsModel()
+            {
+                IsEnglish = false,
+                IsShowText = true,
+                TextFormat = "<span class=\"pagetext\"><strong>总共</strong>:{0} 条 <strong>当前</strong>:{1}/{2}</span> ",
+                ClassName = "pagination",
+                PageIndexName = "pageIndex",
+                IsAjax = false
+            };
+        }
 
         #region  set method
         /// <summary>
@@ -67,21 +79,6 @@ namespace SyntacticSugar
 
         #endregion
 
-
-
-        public PageString()
-        {
-            _params = new ParamsModel()
-            {
-                IsEnglish = false,
-                IsShowText = true,
-                TextFormat = "<span class=\"pagetext\"><strong>总共</strong>:{0} 条 <strong>当前</strong>:{1}/{2}</span> ",
-                ClassName = "pagination",
-                PageIndexName = "pageIndex",
-                IsAjax = false
-            };
-        }
-
         /*免费的样式 
         .pagination .click {cursor:pointer}
         .pagination a{text-decoration: none;border: 1px solid #AAE;color: #15B;font-size: 13px;border-radius: 2px;}
@@ -94,6 +91,7 @@ namespace SyntacticSugar
         .pagination .current.prev, .pagination .current.next{color: #999;border-color: #999;background: #fff;}
          * */
 
+        #region main method
         /// <summary>
         /// 分页算法＜一＞共20页 首页 上一页  1  2  3  4  5  6  7  8  9  10  下一页  末页 
         /// </summary>
@@ -169,6 +167,9 @@ namespace SyntacticSugar
             return ConversionData(pagestr.ToString());
         }
 
+        #endregion
+
+        #region private method
         private string ConversionData(string page)
         {
             if (_params.IsEnglish)
@@ -188,8 +189,10 @@ namespace SyntacticSugar
             }
             return page;
 
-        }
+        } 
+        #endregion
 
+        #region model
         private class ParamsModel
         {
             /// <summary>
@@ -219,7 +222,8 @@ namespace SyntacticSugar
             /// 默认值：《span class=\"pagetext\"》《strong》总共《/strong》:{0} 条 《strong》当前《/strong》:{1}/{2}《/span》
             /// </summary>
             public string TextFormat { get; set; }
-        }
+        } 
+        #endregion
 
     }
 

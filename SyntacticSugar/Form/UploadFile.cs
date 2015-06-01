@@ -254,7 +254,7 @@ namespace SyntacticSugar
         } 
         #endregion
 
-        #region models
+        #region model
 
         private class ParamsModel
         {
