@@ -10,7 +10,7 @@ namespace SyntacticSugar
     /// ** 描述：程序性能测试类
     /// ** 创始时间：2015-5-30
     /// ** 修改时间：-
-    /// ** 修改人：sunkaixuan
+    /// ** 作者：sunkaixuan
     /// ** 使用说明：http://www.cnblogs.com/sunkaixuan/p/4540840.html
     /// </summary>
     public class PerformanceTest
