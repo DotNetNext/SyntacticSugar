@@ -15,6 +15,7 @@ namespace SyntacticSugar
     /// ** 创始时间：2015-5-27
     /// ** 修改时间：-
     /// ** 作者：sunkaixuan
+    /// ** 使用说明：http://www.cnblogs.com/sunkaixuan/p/4533954.html
     /// </summary>
     public class UploadFile
     {
@@ -27,12 +28,13 @@ namespace SyntacticSugar
                 FileDirectory = "/upload",
                 FileType = ".pdf,.xls,.xlsx,.doc,.docx,.txt,.png,.jpg,.gif",
                 MaxSizeM = 10,
-                PathSaveType = PathSaveType.dateTimeNow
+                PathSaveType = PathSaveType.dateTimeNow,
+                IsRenameSameFile=true
             };
         }
 
         /// <summary>
-        /// 文件保存路径
+        /// 文件保存路径(默认:/upload)
         /// </summary>
         public void SetFileDirectory(string fileDirectory)
         {
@@ -51,7 +53,7 @@ namespace SyntacticSugar
 
    
         /// <summary>
-        /// 是否使用原始文件名作为新文件的文件名
+        /// 是否使用原始文件名作为新文件的文件名(默认:true)
         /// </summary>
         /// <param name="isUseOldFileName">true原始文件名,false系统生成新文件名</param>
         public void SetIsUseOldFileName(bool isUseOldFileName)
@@ -60,7 +62,7 @@ namespace SyntacticSugar
         }
 
         /// <summary>
-        /// 允许上传的文件类型, 逗号分割,必须全部小写! (默认值:.pdf,.xls,.xlsx,.doc,.docx,.txt,.png,.jpg,.gif)
+        /// 允许上传的文件类型, 逗号分割,必须全部小写! *表示所有 (默认值: .pdf,.xls,.xlsx,.doc,.docx,.txt,.png,.jpg,.gif )  
         /// </summary>
         public void SetFileType(string fileType)
         {
@@ -215,20 +217,23 @@ namespace SyntacticSugar
         }
 
         /// <summary>
-        /// 验证文件类型
+        /// 验证文件类型)
         /// </summary>
         /// <param name="fileName"></param>
         private void CheckingType(ResponseMessage message, string fileName)
         {
-            // 获取允许允许上传类型列表
-            string[] typeList = Params.FileType.Split(',');
+            if (Params.FileType != "*")
+            {
+                // 获取允许允许上传类型列表
+                string[] typeList = Params.FileType.Split(',');
 
-            // 获取上传文件类型(小写)
-            string type = Path.GetExtension(fileName).ToLowerInvariant(); ;
+                // 获取上传文件类型(小写)
+                string type = Path.GetExtension(fileName).ToLowerInvariant(); ;
 
-            // 验证类型
-            if (typeList.Contains(type) == false)
-                this.TryError(message, "文件类型非法!");
+                // 验证类型
+                if (typeList.Contains(type) == false)
+                    this.TryError(message, "文件类型非法!");
+            }
         }
 
         /// <summary>
