@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extenions\IsWhat.cs" />
+    <Compile Include="Extenions\LogicSugar.cs" />
     <Compile Include="Form\RequestToModel.cs" />
     <Compile Include="Form\UploadFile.cs" />
     <Compile Include="Form\UploadImage.cs" />

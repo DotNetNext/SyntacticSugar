@@ -12,16 +12,14 @@ namespace Test.Test
         protected void Page_Load(object sender, EventArgs e)
         {
             PerformanceTest p = new PerformanceTest();
-            p.SetCount(10);//循环次数(默认:1)
-            p.SetIsMultithread(true);//是否启动多线程测试 (默认:false)
+            p.SetCount(1000);//循环次数(默认:1)
+            p.SetIsMultithread(false);//是否启动多线程测试 (默认:false)
             p.Execute(
             i =>
             {
                 //需要测试的代码
-                Response.Write(i+"<br>");
-                System.Threading.Thread.Sleep(1000);
-
-
+                var bookKey = "sql";
+                var  myBook = bookKey.Switch().Case("c#", "asp.net技术").Case("java", "java技术").Case("sql", "sql技术").Default("要饭技术").Break();//点的爽啊
             },
             message =>
             {
