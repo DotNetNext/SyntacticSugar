@@ -20,10 +20,12 @@ namespace SyntacticSugar
     public class UploadFile
     {
 
-        private ParamsModel Params;
+        private ParamsModel _params;
+        private string _Number { get; set; }
+
         public UploadFile()
         {
-            Params = new ParamsModel()
+            _params = new ParamsModel()
             {
                 FileDirectory = "/upload",
                 FileType = ".pdf,.xls,.xlsx,.doc,.docx,.txt,.png,.jpg,.gif",
@@ -48,7 +50,7 @@ namespace SyntacticSugar
             {
                 fileDirectory = GetRelativePath(fileDirectory);
             }
-            Params.FileDirectory = fileDirectory;
+            _params.FileDirectory = fileDirectory;
         }
 
    
@@ -58,7 +60,7 @@ namespace SyntacticSugar
         /// <param name="isUseOldFileName">true原始文件名,false系统生成新文件名</param>
         public void SetIsUseOldFileName(bool isUseOldFileName)
         {
-            Params.IsUseOldFileName = isUseOldFileName;
+            _params.IsUseOldFileName = isUseOldFileName;
         }
 
         /// <summary>
@@ -66,14 +68,14 @@ namespace SyntacticSugar
         /// </summary>
         public void SetFileType(string fileType)
         {
-            Params.FileType = fileType;
+            _params.FileType = fileType;
         }
         /// <summary>
         /// 允许上传多少大小(单位：M)
         /// </summary>
         public void SetMaxSizeM(double maxSizeM)
         {
-            Params.MaxSizeM = maxSizeM;
+            _params.MaxSizeM = maxSizeM;
         }
         /// <summary>
         /// 重命名同名文件？ 
@@ -81,7 +83,7 @@ namespace SyntacticSugar
         /// <param name="isRenameSameFile">true:重命名,false覆盖</param>
         public void SetIsRenameSameFile(bool isRenameSameFile)
         {
-            Params.IsRenameSameFile = isRenameSameFile;
+            _params.IsRenameSameFile = isRenameSameFile;
         }
 
 
@@ -106,7 +108,7 @@ namespace SyntacticSugar
         public ResponseMessage Save(HttpPostedFile postFile, string number)
         {
 
-            Params.PathSaveType = PathSaveType.code;
+            _params.PathSaveType = PathSaveType.code;
             _Number = number;
             return CommonSave(postFile);
         }
@@ -132,7 +134,7 @@ namespace SyntacticSugar
                 }
 
                 //文件名
-                string fileName = Params.IsUseOldFileName ? postFile.FileName : DateTime.Now.ToString("yyyyMMddhhmmssms") + Path.GetExtension(postFile.FileName);
+                string fileName = _params.IsUseOldFileName ? postFile.FileName : DateTime.Now.ToString("yyyyMMddhhmmssms") + Path.GetExtension(postFile.FileName);
 
                 //验证格式
                 this.CheckingType(reval, postFile.FileName);
@@ -148,7 +150,7 @@ namespace SyntacticSugar
                 var filePath = directory + fileName;
                 if (System.IO.File.Exists(filePath))
                 {
-                    if (Params.IsRenameSameFile)
+                    if (_params.IsRenameSameFile)
                     {
                         filePath = directory + DateTime.Now.ToString("yyyyMMddhhssms") + "-" + fileName;
                     }
@@ -174,9 +176,9 @@ namespace SyntacticSugar
 
         private void CheckSize(ResponseMessage message, HttpPostedFile PostFile)
         {
-            if (PostFile.ContentLength / 1024.0 / 1024.0 > Params.MaxSizeM)
+            if (PostFile.ContentLength / 1024.0 / 1024.0 > _params.MaxSizeM)
             {
-                TryError(message, string.Format("对不起上传文件过大，不能超过{0}M！", Params.MaxSizeM));
+                TryError(message, string.Format("对不起上传文件过大，不能超过{0}M！", _params.MaxSizeM));
             }
         }
         /// <summary>
@@ -200,11 +202,11 @@ namespace SyntacticSugar
         {
             var sever = HttpContext.Current.Server;
             // 存储目录
-            string directory = Params.FileDirectory;
+            string directory = _params.FileDirectory;
 
             // 目录格式
             string childDirectory = DateTime.Now.ToString("yyyy-MM/dd");
-            if (Params.PathSaveType == PathSaveType.code)
+            if (_params.PathSaveType == PathSaveType.code)
             {
                 childDirectory = _Number;
             }
@@ -222,10 +224,10 @@ namespace SyntacticSugar
         /// <param name="fileName"></param>
         private void CheckingType(ResponseMessage message, string fileName)
         {
-            if (Params.FileType != "*")
+            if (_params.FileType != "*")
             {
                 // 获取允许允许上传类型列表
-                string[] typeList = Params.FileType.Split(',');
+                string[] typeList = _params.FileType.Split(',');
 
                 // 获取上传文件类型(小写)
                 string type = Path.GetExtension(fileName).ToLowerInvariant(); ;
@@ -292,7 +294,7 @@ namespace SyntacticSugar
             code = 1
 
         }
-        private string _Number { get; set; }
+
 
         /// <summary>
         /// 反回信息
