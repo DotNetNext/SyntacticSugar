@@ -35,6 +35,7 @@ namespace SyntacticSugar
             };
         }
 
+        #region set method
         /// <summary>
         /// 文件保存路径(默认:/upload)
         /// </summary>
@@ -53,7 +54,6 @@ namespace SyntacticSugar
             _params.FileDirectory = fileDirectory;
         }
 
-   
         /// <summary>
         /// 是否使用原始文件名作为新文件的文件名(默认:true)
         /// </summary>
@@ -70,6 +70,7 @@ namespace SyntacticSugar
         {
             _params.FileType = fileType;
         }
+
         /// <summary>
         /// 允许上传多少大小(单位：M)
         /// </summary>
@@ -77,6 +78,7 @@ namespace SyntacticSugar
         {
             _params.MaxSizeM = maxSizeM;
         }
+
         /// <summary>
         /// 重命名同名文件？ 
         /// </summary>
@@ -84,9 +86,10 @@ namespace SyntacticSugar
         public void SetIsRenameSameFile(bool isRenameSameFile)
         {
             _params.IsRenameSameFile = isRenameSameFile;
-        }
+        } 
+        #endregion
 
-
+        #region main mehtod
         /// <summary>
         /// 保存表单文件
         /// </summary>
@@ -96,8 +99,6 @@ namespace SyntacticSugar
         {
             return CommonSave(postFile);
         }
-
-
 
         /// <summary>
         /// 保存表单文件,根据编号创建子文件夹
@@ -111,8 +112,11 @@ namespace SyntacticSugar
             _params.PathSaveType = PathSaveType.code;
             _number = number;
             return CommonSave(postFile);
-        }
+        } 
+        #endregion
 
+        #region private method
+  
 
         /// <summary>
         /// 保存表单文件,根据HttpPostedFile
@@ -181,6 +185,7 @@ namespace SyntacticSugar
                 TryError(message, string.Format("对不起上传文件过大，不能超过{0}M！", _params.MaxSizeM));
             }
         }
+
         /// <summary>
         /// 根据物理路径获取相对路径
         /// </summary>
@@ -246,7 +251,8 @@ namespace SyntacticSugar
         {
             message.Error = true;
             message.Message = msg;
-        }
+        } 
+        #endregion
 
         #region models
 
