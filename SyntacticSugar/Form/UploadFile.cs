@@ -21,7 +21,7 @@ namespace SyntacticSugar
     {
 
         private ParamsModel _params;
-        private string _Number { get; set; }
+        private string _number { get; set; }
 
         public UploadFile()
         {
@@ -109,7 +109,7 @@ namespace SyntacticSugar
         {
 
             _params.PathSaveType = PathSaveType.code;
-            _Number = number;
+            _number = number;
             return CommonSave(postFile);
         }
 
@@ -208,7 +208,7 @@ namespace SyntacticSugar
             string childDirectory = DateTime.Now.ToString("yyyy-MM/dd");
             if (_params.PathSaveType == PathSaveType.code)
             {
-                childDirectory = _Number;
+                childDirectory = _number;
             }
             webDir = directory.TrimEnd('/') + "/" + childDirectory + '/';
             string dir = sever.MapPath(webDir);
