@@ -52,7 +52,7 @@ namespace SyntacticSugar
         /// <summary>
         /// 是否使用原始文件名作为新文件的文件名
         /// </summary>
-        /// <param name="isUseOldFileName">true使用,false系统自动生成唯一值</param>
+        /// <param name="isUseOldFileName">true原始文件名,false系统生成新文件名</param>
         public void SetIsUseOldFileName(bool isUseOldFileName)
         {
             Params.IsUseOldFileName = isUseOldFileName;
