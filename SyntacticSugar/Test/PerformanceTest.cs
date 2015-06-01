@@ -15,16 +15,16 @@ namespace SyntacticSugar
     /// </summary>
     public class PerformanceTest
     {
-        private DateTime BeginTime;
-        private DateTime EndTime;
-        private ParamsModel Params;
+        private DateTime _BeginTime;
+        private DateTime _EndTime;
+        private ParamsModel _Params;
 
         /// <summary>
         ///设置执行次数(默认:1)
         /// </summary>
         public void SetCount(int count)
         {
-            Params.RunCount = count;
+            _Params.RunCount = count;
         }
         /// <summary>
         /// 设置线程模式(默认:false)
@@ -32,7 +32,7 @@ namespace SyntacticSugar
         /// <param name="isMul">true为多线程</param>
         public void SetIsMultithread(bool isMul)
         {
-            Params.IsMultithread = isMul;
+            _Params.IsMultithread = isMul;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace SyntacticSugar
         /// </summary>
         public PerformanceTest()
         {
-            Params = new ParamsModel()
+            _Params = new ParamsModel()
             {
                 RunCount = 1
             };
@@ -53,10 +53,10 @@ namespace SyntacticSugar
         public void Execute(Action<int> action, Action<string> rollBack)
         {
             List<Thread> arr = new List<Thread>();
-            BeginTime = DateTime.Now;
-            for (int i = 0; i < Params.RunCount; i++)
+            _BeginTime = DateTime.Now;
+            for (int i = 0; i < _Params.RunCount; i++)
             {
-                if (Params.IsMultithread)
+                if (_Params.IsMultithread)
                 {
                     var thread = new Thread(new System.Threading.ThreadStart(() =>
                     {
@@ -70,7 +70,7 @@ namespace SyntacticSugar
                     action(i);
                 }
             }
-            if (Params.IsMultithread)
+            if (_Params.IsMultithread)
             {
                 foreach (Thread t in arr)
                 {
@@ -86,8 +86,8 @@ namespace SyntacticSugar
 
         public string GetResult()
         {
-            EndTime = DateTime.Now;
-            string totalTime = ((EndTime - BeginTime).TotalMilliseconds / 1000.0).ToString("n5");
+            _EndTime = DateTime.Now;
+            string totalTime = ((_EndTime - _BeginTime).TotalMilliseconds / 1000.0).ToString("n5");
             string reval = string.Format("总共执行时间：{0}秒", totalTime);
             Console.Write(reval);
             return reval;
