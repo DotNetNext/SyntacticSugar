@@ -14,42 +14,72 @@ namespace SyntacticSugar
     /// ** 使用说明: http://www.cnblogs.com/sunkaixuan/p/4538593.html
     public class PageString
     {
+        private ParamsModel _params;
+
+        #region  set method
         /// <summary>
         /// 是否是英文      (默认：false)
         /// </summary>
-        public bool SetIsEnglish { get; set; }
+        public void SetIsEnglish(bool isEnglish)
+        {
+            _params.IsEnglish = isEnglish;
+        }
         /// <summary>
         /// 是否显示分页文字(默认：true)
         /// </summary>
-        public bool SetIsShowText { get; set; }
+        public void SetIsShowText(bool isShowText)
+        {
+            _params.IsShowText = isShowText;
+        }
         /// <summary>
         /// 样式            (默认:"pagination")
         /// </summary>
-        public string SetClassName { get; set; }
+        public void SetClassName(string className)
+        {
+            _params.ClassName = className;
+        }
         /// <summary>
         /// 分页参数名      (默认:"pageIndex")
         /// </summary>
-        public string SetPageIndexName { get; set; }
+        public void SetPageIndexName(string pageIndexName)
+        {
+            _params.PageIndexName = pageIndexName;
+
+        }
         /// <summary>
         /// 是否是异步 同步 href='' 异步 onclick=ajaxPage()    (默认:false)
         /// </summary>
-        public bool SetIsAjax { get; set; }
+        public void SetIsAjax(bool isAjax)
+        {
+            _params.IsAjax = isAjax;
+        }
 
         /// <summary>
         /// 自定义文字
         /// string.Format("{0}{1}{2}","总记录数","当前页数","总页数")
         /// 默认值：《span class=\"pagetext\"》《strong》总共《/strong》:{0} 条 《strong》当前《/strong》:{1}/{2}《/span》
         /// </summary>
-        public string SetTextFormat { get; set; }
+        public void SetTextFormat(string textFormat)
+        {
+            _params.TextFormat = textFormat;
+        }
+
+
+        #endregion
+
+
 
         public PageString()
         {
-            SetIsEnglish = false;
-            SetIsShowText = true;
-            SetTextFormat = "<span class=\"pagetext\"><strong>总共</strong>:{0} 条 <strong>当前</strong>:{1}/{2}</span> ";
-            SetClassName = "pagination";
-            SetPageIndexName = "pageIndex";
-            SetIsAjax = false;
+            _params = new ParamsModel()
+            {
+                IsEnglish = false,
+                IsShowText = true,
+                TextFormat = "<span class=\"pagetext\"><strong>总共</strong>:{0} 条 <strong>当前</strong>:{1}/{2}</span> ",
+                ClassName = "pagination",
+                PageIndexName = "pageIndex",
+                IsAjax = false
+            };
         }
 
         /*免费的样式 
@@ -82,7 +112,7 @@ namespace SyntacticSugar
             int endcount = 0;
             StringBuilder pagestr = new StringBuilder();
             pageIndex = pageIndex == 0 ? 1 : pageIndex;
-            pagestr.AppendFormat("<div class=\"{0}\" >", SetClassName);
+            pagestr.AppendFormat("<div class=\"{0}\" >", _params.ClassName);
             if (pageIndex < 1) { pageIndex = 1; }
             //计算总页数
             if (pageSize != 0)
@@ -102,8 +132,8 @@ namespace SyntacticSugar
             bool isFirst = pageIndex == 1;
             bool isLast = pageIndex == allpage;
 
-            if (SetIsShowText)
-                pagestr.AppendFormat(SetTextFormat, total, pageIndex, allpage);
+            if (_params.IsShowText)
+                pagestr.AppendFormat(_params.TextFormat, total, pageIndex, allpage);
 
             if (isFirst)
             {
@@ -141,23 +171,54 @@ namespace SyntacticSugar
 
         private string ConversionData(string page)
         {
-            if (SetIsEnglish)
+            if (_params.IsEnglish)
             {
-                page= page.Replace("上一页", "Previous").Replace("下一页", "Next").Replace("总共", "total").Replace("当前", "Current").Replace("条", "records").Replace("首页", "First").Replace("末页", "Last");
+                page = page.Replace("上一页", "Previous").Replace("下一页", "Next").Replace("总共", "total").Replace("当前", "Current").Replace("条", "records").Replace("首页", "First").Replace("末页", "Last");
             }
-            if (SetIsAjax)
+            if (_params.IsAjax)
             {
-                var matches = Regex.Matches(page, @"href\="".*?""",RegexOptions.Singleline);
+                var matches = Regex.Matches(page, @"href\="".*?""", RegexOptions.Singleline);
                 if (matches != null && matches.Count > 0)
                 {
                     foreach (Match m in matches)
                     {
-                        page = page.Replace(m.Value, string.Format("class=\"click\" onclick=\"ajaxPage('{0}')\"", Regex.Match(m.Value, string.Format(@"{0}\=(\d+)", SetPageIndexName)).Groups[1].Value));
+                        page = page.Replace(m.Value, string.Format("class=\"click\" onclick=\"ajaxPage('{0}')\"", Regex.Match(m.Value, string.Format(@"{0}\=(\d+)", _params.PageIndexName)).Groups[1].Value));
                     }
                 }
             }
             return page;
 
+        }
+
+        private class ParamsModel
+        {
+            /// <summary>
+            /// 是否是英文      (默认：false)
+            /// </summary>
+            public bool IsEnglish { get; set; }
+            /// <summary>
+            /// 是否显示分页文字(默认：true)
+            /// </summary>
+            public bool IsShowText { get; set; }
+            /// <summary>
+            /// 样式            (默认:"pagination")
+            /// </summary>
+            public string ClassName { get; set; }
+            /// <summary>
+            /// 分页参数名      (默认:"pageIndex")
+            /// </summary>
+            public string PageIndexName { get; set; }
+            /// <summary>
+            /// 是否是异步 同步 href='' 异步 onclick=ajaxPage()    (默认:false)
+            /// </summary>
+            public bool IsAjax { get; set; }
+
+            /// <summary>
+            /// 自定义文字
+            /// string.Format("{0}{1}{2}","总记录数","当前页数","总页数")
+            /// 默认值：《span class=\"pagetext\"》《strong》总共《/strong》:{0} 条 《strong》当前《/strong》:{1}/{2}《/span》
+            /// </summary>
+            public string TextFormat { get; set; }
         }
 
     }

@@ -18,11 +18,11 @@ namespace Test.UI
 
             /*可选参数*/
 
-            ps.SetIsEnglish = true;// 是否是英文       (默认：false)
-            ps.SetIsShowText = true;//是否显示分页文字 (默认：true)
-            //ps.TextFormat=""                         (默认值：《span class=\"pagetext\"》《strong》总共《/strong》:{0} 条 《strong》当前《/strong》:{1}/{2}《/span》)
+            ps.SetIsEnglish(true);// 是否是英文       (默认：false)
+            ps.SetIsShowText(true);//是否显示分页文字 (默认：true)
+            //ps.SetTextFormat                       (默认值：《span class=\"pagetext\"》《strong》总共《/strong》:{0} 条 《strong》当前《/strong》:{1}/{2}《/span》)
             //ps.SetPageIndexName  Request["pageIndex"](默认值："pageIndex")
-            ps.SetIsAjax = false;//                    (默认值："false")
+            ps.SetIsAjax(false);//                    (默认值："false")
 
             /*函数参数*/
             int total = 10000;
