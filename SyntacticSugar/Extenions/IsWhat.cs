@@ -91,7 +91,7 @@ namespace SyntacticSugar
         /// 有值?(与IsNullOrEmpty相反)
         /// </summary>
         /// <returns></returns>
-        public static bool IsAnyValue(this IEnumerable<object> o)
+        public static bool IsValuable(this IEnumerable<object> o)
         {
             if (o == null || o.Count() == 0) return false;
             return true;

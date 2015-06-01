@@ -42,7 +42,7 @@ namespace Test.Extenions
             
             }
 
-            //【IsValuable】
+            //【IsValuable与IsNullOrEmpty相反】
             string ss = "";
             //以前写法
             if (!string.IsNullOrEmpty(ss)) { }
@@ -54,7 +54,7 @@ namespace Test.Extenions
             //以前写法
             if (list != null && list.Count > 0) { }
             //现在写法
-            if (list.IsAnyValue()) { }
+            if (list.IsValuable()) { }
 
 
 
