@@ -82,7 +82,7 @@ namespace SyntacticSugar
         /// 有值?(与IsNullOrEmpty相反)
         /// </summary>
         /// <returns></returns>
-        public static bool IsAnyValue(this object o)
+        public static bool IsValuable(this object o)
         {
             if (o == null) return false;
             return o.ToString() != "";

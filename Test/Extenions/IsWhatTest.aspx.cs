@@ -42,12 +42,12 @@ namespace Test.Extenions
             
             }
 
-            //【IsHasValue】
+            //【IsValuable】
             string ss = "";
             //以前写法
             if (!string.IsNullOrEmpty(ss)) { }
             //现在写法
-            if (s.IsAnyValue()) { }
+            if (s.IsValuable()) { }
 
 
             List<string> list = null;
