@@ -44,11 +44,12 @@ namespace SyntacticSugar
             var isMapPath = Regex.IsMatch(fileDirectory, @"[a-z]\:\\", RegexOptions.IgnoreCase);
             if (isMapPath)
             {
-                var sever = HttpContext.Current.Server;
-                fileDirectory = "/" + fileDirectory.Replace(sever.MapPath("~/"), "").TrimStart('/').Replace('\\', '/');
+                fileDirectory = GetRelativePath(fileDirectory);
             }
             Params.FileDirectory = fileDirectory;
         }
+
+   
         /// <summary>
         /// 是否使用原始文件名作为新文件的文件名
         /// </summary>
@@ -176,8 +177,18 @@ namespace SyntacticSugar
                 TryError(message, string.Format("对不起上传文件过大，不能超过{0}M！", Params.MaxSizeM));
             }
         }
-
-
+        /// <summary>
+        /// 根据物理路径获取相对路径
+        /// </summary>
+        /// <param name="fileDirectory"></param>
+        /// <param name="sever"></param>
+        /// <returns></returns>
+        private static string GetRelativePath(string fileDirectory)
+        {
+            var sever = HttpContext.Current.Server;
+            fileDirectory = "/" + fileDirectory.Replace(sever.MapPath("~/"), "").TrimStart('/').Replace('\\', '/');
+            return fileDirectory;
+        }
 
         /// <summary>
         /// 获取目录
