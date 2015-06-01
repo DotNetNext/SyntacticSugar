@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Hosting;
 
 
 namespace SyntacticSugar
@@ -13,84 +15,99 @@ namespace SyntacticSugar
     /// ** 创始时间：2015-5-27
     /// ** 修改时间：-
     /// ** 作者：sunkaixuan
-    /// ** 使用说明：http://www.cnblogs.com/sunkaixuan/p/4533954.html
     /// </summary>
     public class UploadFile
     {
 
+        private ParamsModel Params;
+        public UploadFile()
+        {
+            Params = new ParamsModel()
+            {
+                FileDirectory = "/upload",
+                FileType = ".pdf,.xls,.xlsx,.doc,.docx,.txt,.png,.jpg,.gif",
+                MaxSizeM = 10,
+                PathSaveType = PathSaveType.dateTimeNow
+            };
+        }
+
         /// <summary>
         /// 文件保存路径
         /// </summary>
-        public string SetFileDirectory { get; set; }
+        public void SetFileDirectory(string fileDirectory)
+        {
+            if (fileDirectory == null)
+            {
+                throw new ArgumentNullException("fileDirectory");
+            }
+
+            var isMapPath = Regex.IsMatch(fileDirectory, @"[a-z]\:\\", RegexOptions.IgnoreCase);
+            if (isMapPath)
+            {
+                var sever = HttpContext.Current.Server;
+                fileDirectory = "/" + fileDirectory.Replace(sever.MapPath("~/"), "").TrimStart('/').Replace('\\', '/');
+            }
+            Params.FileDirectory = fileDirectory;
+        }
         /// <summary>
-        /// 允许上传的文件类型, 逗号分割,必须全部小写!
-        ///
-        /// 格式: ".gif,.exe" 或更多
+        /// 是否使用原始文件名作为新文件的文件名
         /// </summary>
-        public string SetFileType { get; set; }
+        /// <param name="isUseOldFileName">true使用,false系统自动生成唯一值</param>
+        public void SetIsUseOldFileName(bool isUseOldFileName)
+        {
+            Params.IsUseOldFileName = isUseOldFileName;
+        }
+
+        /// <summary>
+        /// 允许上传的文件类型, 逗号分割,必须全部小写! (默认值:.pdf,.xls,.xlsx,.doc,.docx,.txt,.png,.jpg,.gif)
+        /// </summary>
+        public void SetFileType(string fileType)
+        {
+            Params.FileType = fileType;
+        }
         /// <summary>
         /// 允许上传多少大小(单位：M)
         /// </summary>
-        public double SetMaxSizeM { get; set; }
-        /// <summary>
-        /// 上传错误
-        /// </summary>
-        public bool GetError { get; private set; }
-        /// <summary>
-        /// 消息
-        /// </summary>
-        public string GetMessage { get; private set; }
-        /// <summary>
-        /// 文件路径
-        /// </summary>
-        public string GetFilePath { get; private set; }
-        /// <summary>
-        /// 网站路径
-        /// </summary>
-        public string GetWebFilePath { get; private set; }
-        /// <summary>
-        /// 获取文件名
-        /// </summary>
-        public string GetFileName { get; private set; }
-
-        public UploadFile()
+        public void SetMaxSizeM(double maxSizeM)
         {
-
-            SetFileDirectory = "/upload";
-            SetFileType = ".pdf,.xls,.xlsx,.doc,.docx,.txt,.png,.jpg,.gif";
-            SetMaxSizeM = 10;
+            Params.MaxSizeM = maxSizeM;
+        }
+        /// <summary>
+        /// 重命名同名文件？ 
+        /// </summary>
+        /// <param name="isRenameSameFile">true:重命名,false覆盖</param>
+        public void SetIsRenameSameFile(bool isRenameSameFile)
+        {
+            Params.IsRenameSameFile = isRenameSameFile;
         }
 
-        /// <summary>
-        /// 单文件上传类
-        /// </summary>
-        /// <param name="directory">文件保存路径</param>
-        /// <param name="fileType">允许上传的文件类型</param>
-        /// <param name="maxSizeM">允许上传多少大小(单位：M)</param>
-        public UploadFile(string directory, string fileType, double maxSizeM)
-        {
-
-            SetFileDirectory = directory;
-            SetFileType = fileType;
-            SetMaxSizeM = maxSizeM;
-        }
 
         /// <summary>
-        /// 保存表单文件,根据file name
+        /// 保存表单文件
         /// </summary>
-        /// <param name="formField"></param>
-        /// <param name="isRenameSameFile">值为true 同名文件进行重命名，false覆盖原有文件</param>
-        /// <param name="fileName">新的文件名</param>
+        /// <param name="postFile">HttpPostedFile</param>
         /// <returns></returns>
-        public string Save(string formField, bool isRenameSameFile, string fileName = null)
+        public ResponseMessage Save(HttpPostedFile postFile)
         {
-            var Response = HttpContext.Current.Response;
-            var Request = HttpContext.Current.Request;
-            // 获取上传的文件
-            HttpFileCollection file = Request.Files;
-            HttpPostedFile postFile = file[formField];
-            return Save(postFile, isRenameSameFile, fileName);
+            return CommonSave(postFile);
         }
+
+
+
+        /// <summary>
+        /// 保存表单文件,根据编号创建子文件夹
+        /// </summary>
+        /// <param name="postFile">HttpPostedFile</param>
+        /// <param name="number">编号</param>
+        /// <returns></returns>
+        public ResponseMessage Save(HttpPostedFile postFile, string number)
+        {
+
+            Params.PathSaveType = PathSaveType.code;
+            _Number = number;
+            return CommonSave(postFile);
+        }
+
 
         /// <summary>
         /// 保存表单文件,根据HttpPostedFile
@@ -99,19 +116,27 @@ namespace SyntacticSugar
         /// <param name="isRenameSameFile">值为true 同名文件进行重命名，false覆盖原有文件</param>
         /// <param name="fileName">新的文件名</param>
         /// <returns></returns>
-        public string Save(HttpPostedFile postFile, bool isRenameSameFile, string fileName = null)
+        private ResponseMessage CommonSave(HttpPostedFile postFile)
         {
+
+            ResponseMessage reval = new ResponseMessage();
             try
             {
+                if (postFile == null || postFile.ContentLength == 0)
+                {
+                    TryError(reval, "没有文件！");
+                    return reval;
+                }
+
                 //文件名
-                fileName = string.IsNullOrEmpty(fileName) ? postFile.FileName : fileName;
+                string fileName = Params.IsUseOldFileName ? postFile.FileName : DateTime.Now.ToString("yyyyMMddhhmmssms") + Path.GetExtension(postFile.FileName);
 
                 //验证格式
-                this.CheckingType(postFile.FileName);
+                this.CheckingType(reval, postFile.FileName);
                 //验证大小
-                this.CheckSize(postFile);
+                this.CheckSize(reval, postFile);
 
-                if (GetError) return string.Empty;
+                if (reval.Error) return reval;
 
 
                 string webDir = string.Empty;
@@ -120,7 +145,7 @@ namespace SyntacticSugar
                 var filePath = directory + fileName;
                 if (System.IO.File.Exists(filePath))
                 {
-                    if (isRenameSameFile)
+                    if (Params.IsRenameSameFile)
                     {
                         filePath = directory + DateTime.Now.ToString("yyyyMMddhhssms") + "-" + fileName;
                     }
@@ -131,23 +156,24 @@ namespace SyntacticSugar
                 }
                 // 保存文件
                 postFile.SaveAs(filePath);
-                GetFilePath = filePath;
-                GetWebFilePath = webDir + fileName;
-                GetFileName = postFile.FileName;
-                return filePath;
+                reval.FilePath = filePath;
+                reval.FilePath = webDir + fileName;
+                reval.FileName = fileName;
+                reval.WebFilePath = webDir + fileName;
+                return reval;
             }
             catch (Exception ex)
             {
-                TryError(ex.Message);
-                return string.Empty;
+                TryError(reval, ex.Message);
+                return reval;
             }
         }
 
-        private void CheckSize(HttpPostedFile PostFile)
+        private void CheckSize(ResponseMessage message, HttpPostedFile PostFile)
         {
-            if (PostFile.ContentLength / 1024.0 / 1024.0 > SetMaxSizeM)
+            if (PostFile.ContentLength / 1024.0 / 1024.0 > Params.MaxSizeM)
             {
-                TryError(string.Format("对不起上传文件过大，不能超过{0}M！", SetMaxSizeM));
+                TryError(message, string.Format("对不起上传文件过大，不能超过{0}M！", Params.MaxSizeM));
             }
         }
 
@@ -159,13 +185,18 @@ namespace SyntacticSugar
         /// <returns></returns>
         private string GetDirectory(ref string webDir)
         {
+            var sever = HttpContext.Current.Server;
             // 存储目录
-            string directory = this.SetFileDirectory;
+            string directory = Params.FileDirectory;
 
             // 目录格式
-            string Date = DateTime.Now.ToString("yyyy-MM/dd");
-            webDir = directory + "/" + Date + '/';
-            string dir = HttpContext.Current.Server.MapPath(webDir);
+            string childDirectory = DateTime.Now.ToString("yyyy-MM/dd");
+            if (Params.PathSaveType == PathSaveType.code)
+            {
+                childDirectory = _Number;
+            }
+            webDir = directory.TrimEnd('/') + "/" + childDirectory + '/';
+            string dir = sever.MapPath(webDir);
             // 创建目录
             if (Directory.Exists(dir) == false)
                 Directory.CreateDirectory(dir);
@@ -176,27 +207,104 @@ namespace SyntacticSugar
         /// 验证文件类型
         /// </summary>
         /// <param name="fileName"></param>
-        private void CheckingType(string fileName)
+        private void CheckingType(ResponseMessage message, string fileName)
         {
             // 获取允许允许上传类型列表
-            string[] typeList = this.SetFileType.Split(',');
+            string[] typeList = Params.FileType.Split(',');
 
             // 获取上传文件类型(小写)
             string type = Path.GetExtension(fileName).ToLowerInvariant(); ;
 
             // 验证类型
             if (typeList.Contains(type) == false)
-                this.TryError("文件类型非法!");
+                this.TryError(message, "文件类型非法!");
         }
 
         /// <summary>
         /// 抛出错误
         /// </summary>
         /// <param name="Msg"></param>
-        private void TryError(string msg)
+        private void TryError(ResponseMessage message, string msg)
         {
-            this.GetError = true;
-            this.GetMessage = msg;
+            message.Error = true;
+            message.Message = msg;
         }
+
+        #region models
+
+        private class ParamsModel
+        {
+            /// <summary>
+            /// 文件保存路径
+            /// </summary>
+            public string FileDirectory { get; set; }
+            /// <summary>
+            /// 允许上传的文件类型, 逗号分割,必须全部小写!
+            /// </summary>
+            public string FileType { get; set; }
+            /// <summary>
+            /// 允许上传多少大小
+            /// </summary>
+            public double MaxSizeM { get; set; }
+            /// <summary>
+            /// 路径存储类型
+            /// </summary>
+            public PathSaveType PathSaveType { get; set; }
+            /// <summary>
+            /// 重命名同名文件? 
+            /// </summary>
+            public bool IsRenameSameFile { get; set; }
+            /// <summary>
+            /// 是否使用原始文件名
+            /// </summary>
+            public bool IsUseOldFileName { get; set; }
+        }
+
+
+        /// <summary>
+        /// 路径存储类型
+        /// </summary>
+        public enum PathSaveType
+        {
+            /// <summary>
+            /// 根据时间创建存储目录
+            /// </summary>
+            dateTimeNow = 0,
+            /// <summary>
+            /// 根据ID编号方式来创建存储目录
+            /// </summary>
+            code = 1
+
+        }
+        private string _Number { get; set; }
+
+        /// <summary>
+        /// 反回信息
+        /// </summary>
+        public class ResponseMessage
+        {
+            /// <summary>
+            /// 上传错误
+            /// </summary>
+            public bool Error { get; set; }
+            /// <summary>
+            /// 消息
+            /// </summary>
+            public string Message { get; set; }
+            /// <summary>
+            /// 文件路径
+            /// </summary>
+            public string FilePath { get; set; }
+            /// <summary>
+            /// 网站路径
+            /// </summary>
+            public string WebFilePath { get; set; }
+            /// <summary>
+            /// 获取文件名
+            /// </summary>
+            public string FileName { get; set; }
+
+        }
+        #endregion
     }
 }
