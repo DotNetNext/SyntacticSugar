@@ -66,6 +66,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Extenions\IsWhatTest.aspx" />
     <Content Include="Extenions\LogicTest.aspx" />
+    <Content Include="Extenions\TryParseTest.aspx" />
     <Content Include="file\UploadFileTest.aspx" />
     <Content Include="file\UploadImageTest.aspx" />
     <Content Include="Generation\ClassGeneratingTest.aspx" />
@@ -121,6 +122,13 @@
     </Compile>
     <Compile Include="Extenions\LogicTest.aspx.designer.cs">
       <DependentUpon>LogicTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Extenions\TryParseTest.aspx.cs">
+      <DependentUpon>TryParseTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extenions\TryParseTest.aspx.designer.cs">
+      <DependentUpon>TryParseTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="file\UploadFileTest.aspx.cs">
       <DependentUpon>UploadFileTest.aspx</DependentUpon>
