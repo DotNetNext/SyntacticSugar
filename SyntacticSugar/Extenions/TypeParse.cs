@@ -76,7 +76,7 @@ namespace SyntacticSugar
         /// <param name="thisValue"></param>
         /// <param name="errorValue"></param>
         /// <returns></returns>
-        public static double TryToMoney(this object thisValue, int errorValue)
+        public static double TryToMoney(this object thisValue, double errorValue)
         {
             double reval = 0;
             if (thisValue != null && double.TryParse(thisValue.ToString(), out reval))
@@ -136,7 +136,7 @@ namespace SyntacticSugar
         /// <param name="thisValue"></param>
         /// <param name="errorValue"></param>
         /// <returns></returns>
-        public static Decimal TryToDecimal(this object thisValue, int errorValue)
+        public static Decimal TryToDecimal(this object thisValue, decimal errorValue)
         {
             Decimal reval = 0;
             if (thisValue != null && decimal.TryParse(thisValue.ToString(), out reval))
