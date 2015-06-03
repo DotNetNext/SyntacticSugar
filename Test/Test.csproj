@@ -69,6 +69,12 @@
     <Content Include="Extenions\TryParseTest.aspx" />
     <Content Include="file\UploadFileTest.aspx" />
     <Content Include="file\UploadImageTest.aspx" />
+    <Content Include="Form\ValidationSugar\jsLib\images\invalid.png" />
+    <Content Include="Form\ValidationSugar\jsLib\images\red_asterisk.png" />
+    <Content Include="Form\ValidationSugar\jsLib\images\valid.png" />
+    <Content Include="Form\ValidationSugar\jsLib\index.html" />
+    <Content Include="Form\ValidationSugar\jsLib\styles.css" />
+    <Content Include="Form\ValidationSugar\ValidationSugarTest.aspx" />
     <Content Include="Generation\ClassGeneratingTest.aspx" />
     <Content Include="Test\Performance2Test.aspx" />
     <Content Include="UI\PageStringTest.aspx" />
@@ -144,6 +150,13 @@
     <Compile Include="file\UploadImageTest.aspx.designer.cs">
       <DependentUpon>UploadImageTest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\ValidationSugar\ValidationSugarTest.aspx.cs">
+      <DependentUpon>ValidationSugarTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\ValidationSugar\ValidationSugarTest.aspx.designer.cs">
+      <DependentUpon>ValidationSugarTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Generation\ClassGeneratingTest.aspx.cs">
       <DependentUpon>ClassGeneratingTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -180,6 +193,9 @@
       <Project>{48225611-95D6-4C3A-AEC0-D690FF3B20F0}</Project>
       <Name>SyntacticSugar</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Form\ValidationSugar\jsLib\images\Thumbs.db" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

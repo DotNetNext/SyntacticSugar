@@ -141,6 +141,18 @@ namespace SyntacticSugar
         }
 
         /// <summary>
+        /// 是时间?
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static bool IsDate(this object thisValue)
+        {
+            if (thisValue == null) return false;
+            DateTime outValue = DateTime.MinValue;
+            return DateTime.TryParse(thisValue.ToString(), out outValue);
+        }
+
+        /// <summary>
         /// 是邮箱?
         /// </summary>
         /// <param name="thisValue"></param>
@@ -181,6 +193,17 @@ namespace SyntacticSugar
         {
             if (thisValue == null) return false;
             return System.Text.RegularExpressions.Regex.IsMatch(thisValue.ToString(), @"^(\d{15}$|^\d{18}$|^\d{17}(\d|X|x))$");
+        }
+
+        /// <summary>
+        /// 是传真?
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static bool IsFax(this object thisValue)
+        {
+            if (thisValue == null) return false;
+            return System.Text.RegularExpressions.Regex.IsMatch(thisValue.ToString(), @"^[+]{0,1}(\d){1,3}[ ]?([-]?((\d)|[ ]){1,12})+$");
         }
 
         /// <summary>

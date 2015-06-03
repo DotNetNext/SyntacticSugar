@@ -50,6 +50,7 @@
     <Compile Include="Form\RequestToModel.cs" />
     <Compile Include="Form\UploadFile.cs" />
     <Compile Include="Form\UploadImage.cs" />
+    <Compile Include="Form\ValidationSugar.cs" />
     <Compile Include="Generation\ClassGenerating.cs" />
     <Compile Include="Test\PerformanceTest.cs" />
     <Compile Include="TextType\XHtmlElement.cs" />
