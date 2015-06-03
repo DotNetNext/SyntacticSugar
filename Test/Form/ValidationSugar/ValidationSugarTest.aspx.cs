@@ -17,11 +17,11 @@ namespace Test.Form
                 //MVC中可以使用ViewBag 扔到body最下面 ，可以使用变量，这里只是测试不考虑性能
                 ViewState["intiscript"] = ValidationSugar.GetInitScript(_pageKey, new List<ValidationSugar.OptionItem>()
                 {
-                    new ValidationSugar.OptionItem(){  Type=ValidationSugar.OptioItemType.Mail, IsRequired=true, Placeholder="邮箱", Tip="格式为:xx@xx.xx", FormFiledName="email"},
-                    new ValidationSugar.OptionItem(){  Type=ValidationSugar.OptioItemType.Regex, Pattern="^.{5,10}$", IsRequired=true, Placeholder="姓名", Tip="5-10个字符", FormFiledName="name"},
-                    new ValidationSugar.OptionItem(){  Type=ValidationSugar.OptioItemType.Mobile, IsRequired=true, Placeholder="手机", Tip="格式为:18994211791" , FormFiledName="phone"},
-                    new ValidationSugar.OptionItem(){  Type=ValidationSugar.OptioItemType.Regex,Pattern="^0|1$", IsRequired=true, Placeholder="姓别", Tip="格式为:男或女" , FormFiledName="sex"},
-                    new ValidationSugar.OptionItem(){  Type=ValidationSugar.OptioItemType.Int, IsRequired=true, Placeholder="学历", Tip="格式为:大学" , FormFiledName="education"}
+                    new ValidationSugar.OptionItem(){  Type=ValidationSugar.OptionItemType.Mail, IsRequired=true, Placeholder="邮箱", Tip="格式为:xx@xx.xx", FormFiledName="email"},
+                    new ValidationSugar.OptionItem(){  Type=ValidationSugar.OptionItemType.Regex, Pattern="^.{5,10}$", IsRequired=true, Placeholder="姓名", Tip="5-10个字符", FormFiledName="name"},
+                    new ValidationSugar.OptionItem(){  Type=ValidationSugar.OptionItemType.Mobile, IsRequired=true, Placeholder="手机", Tip="格式为:18994211791" , FormFiledName="phone"},
+                    new ValidationSugar.OptionItem(){  Type=ValidationSugar.OptionItemType.Regex,Pattern="^0|1$", IsRequired=true, Placeholder="姓别", Tip="格式为:男或女" , FormFiledName="sex"},
+                    new ValidationSugar.OptionItem(){  Type=ValidationSugar.OptionItemType.Int, IsRequired=true, Placeholder="学历", Tip="格式为:大学" , FormFiledName="education"}
 
                 });
             }
