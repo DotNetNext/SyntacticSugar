@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
-namespace SyntacticSugar.Form
+namespace SyntacticSugar
 {
     /// <summary>
     /// ** 描述：可以方便实现前后端双验证,基于jquery
@@ -15,65 +16,83 @@ namespace SyntacticSugar.Form
     public class ValidationSugar
     {
 
+        private static List<ValidationOption> ValidationOptionList = new List<ValidationOption>();
+
         /// <summary>
         /// 前台注入
         /// </summary>
         /// <param name="pageKey"></param>
         /// <param name="itemList"></param>
-        public static void WebInit(string pageKey, List<OptionItem> itemList)
+        public static string GetInitScript(string pageKey, List<OptionItem> itemList)
         {
-            string uk = Guid.NewGuid().ToString().Replace("-", "");//唯一函数名
-            string script = @"<script>
-var changeInput{1}=function(selector,params){{
-     var selectorObj=$(""#""+selector+"",""[name='""+selector+""']"");
-     selectorObj.after(""<span class=""form_hint"">""+params.tip+""</span>"");
-     if(params.Pattern!=null)
-     selectorObj.attr(""pattern"",params.Pattern);
-     if(params.Pattern!=null)
-     selectorObj.attr(""placeholder"",params.Placeholder);
+            //初始化后不在赋值
+            if (ValidationOptionList.Any(it => it.PageKey == pageKey))
+            {
+                return (ValidationOptionList.Single(c => c.PageKey == pageKey).Script);
+            }
+            else
+            {
+                ValidationOption option = new ValidationOption();
+                string uk = Guid.NewGuid().ToString().Replace("-", "");//唯一函数名
+                string script = @"<script>
+var bindValidation{1}=function(name,params){{
+     var selectorObj=$(""[name='""+name+""']"");
+     selectorObj.after(""<span class=\""form_hint\"">""+params.tip+""</span>"");
+     if(params.pattern!=null)
+     selectorObj.attr(""pattern"",params.pattern);
+     if(params.placeholder!=null)
+     selectorObj.attr(""placeholder"",params.placeholder);
+     if(params.isRequired=true)
+     selectorObj.attr(""required"",params.isRequired);
 }}
 
 
-{0}</script>";
-            StringBuilder itemsCode = new StringBuilder();
-            foreach (var item in itemList)
-            {
-                switch (item.Type)
-                {
-                    case OptioItemType.Mail:
-                        item.Pattern=@"^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$";
-                        break;
-                    case OptioItemType.Phone:
-                           item.Pattern=@"^\d{11}$";
-                        break;
-                    case OptioItemType.Int:
-                         item.Pattern=@"^\d{1,11}$";
-                        break;
-                    case OptioItemType.Double:
-                        item.Pattern=@"^\d{1,11}$";
-                        break;
-                    case OptioItemType.IdCard:
-                        break;
-                    case OptioItemType.Date:
-                        break;
-                    case OptioItemType.Mobile:
-                        break;
-                    case OptioItemType.Telephone:
-                        break;
-                    case OptioItemType.Fax:
-                        break;
-                    case OptioItemType.Regex:
-                        break;
-                }   
-                itemsCode.AppendFormat("changeInput{0}('{1}',{{   tip:'{2}',pattern:'{3}',placeholder:'{4}'}})", uk, item.FormFiledName, item.Tip, item.Pattern=, item.Placeholder);
-                itemsCode.AppendLine();
-            }
-            script = string.Format(script, itemsCode.ToString(), uk);
-            System.Web.HttpContext.Current.Response.Write(script);
-            script = null;
-            uk = null;
-        }
 
+{0}</script>";
+                StringBuilder itemsCode = new StringBuilder();
+                foreach (var item in itemList)
+                {
+                    switch (item.Type)
+                    {
+                        case OptioItemType.Mail:
+                            item.Pattern = @"^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)+$";
+                            break;
+                        case OptioItemType.Int:
+                            item.Pattern = @"^\\d{1,11}$";
+                            break;
+                        case OptioItemType.Double:
+                            item.Pattern = @"^\\d{1,11}$";
+                            break;
+                        case OptioItemType.IdCard:
+                            item.Pattern = @"^(\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$";
+                            break;
+                        case OptioItemType.Date:
+                            item.Pattern = @"^(((1[8-9]\\d{2})|([2-9]\\d{3}))([-\\/])(10|12|0?[13578])([-\\/])(3[01]|[12][0-9]|0?[1-9])$)|(^((1[8-9]\\d{2})|([2-9]\\d{3}))([-\\/])(11|0?[469])([-\\/])(30|[12][0-9]|0?[1-9])$)|(^((1[8-9]\\d{2})|([2-9]\\d{3}))([-\\/])(0?2)([-\\/])(2[0-8]|1[0-9]|0?[1-9])$)|(^([2468][048]00)([-\\/])(0?2)([-\\/])(29)$)|(^([3579][26]00)([-\\/])(0?2)([-\\/])(29)$)|(^([1][89][0][48])([-\\/])(0?2)([-\\/])(29)$)|(^([2-9][0-9][0][48])([-\\/])(0?2)([-\\/])(29)$)|(^([1][89][2468][048])([-\\/])(0?2)([-\\/])(29)$)|(^([2-9][0-9][2468][048])([-\\/])(0?2)([-\\/])(29)$)|(^([1][89][13579][26])([-\\/])(0?2)([-\\/])(29)$)|(^([2-9][0-9][13579][26])([-\\/])(0?2)([-\\/])(29))|(((((0[13578])|([13578])|(1[02]))[\\-\\/\\s]?((0[1-9])|([1-9])|([1-2][0-9])|(3[01])))|((([469])|(11))[\\-\\/\\s]?((0[1-9])|([1-9])|([1-2][0-9])|(30)))|((02|2)[\\-\\/\\s]?((0[1-9])|([1-9])|([1-2][0-9]))))[\\-\\/\\s]?\\d{4})(\\s(((0[1-9])|([1-9])|(1[0-2]))\\:([0-5][0-9])((\\s)|(\\:([0-5][0-9])\\s))([AM|PM|am|pm]{2,2})))?$";
+                            break;
+                        case OptioItemType.Mobile:
+                            item.Pattern = @"^[0-9]{11}$";
+                            break;
+                        case OptioItemType.Telephone:
+                            item.Pattern = @"^(\\(\\d{3,4}\\)|\\d{3,4}-|\\s)?\\d{8}$";
+                            break;
+                        case OptioItemType.Fax:
+                            item.Pattern = @"^[+]{0,1}(\\d){1,3}[ ]?([-]?((\\d)|[ ]){1,12})+$";
+                            break;
+                        case OptioItemType.Regex:
+                            break;
+                    }
+                    itemsCode.AppendFormat("bindValidation{0}('{1}',{{   tip:'{2}',pattern:'{3}',placeholder:'{4}',isRequired:{5} }})", uk, item.FormFiledName, item.Tip, item.Pattern, item.Placeholder,item.IsRequired?"true":"false");
+                    itemsCode.AppendLine();
+                }
+                option.Script = string.Format(script, itemsCode.ToString(), uk);
+                script = null;
+                itemsCode.Clear();
+                option.PageKey = pageKey;
+                option.ItemList = itemList;
+                ValidationOptionList.Add(option);
+                return (option.Script);
+            }
+        }
 
         /// <summary>
         /// 后台验证
@@ -85,8 +104,18 @@ var changeInput{1}=function(selector,params){{
         {
             bool isSuccess = true;
             errorMessage = string.Empty;
-
-
+            if (!ValidationOptionList.Any(c => c.PageKey == pageKey))
+            {
+                throw new ArgumentNullException("ValidationSugar.PostValidation.pageKey");
+            }
+            var context = System.Web.HttpContext.Current;
+            var itemList = ValidationOptionList.Where(c => c.PageKey == pageKey).Single().ItemList;
+            var successItemList = itemList.Where(it => (it.IsRequired && !string.IsNullOrEmpty(context.Request[it.FormFiledName]) || !it.IsRequired)).Where(it => Regex.IsMatch(context.Request[it.FormFiledName], it.Pattern.Replace(@"\\",@"\"))).ToList();
+            isSuccess = (successItemList.Count == itemList.Count);
+            if (!isSuccess)
+            {
+                errorMessage = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(itemList);
+            }
             return isSuccess;
         }
 
@@ -94,6 +123,7 @@ var changeInput{1}=function(selector,params){{
         private class ValidationOption
         {
             public string PageKey { get; set; }
+            public string Script { get; set; }
             public List<OptionItem> ItemList { get; set; }
 
         }
@@ -101,7 +131,6 @@ var changeInput{1}=function(selector,params){{
         public enum OptioItemType
         {
             Mail = 0,
-            Phone = 1,
             Int = 2,
             Double = 3,
             IdCard = 4,

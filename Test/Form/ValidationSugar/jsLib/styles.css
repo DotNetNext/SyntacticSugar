@@ -43,7 +43,7 @@ body {font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", san
 	float:left;
 	padding:3px;
 }
-.contact_form input {
+.contact_form  ul input {
 	height:20px; 
 	width:220px; 
 	padding:5px 8px;
@@ -52,7 +52,7 @@ body {font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", san
 .contact_form button {margin-left:156px;}
 
 	/* form element visual styles */
-	.contact_form input, .contact_form textarea { 
+	.contact_form ul input, .contact_form textarea { 
 		border:1px solid #aaa;
 		box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
 		border-radius:2px;
@@ -62,7 +62,7 @@ body {font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", san
 		-o-transition: padding .25s;
 		transition: padding .25s;
 	}
-	.contact_form input:focus, .contact_form textarea:focus {
+	.contact_form ul input:focus, .contact_form textarea:focus {
 		background: #fff; 
 		border:1px solid #555; 
 		box-shadow: 0 0 3px #aaa; 
@@ -83,7 +83,7 @@ body {font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", san
 	box-shadow: 0 0 5px #d45252;
 	border-color: #b03535
 }
-
+.contact_form input[type="radio"]{ width:inherit; border:none}
 /* === Form hints === */
 .form_hint {
 	background: #d45252;
@@ -107,7 +107,7 @@ body {font: 14px/21px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", san
 .contact_form input:required:valid + .form_hint::before {color:#28921f;}
 	
 /* === Button Style === */
-button.submit {
+form .submit{
 	background-color: #68b12f;
 	background: -webkit-gradient(linear, left top, left bottom, from(#68b12f), to(#50911e));
 	background: -webkit-linear-gradient(top, #68b12f, #50911e);
@@ -133,11 +133,11 @@ button.submit {
 	text-align: center;
 	text-shadow: 0 -1px 0 #396715;
 }
-button.submit:hover {
+form .submit:hover {
 	opacity:.85;
 	cursor: pointer; 
 }
-button.submit:active {
+form .submit:active {
 	border: 1px solid #20911e;
 	box-shadow: 0 0 10px 5px #356b0b inset; 
 	-webkit-box-shadow:0 0 10px 5px #356b0b inset ;
