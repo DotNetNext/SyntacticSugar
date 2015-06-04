@@ -108,11 +108,14 @@ var bindValidation{1}=function(name,params){{
             }
             var context = System.Web.HttpContext.Current;
             var itemList = ValidationOptionList.Where(c => c.PageKey == pageKey).Single().ItemList;
-            var successItemList = itemList.Where(it => (it.IsRequired && !string.IsNullOrEmpty(context.Request[it.FormFiledName]) || !it.IsRequired)).Where(it =>
+            var successItemList = itemList.Where(it =>
             {
+                string value = context.Request[it.FormFiledName];
+                if (string.IsNullOrEmpty(value) && it.IsRequired == false) return true;
+                if (string.IsNullOrEmpty(value) && it.IsRequired) return false;
                 if (it.IsMultiselect == true)
                 {
-                    var errorList = context.Request[it.FormFiledName].Split(',').Where(itit =>
+                    var errorList = value.Split(',').Where(itit =>
                     {
                         var isNotMatch = !Regex.IsMatch(itit, it.Pattern.Replace(@"\\", @"\"));
                         return isNotMatch;
@@ -122,7 +125,7 @@ var bindValidation{1}=function(name,params){{
                 }
                 else
                 {
-                    return Regex.IsMatch(context.Request[it.FormFiledName], it.Pattern.Replace(@"\\", @"\"));
+                    return Regex.IsMatch(value, it.Pattern.Replace(@"\\", @"\"));
                 }
             }
                 ).ToList();
