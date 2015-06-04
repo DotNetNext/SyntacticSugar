@@ -42,7 +42,7 @@ var bindValidation{1}=function(name,params){{
      selectorObj.attr(""pattern"",params.pattern);
      if(params.placeholder!=null)
      selectorObj.attr(""placeholder"",params.placeholder);
-     if(params.isRequired=true)
+     if(params.isRequired==true)
      selectorObj.attr(""required"",params.isRequired);
 }}
 {0}</script>";
