@@ -30,10 +30,10 @@ namespace Test.file
             ui.SetSmallImgWidth = "100,40,20";
 
             //保存图片生成缩略图
-            var reponseMessage = ui.FileSaveAs(Request.Files[0], Server.MapPath("~/file/temp"));
+            var reponseMessage = ui.FileSaveAs(Request.Files[0], Server.MapPath("~/Form/temp"));
 
             //裁剪图片
-            var reponseMessage2 = ui.FileCutSaveAs(Request.Files[0], Server.MapPath("~/file/temp2"), 400, 300, UploadImage.CutMode.CutNo);
+            var reponseMessage2 = ui.FileCutSaveAs(Request.Files[0], Server.MapPath("~/Form/temp2"), 400, 300, UploadImage.CutMode.CutNo);
 
 
 

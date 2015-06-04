@@ -67,8 +67,8 @@
     <Content Include="Extenions\IsWhatTest.aspx" />
     <Content Include="Extenions\LogicTest.aspx" />
     <Content Include="Extenions\TryParseTest.aspx" />
-    <Content Include="file\UploadFileTest.aspx" />
-    <Content Include="file\UploadImageTest.aspx" />
+    <Content Include="Form\UploadFileTest.aspx" />
+    <Content Include="Form\UploadImageTest.aspx" />
     <Content Include="Form\ValidationSugar\jsLib\images\invalid.png" />
     <Content Include="Form\ValidationSugar\jsLib\images\red_asterisk.png" />
     <Content Include="Form\ValidationSugar\jsLib\images\valid.png" />
@@ -136,18 +136,18 @@
     <Compile Include="Extenions\TryParseTest.aspx.designer.cs">
       <DependentUpon>TryParseTest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="file\UploadFileTest.aspx.cs">
+    <Compile Include="Form\UploadFileTest.aspx.cs">
       <DependentUpon>UploadFileTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="file\UploadFileTest.aspx.designer.cs">
+    <Compile Include="Form\UploadFileTest.aspx.designer.cs">
       <DependentUpon>UploadFileTest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="file\UploadImageTest.aspx.cs">
+    <Compile Include="Form\UploadImageTest.aspx.cs">
       <DependentUpon>UploadImageTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="file\UploadImageTest.aspx.designer.cs">
+    <Compile Include="Form\UploadImageTest.aspx.designer.cs">
       <DependentUpon>UploadImageTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\ValidationSugar\ValidationSugarTest.aspx.cs">
@@ -182,8 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="file\temp2\" />
-    <Folder Include="file\temp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Web.config" />
