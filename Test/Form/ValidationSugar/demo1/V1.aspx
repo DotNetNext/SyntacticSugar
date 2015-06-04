@@ -1,20 +1,20 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ValidationSugarTest.aspx.cs"
-    Inherits="Test.Form.ValidationSugarTest" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="V1.aspx.cs" EnableViewState="false" Inherits="demo1_V1" %>
+
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <title>基于css3验证</title>
     <script type="text/javascript" src="http://www.52mvc.com/javascript/jquery.js"></script>
-    <link href="jsLib/styles.css" rel="stylesheet" type="text/css" />
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="form1" runat="server" class="contact_form">
     <ul>
         <li>
             <h2>
-                表单验证</h2>
+                基于html5+css3验证</h2>
             <span class="required_notification">* 表示必填项</span> </li>
         <li>
             <label for="name">
@@ -54,6 +54,6 @@
     <br />
     <asp:Button ID="Button1" runat="server" Text="submit" CssClass="submit" OnClick="Button1_Click" />
     </form>
-    <%=ViewState["intiscript"]%>
+    <%=ViewState["initscript"]%>
 </body>
 </html>
