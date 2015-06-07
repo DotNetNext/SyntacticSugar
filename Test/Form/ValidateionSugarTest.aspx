@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PostV2.aspx.cs" Inherits="demo2_PostV2" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ValidateionSugarTest.aspx.cs" Inherits="Test.Form.ValidateionSugarTest" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
