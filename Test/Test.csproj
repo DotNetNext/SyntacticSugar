@@ -80,6 +80,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Work\MailSmtpTest.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\ChangePassword.aspx.cs">
@@ -173,6 +174,13 @@
     </Compile>
     <Compile Include="UI\PageStringTest.aspx.designer.cs">
       <DependentUpon>PageStringTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Work\MailSmtpTest.aspx.cs">
+      <DependentUpon>MailSmtpTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Work\MailSmtpTest.aspx.designer.cs">
+      <DependentUpon>MailSmtpTest.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

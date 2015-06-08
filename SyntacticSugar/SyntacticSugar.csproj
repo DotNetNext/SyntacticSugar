@@ -56,6 +56,7 @@
     <Compile Include="TextType\XHtmlElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\PageString.cs" />
+    <Compile Include="Work\MailSmtp.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
