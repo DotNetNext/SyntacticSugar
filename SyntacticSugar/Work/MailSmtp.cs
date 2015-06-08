@@ -9,12 +9,13 @@ using System.Text.RegularExpressions;
 
 namespace SyntacticSugar
 {
-    /// <summary>     
-    /// 1. 功能：发送邮箱
-    /// 2. 作者：kaixuan
-    /// 3. 创建日期：2014-10-31
-    /// 4. 最后修改日期：2014-10-31
-    /// </summary>  
+    /// <summary>
+    /// ** 描述：邮件发送
+    /// ** 创始时间：2015-6-8
+    /// ** 修改时间：-
+    /// ** 作者：sunkaixuan
+    /// ** 使用说明：http://www.cnblogs.com/sunkaixuan/p/4562147.html
+    /// </summary>
     public class MailSmtp
     {
         /// <summary>
