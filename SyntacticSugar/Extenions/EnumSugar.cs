@@ -11,12 +11,11 @@ namespace SyntacticSugar
         /// <summary>
         /// 获得枚举字段的特性(Attribute)，该属性不允许多次定义。
         /// </summary>
-        /// <typeparam name="T">特性类型。</typeparam>
-        /// <param name="thisValue">一个枚举的实例对象。</param>
-        /// <returns>枚举字段的扩展属性。如果不存在则返回 <c>null</c> 。</returns>
         public static string GetAttribute(this Enum thisValue)
         {
             FieldInfo field = thisValue.GetType().GetField(thisValue.ToString());
+            var attr= (Attribute.GetCustomAttribute(field, typeof(Desc)) as Desc);
+            if (attr == null) return string.Empty;
             return (Attribute.GetCustomAttribute(field, typeof(Desc)) as Desc).Value;
         }
 

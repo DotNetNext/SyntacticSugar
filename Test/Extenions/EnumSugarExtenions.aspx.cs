@@ -21,9 +21,9 @@ namespace Test.Extenions
 
     public enum MyType
     {
-        [Desc("阿asfd")]
+ 
         a = 0,
-        [Desc("逼")]
+
         b = 1
     }
 }
