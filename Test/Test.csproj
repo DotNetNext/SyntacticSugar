@@ -69,29 +69,7 @@
     <Content Include="Extenions\TryParseTest.aspx" />
     <Content Include="Form\UploadFileTest.aspx" />
     <Content Include="Form\UploadImageTest.aspx" />
-    <Content Include="Form\ValidationSugar\demo1\css\images\invalid.png" />
-    <Content Include="Form\ValidationSugar\demo1\css\images\red_asterisk.png" />
-    <Content Include="Form\ValidationSugar\demo1\css\images\valid.png" />
-    <Content Include="Form\ValidationSugar\demo1\css\index.html" />
-    <Content Include="Form\ValidationSugar\demo1\css\styles.css" />
-    <Content Include="Form\ValidationSugar\demo1\V1.aspx" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\dist\additional-methods.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\dist\additional-methods.min.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\dist\jquery.validate.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\dist\jquery.validate.min.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\lib\jquery-1.11.1.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\lib\jquery-1.6.4.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\lib\jquery-1.7.2.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\lib\jquery-1.8.3.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\lib\jquery-1.9.1.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\lib\jquery.form.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\lib\jquery.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\lib\jquery.mockjax.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\lib\jquery.simulate.js" />
-    <Content Include="Form\ValidationSugar\demo2\jquery-validation-1.13.1\lib\require.js" />
-    <Content Include="Form\ValidationSugar\demo2\PostV2.aspx" />
-    <Content Include="Form\ValidationSugar\demo2\v2.aspx" />
-    <Content Include="Form\ValidationSugar\demo2\ValidationSugar.js" />
+    <Content Include="Form\ValidateionSugarTest.aspx" />
     <Content Include="Generation\ClassGeneratingTest.aspx" />
     <Content Include="Test\Performance2Test.aspx" />
     <Content Include="UI\PageStringTest.aspx" />
@@ -167,17 +145,12 @@
     <Compile Include="Form\UploadImageTest.aspx.designer.cs">
       <DependentUpon>UploadImageTest.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Form\ValidationSugar\demo1\V1.aspx.cs">
-      <DependentUpon>V1.aspx</DependentUpon>
+    <Compile Include="Form\ValidateionSugarTest.aspx.cs">
+      <DependentUpon>ValidateionSugarTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Form\ValidationSugar\demo2\PostV2.aspx.cs">
-      <DependentUpon>PostV2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Form\ValidationSugar\demo2\v2.aspx.cs">
-      <DependentUpon>v2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="Form\ValidateionSugarTest.aspx.designer.cs">
+      <DependentUpon>ValidateionSugarTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Generation\ClassGeneratingTest.aspx.cs">
       <DependentUpon>ClassGeneratingTest.aspx</DependentUpon>
