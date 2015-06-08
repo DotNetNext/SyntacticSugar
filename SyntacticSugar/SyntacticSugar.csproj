@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extenions\EnumSugar.cs" />
+    <Compile Include="Extenions\IEnumerable.cs" />
     <Compile Include="Extenions\IsWhat.cs" />
     <Compile Include="Extenions\LogicSugar.cs" />
     <Compile Include="Extenions\TypeParse.cs" />

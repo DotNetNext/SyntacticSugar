@@ -64,6 +64,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="Extenions\EnumSugarExtenions.aspx" />
     <Content Include="Extenions\IsWhatTest.aspx" />
     <Content Include="Extenions\LogicTest.aspx" />
     <Content Include="Extenions\TryParseTest.aspx" />
@@ -110,6 +111,13 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Extenions\EnumSugarExtenions.aspx.cs">
+      <DependentUpon>EnumSugarExtenions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extenions\EnumSugarExtenions.aspx.designer.cs">
+      <DependentUpon>EnumSugarExtenions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Extenions\IsWhatTest.aspx.cs">
       <DependentUpon>IsWhatTest.aspx</DependentUpon>
