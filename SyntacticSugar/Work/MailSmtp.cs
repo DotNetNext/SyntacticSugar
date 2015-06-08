@@ -51,7 +51,14 @@ namespace SyntacticSugar
         {
             this._bcc = bc;
         }
-
+        /// <summary>
+        /// 是否ssl加密
+        /// </summary>
+        /// <param name="isSSL"></param>
+        public void SetIsSSL(bool isSSL)
+        {
+            this._smtp.EnableSsl = isSSL;
+        }
 
         /// <summary>
         /// 构造函数
@@ -63,6 +70,7 @@ namespace SyntacticSugar
         {
             this._smtp.Host = host;
             this._smtp.Port = 0x19;
+            this._smtp.EnableSsl = false;
             this._isHtml = true;
             this._encoding = Encoding.UTF8;
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
