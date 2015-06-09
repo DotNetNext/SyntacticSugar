@@ -57,6 +57,7 @@
     <Compile Include="Generation\ClassGenerating.cs" />
     <Compile Include="Http\CacheManager.cs" />
     <Compile Include="Http\CookiesHelper.cs" />
+    <Compile Include="Http\IHttpStorageObject.cs" />
     <Compile Include="Http\SessionHelper.cs" />
     <Compile Include="Test\PerformanceTest.cs" />
     <Compile Include="TextType\XHtmlElement.cs" />

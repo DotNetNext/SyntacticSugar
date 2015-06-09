@@ -18,16 +18,11 @@ namespace SyntacticSugar
     /// </summary>
     /// <typeparam name="K">键</typeparam>
     /// <typeparam name="V">值</typeparam>
-    public class CacheManager<V>
+    public class CacheManager<V> : IHttpStorageObject<V>
     {
 
-        public int Minutes = 60;
-        public int Hour = 60 * 60;
-        public int Day = 60 * 60 * 24;
-
-
         #region 全局变量
-        private static CacheManager<V> _instance = null;
+        private static IHttpStorageObject<V> _instance = null;
         private static readonly object _instanceLock = new object();
         #endregion
 
@@ -41,7 +36,7 @@ namespace SyntacticSugar
         ///根据key获取value     
         /// </summary>         
         /// <value></value>      
-        public V this[string key]
+        public override V this[string key]
         {
             get { return (V)HttpRuntime.Cache[CreateKey(key)]; }
         }
@@ -54,7 +49,7 @@ namespace SyntacticSugar
         /// </summary>         
         /// <param name="key">key</param>         
         /// <returns> /// 	存在<c>true</c> 不存在<c>false</c>.        /// /// </returns>         
-        public bool ContainsKey(string key)
+        public override bool ContainsKey(string key)
         {
             return HttpRuntime.Cache[CreateKey(key)] != null;
         }
@@ -64,7 +59,7 @@ namespace SyntacticSugar
         /// </summary>         
         /// <param name="key">key</param>         
         /// <returns></returns>         
-        public V Get(string key)
+        public override V Get(string key)
         {
             return (V)HttpRuntime.Cache.Get(CreateKey(key));
         }
@@ -73,7 +68,7 @@ namespace SyntacticSugar
         /// 获取实例 （单例模式）       
         /// </summary>         
         /// <returns></returns>         
-        public static CacheManager<V> GetInstance()
+        public static IHttpStorageObject<V> GetInstance()
         {
             if (_instance == null)
                 lock (_instanceLock)
@@ -88,7 +83,7 @@ namespace SyntacticSugar
         /// <param name="key"> key</param>         
         /// <param name="value">value</param>         
         /// <param name="cacheDurationInSeconds">过期时间单位秒</param>         
-        public void Add(string key, V value, int cacheDurationInSeconds)
+        public override void Add(string key, V value, int cacheDurationInSeconds)
         {
             Add(key, value, cacheDurationInSeconds, CacheItemPriority.Default);
         }
@@ -113,7 +108,7 @@ namespace SyntacticSugar
         /// <param name="value">value</param>         
         /// <param name="cacheDurationInSeconds">过期时间单位秒</param>         
         /// <param name="priority">缓存项属性</param>         
-        public void Add(string key, V value, int cacheDurationInSeconds, CacheDependency dependency, CacheItemPriority priority)
+        public  void Add(string key, V value, int cacheDurationInSeconds, CacheDependency dependency, CacheItemPriority priority)
         {
             string keyString = CreateKey(key);
             HttpRuntime.Cache.Insert(keyString, value, dependency, DateTime.Now.AddSeconds(cacheDurationInSeconds), Cache.NoSlidingExpiration, priority, null);
@@ -123,7 +118,7 @@ namespace SyntacticSugar
         /// 删除缓存         
         /// </summary>         
         /// <param name="key">key</param>         
-        public void Remove(string key)
+        public override void Remove(string key)
         {
             HttpRuntime.Cache.Remove(CreateKey(key));
         }
@@ -131,7 +126,7 @@ namespace SyntacticSugar
         /// <summary>
         /// 清除所有缓存
         /// </summary>
-        public void RemoveAll()
+        public override void RemoveAll()
         {
             System.Web.Caching.Cache cache = HttpRuntime.Cache;
             IDictionaryEnumerator CacheEnum = cache.GetEnumerator();
@@ -150,7 +145,7 @@ namespace SyntacticSugar
         /// 清除所有包含关键字的缓存
         /// </summary>
         /// <param name="removeKey">关键字</param>
-        public void RemoveAll(Func<string, bool> removeExpression)
+        public override void RemoveAll(Func<string, bool> removeExpression)
         {
             System.Web.Caching.Cache _cache = HttpRuntime.Cache;
             var allKeyList = GetAllKey();
@@ -165,7 +160,7 @@ namespace SyntacticSugar
         /// 获取所有缓存key
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> GetAllKey()
+        public override IEnumerable<string> GetAllKey()
         {
             IDictionaryEnumerator CacheEnum = HttpRuntime.Cache.GetEnumerator();
             while (CacheEnum.MoveNext())
