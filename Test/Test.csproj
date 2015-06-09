@@ -72,6 +72,7 @@
     <Content Include="Form\UploadImageTest.aspx" />
     <Content Include="Form\ValidateionSugarTest.aspx" />
     <Content Include="Generation\ClassGeneratingTest.aspx" />
+    <Content Include="Http\CacheManagerTest.aspx" />
     <Content Include="Test\Performance2Test.aspx" />
     <Content Include="UI\PageStringTest.aspx" />
     <Content Include="Web.config" />
@@ -167,6 +168,13 @@
     </Compile>
     <Compile Include="Generation\ClassGeneratingTest.aspx.designer.cs">
       <DependentUpon>ClassGeneratingTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Http\CacheManagerTest.aspx.cs">
+      <DependentUpon>CacheManagerTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Http\CacheManagerTest.aspx.designer.cs">
+      <DependentUpon>CacheManagerTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test\Performance2Test.aspx.cs">

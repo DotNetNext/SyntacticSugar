@@ -48,12 +48,16 @@
     <Compile Include="Extenions\IEnumerable.cs" />
     <Compile Include="Extenions\IsWhat.cs" />
     <Compile Include="Extenions\LogicSugar.cs" />
+    <Compile Include="Extenions\StringSugar.cs" />
     <Compile Include="Extenions\TypeParse.cs" />
     <Compile Include="Form\RequestToModel.cs" />
     <Compile Include="Form\UploadFile.cs" />
     <Compile Include="Form\UploadImage.cs" />
     <Compile Include="Form\ValidationSugar.cs" />
     <Compile Include="Generation\ClassGenerating.cs" />
+    <Compile Include="Http\CacheManager.cs" />
+    <Compile Include="Http\CookiesHelper.cs" />
+    <Compile Include="Http\SessionHelper.cs" />
     <Compile Include="Test\PerformanceTest.cs" />
     <Compile Include="TextType\XHtmlElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
