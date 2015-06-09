@@ -189,7 +189,7 @@ namespace SyntacticSugar
         /// <returns></returns>         
         private string CreateKey(string key)
         {
-            return key.ToString();
+            return "http_cache_"+key.ToString();
         }
 
         #endregion
