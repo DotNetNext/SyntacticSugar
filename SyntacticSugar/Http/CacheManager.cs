@@ -14,7 +14,7 @@ namespace SyntacticSugar
     /// ** 创始时间：2015-6-9
     /// ** 修改时间：-
     /// ** 作者：sunkaixuan
-    /// ** 使用说明：
+    /// ** 使用说明：http://www.cnblogs.com/sunkaixuan/p/4563462.html
     /// </summary>
     /// <typeparam name="K">键</typeparam>
     /// <typeparam name="V">值</typeparam>
