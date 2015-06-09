@@ -73,6 +73,7 @@
     <Content Include="Form\ValidateionSugarTest.aspx" />
     <Content Include="Generation\ClassGeneratingTest.aspx" />
     <Content Include="Http\CacheManagerTest.aspx" />
+    <Content Include="Http\CookiesManagerTest.aspx" />
     <Content Include="Http\SessionManagerTest.aspx" />
     <Content Include="Test\Performance2Test.aspx" />
     <Content Include="UI\PageStringTest.aspx" />
@@ -176,6 +177,13 @@
     </Compile>
     <Compile Include="Http\CacheManagerTest.aspx.designer.cs">
       <DependentUpon>CacheManagerTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Http\CookiesManagerTest.aspx.cs">
+      <DependentUpon>CookiesManagerTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Http\CookiesManagerTest.aspx.designer.cs">
+      <DependentUpon>CookiesManagerTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Http\SessionManagerTest.aspx.cs">
       <DependentUpon>SessionManagerTest.aspx</DependentUpon>
