@@ -7,7 +7,7 @@ namespace SyntacticSugar
         public int Minutes = 60;
         public int Hour = 60 * 60;
         public int Day = 60 * 60 * 24;
-
+        public abstract void Add(string key, V value);
         public abstract void Add(string key, V value, int cacheDurationInSeconds);
         public abstract bool ContainsKey(string key);
         public abstract V Get(string key);

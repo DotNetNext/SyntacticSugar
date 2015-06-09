@@ -78,6 +78,16 @@ namespace SyntacticSugar
         }
 
         /// <summary>         
+        /// 插入缓存(默认20分钟)        
+        /// </summary>         
+        /// <param name="key"> key</param>         
+        /// <param name="value">value</param>          
+        public override void Add(string key, V value)
+        {
+            Add(key, value, Minutes*20);
+        }
+
+        /// <summary>         
         /// 插入缓存        
         /// </summary>         
         /// <param name="key"> key</param>         
@@ -183,6 +193,7 @@ namespace SyntacticSugar
         }
 
         #endregion
+
 
 
 
