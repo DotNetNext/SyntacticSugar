@@ -64,6 +64,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="Extenions\EnumSugarExtenions.aspx" />
     <Content Include="Extenions\IsWhatTest.aspx" />
     <Content Include="Extenions\LogicTest.aspx" />
     <Content Include="Extenions\TryParseTest.aspx" />
@@ -80,6 +81,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Work\MailSmtpTest.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\ChangePassword.aspx.cs">
@@ -109,6 +111,13 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Extenions\EnumSugarExtenions.aspx.cs">
+      <DependentUpon>EnumSugarExtenions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extenions\EnumSugarExtenions.aspx.designer.cs">
+      <DependentUpon>EnumSugarExtenions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Extenions\IsWhatTest.aspx.cs">
       <DependentUpon>IsWhatTest.aspx</DependentUpon>
@@ -173,6 +182,13 @@
     </Compile>
     <Compile Include="UI\PageStringTest.aspx.designer.cs">
       <DependentUpon>PageStringTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Work\MailSmtpTest.aspx.cs">
+      <DependentUpon>MailSmtpTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Work\MailSmtpTest.aspx.designer.cs">
+      <DependentUpon>MailSmtpTest.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
