@@ -4,114 +4,88 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace COM.Utility
+namespace SyntacticSugar
 {
     /// <summary>
-    /// 1. 功能：session操作类
-    /// 2. 作者：kaixuan
-    /// 3. 创建日期：2014-10-24
-    /// 4. 最后修改日期：2014-10-24
+    /// ** 描述：session操作类
+    /// ** 创始时间：2015-6-9
+    /// ** 修改时间：-
+    /// ** 作者：sunkaixuan
+    /// ** 使用说明：
     /// </summary>
-    public class SessionHelper
+    /// <typeparam name="K">键</typeparam>
+    /// <typeparam name="V">值</typeparam>
+    public class SessionManager<V> : IHttpStorageObject<V>
     {
+        private static readonly object _instancelock = new object();
+        private static SessionManager<V> _instance = null;
 
-        /// <summary>
-        /// 添加Session，调动有效期为20分钟
-        /// </summary>
-        /// <param name="strSessionName">Session对象名称</param>
-        /// <param name="sesValue">Session值</param>
-        public static void Add(string strSessionName, object sesValue)
+        public static SessionManager<V> GetInstance()
         {
-            HttpContext.Current.Session[strSessionName] = sesValue;
-        }
-
-        /// <summary>
-        /// 添加Session，调动有效期为20分钟
-        /// </summary>
-        /// <param name="strSessionName">Session对象名称</param>
-        /// <param name="strValues">Session值数组</param>
-        public static void Adds(string strSessionName, string[] strValues)
-        {
-            HttpContext.Current.Session[strSessionName] = strValues;
-            HttpContext.Current.Session.Timeout = 20;
-        }
-
-        /// <summary>
-        /// 添加Session
-        /// </summary>
-        /// <param name="strSessionName">Session对象名称</param>
-        /// <param name="seValue">Session值</param>
-        /// <param name="iExpires">调动有效期（分钟）</param>
-        public static void Add(string strSessionName, object seValue, int iExpires)
-        {
-            HttpContext.Current.Session[strSessionName] = seValue;
-            HttpContext.Current.Session.Timeout = iExpires;
-        }
-
-        /// <summary>
-        /// 添加Session
-        /// </summary>
-        /// <param name="strSessionName">Session对象名称</param>
-        /// <param name="strValues">Session值数组</param>
-        /// <param name="iExpires">调动有效期（分钟）</param>
-        public static void Adds(string strSessionName, string[] strValues, int iExpires)
-        {
-            HttpContext.Current.Session[strSessionName] = strValues;
-            HttpContext.Current.Session.Timeout = iExpires;
-        }
-
-        /// <summary>
-        /// 读取某个Session对象值
-        /// </summary>
-        /// <param name="strSessionName">Session对象名称</param>
-        /// <returns>Session对象值</returns>
-        public static object Get(string strSessionName)
-        {
-            if (HttpContext.Current.Session[strSessionName] == null)
+            if (_instance == null)
             {
-                return null;
+                lock (_instancelock)
+                {
+                    if (_instance == null)
+                    {
+                        _instance = new SessionManager<V>();
+                    }
+                }
+
             }
-            else
-            {
-                return HttpContext.Current.Session[strSessionName];
-            }
-        }
-        /// <summary>
-        /// 读取某个Session对象值
-        /// </summary>
-        /// <param name="strSessionName">Session对象名称</param>
-        /// <returns>Session对象值</returns>
-        public static T Get<T>(string strSessionName)
-        {
-            return (T)HttpContext.Current.Session[strSessionName];
+            return _instance;
         }
 
-        /// <summary>
-        /// 读取某个Session对象值数组
-        /// </summary>
-        /// <param name="strSessionName">Session对象名称</param>
-        /// <returns>Session对象值数组</returns>
-        public static string[] Gets(string strSessionName)
+        public override void Add(string key, V value)
         {
-            if (HttpContext.Current.Session[strSessionName] == null)
+            context.Session.Add(key, value);
+        }
+
+        public override bool ContainsKey(string key)
+        {
+            return context.Session[key] != null;
+        }
+
+        public override V Get(string key)
+        {
+            return (V)context.Session[key];
+        }
+
+        public override IEnumerable<string> GetAllKey()
+        {
+            foreach (var key in context.Session.Keys)
             {
-                return null;
-            }
-            else
-            {
-                return (string[])HttpContext.Current.Session[strSessionName];
+                yield return key.ToString();
             }
         }
 
-        /// <summary>
-        /// 删除某个Session对象
-        /// </summary>
-        /// <param name="strSessionName">Session对象名称</param>
-        public static void Del(string strSessionName)
+        public override void Remove(string key)
         {
-            HttpContext.Current.Session[strSessionName] = null;
+            context.Session[key] = null;
+            context.Session.Remove(key);
         }
 
+        public override void RemoveAll()
+        {
+            foreach (var key in GetAllKey())
+            {
+                Remove(key);
+            }
+        }
 
+        public override void RemoveAll(Func<string, bool> removeExpression)
+        {
+            var allKeyList = GetAllKey().ToList();
+            var removeKeyList = allKeyList.Where(removeExpression).ToList();
+            foreach (var key in removeKeyList)
+            {
+                Remove(key);
+            }
+        }
+
+        public override V this[string key]
+        {
+            get { return (V)context.Session[key]; }
+        }
     }
 }

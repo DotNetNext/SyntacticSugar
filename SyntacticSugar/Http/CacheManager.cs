@@ -22,7 +22,7 @@ namespace SyntacticSugar
     {
 
         #region 全局变量
-        private static IHttpStorageObject<V> _instance = null;
+        private static CacheManager<V> _instance = null;
         private static readonly object _instanceLock = new object();
         #endregion
 
@@ -68,7 +68,7 @@ namespace SyntacticSugar
         /// 获取实例 （单例模式）       
         /// </summary>         
         /// <returns></returns>         
-        public static IHttpStorageObject<V> GetInstance()
+        public static CacheManager<V> GetInstance()
         {
             if (_instance == null)
                 lock (_instanceLock)
@@ -93,7 +93,7 @@ namespace SyntacticSugar
         /// <param name="key"> key</param>         
         /// <param name="value">value</param>         
         /// <param name="cacheDurationInSeconds">过期时间单位秒</param>         
-        public override void Add(string key, V value, int cacheDurationInSeconds)
+        public  void Add(string key, V value, int cacheDurationInSeconds)
         {
             Add(key, value, cacheDurationInSeconds, CacheItemPriority.Default);
         }
