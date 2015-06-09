@@ -75,6 +75,40 @@ namespace SyntacticSugar
                 }
             }
         }
+        /// <summary>
+        /// 添加cookies ,注意value最大4K
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="cookiesDurationInSeconds">有效时间单位秒</param>
+        public void Add(string key, V value, int cookiesDurationInSeconds, string path, string domain=null)
+        {
+            HttpResponse response = HttpContext.Current.Response;
+            if (response != null)
+            {
+                HttpCookie cookie = response.Cookies[key];
+                if (!string.IsNullOrEmpty(path))
+                    cookie.Path = path;
+                if (!string.IsNullOrEmpty(domain))
+                    cookie.Domain = domain;
+                if (cookie != null)
+                {
+                    if (typeof(V) == typeof(string))
+                    {
+                        string setValue = value.ToString();
+                        Add(key, cookiesDurationInSeconds, cookie, setValue, response);
+                    }
+                    else
+                    {
+                        System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+                        string setValue = jss.Serialize(value);
+                        Add(key, cookiesDurationInSeconds, cookie, setValue, response);
+
+                    }
+                }
+            }
+        }
+
 
         private void Add(string key, int cookiesDurationInSeconds, HttpCookie cookie, string setValue, HttpResponse response)
         {
