@@ -15,7 +15,7 @@ namespace Test.Extenions
             var attr = MyType.b.GetName();
             var value = MyType.b.GetValue<int>();
 
-            var type = MyType.a.GetAttribute();
+            var type = MyType.a.GetAttributeValue();
         }
     }
 

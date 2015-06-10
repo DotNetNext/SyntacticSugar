@@ -11,12 +11,22 @@ namespace SyntacticSugar
         /// <summary>
         /// 获得枚举字段的特性(Attribute)，该属性不允许多次定义。
         /// </summary>
-        public static string GetAttribute(this Enum thisValue)
+        public static string GetAttributeValue(this Enum thisValue)
         {
             FieldInfo field = thisValue.GetType().GetField(thisValue.ToString());
             var attr= (Attribute.GetCustomAttribute(field, typeof(Desc)) as Desc);
             if (attr == null) return string.Empty;
             return (Attribute.GetCustomAttribute(field, typeof(Desc)) as Desc).Value;
+        }
+
+        /// <summary>
+        /// 获得枚举字段的特性(Attribute)，该属性不允许多次定义。
+        /// </summary>
+        public static T GetAttribute<T>(this Enum thisValue)where T:class
+        {
+            FieldInfo field = thisValue.GetType().GetField(thisValue.ToString());
+            var attr = (Attribute.GetCustomAttribute(field, typeof(T)) as T);
+            return attr;
         }
 
         /// <summary>

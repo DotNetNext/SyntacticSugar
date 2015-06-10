@@ -7,7 +7,6 @@ D:\学习\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.dll
 D:\学习\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.pdb
 D:\学习\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSugar.dll
 D:\学习\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSugar.pdb
-D:\学习\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.csprojResolveAssemblyReference.cache
 D:\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSugar.dll
 D:\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSugar.pdb
 D:\SyntacticSugar\SyntacticSugar\obj\Debug\ResolveAssemblyReference.cache
