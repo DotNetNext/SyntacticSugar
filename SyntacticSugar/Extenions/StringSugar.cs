@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace SyntacticSugar
 {
@@ -14,7 +15,7 @@ namespace SyntacticSugar
         /// <param name="value"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        public static string GetFormat(this string value, params object[] args)
+        public static string ToFormat(this string value, params object[] args)
         {
             return string.Format(value, args);
         }
@@ -26,7 +27,7 @@ namespace SyntacticSugar
         /// <param name="cutLength"></param>
         /// <param name="bdot"></param>
         /// <returns></returns>
-        public static string GetSubString(this string value, int cutLength, string appendString = null)
+        public static string ToCutString(this string value, int cutLength, string appendString = null)
         {
             string str = "";
 
@@ -54,7 +55,7 @@ namespace SyntacticSugar
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetHtmlDecode(this string value)
+        public static string ToHtmlDecode(this string value)
         {
             return System.Web.HttpContext.Current.Server.HtmlDecode(value);
         }
@@ -63,7 +64,7 @@ namespace SyntacticSugar
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetHtmlEncode(this string value)
+        public static string ToHtmlEncode(this string value)
         {
             return System.Web.HttpContext.Current.Server.HtmlEncode(value);
         }
@@ -72,7 +73,7 @@ namespace SyntacticSugar
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetUrlDecode(this string value)
+        public static string ToUrlDecode(this string value)
         {
             return System.Web.HttpContext.Current.Server.UrlDecode(value);
         }
@@ -81,9 +82,23 @@ namespace SyntacticSugar
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetUrlEncode(this string value)
+        public static string ToUrlEncode(this string value)
         {
             return System.Web.HttpContext.Current.Server.UrlEncode(value);
         }
+        /// <summary>
+        /// 将文本转换成html
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToHtmlByText(this string value)
+        {
+            value = value.Replace("\r\n", "\r");
+            value = value.Replace("\n", "\r");
+            value = value.Replace("\r", "<br>\r\n");
+            value = value.Replace("\t", " ");
+            return value;
+        }
+ 
     }
 }
