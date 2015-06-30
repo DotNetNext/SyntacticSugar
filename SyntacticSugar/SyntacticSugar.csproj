@@ -59,6 +59,7 @@
     <Compile Include="Http\StorageObject\CookiesManager.cs" />
     <Compile Include="Http\StorageObject\IHttpStorageObject.cs" />
     <Compile Include="Http\StorageObject\SessionHelper.cs" />
+    <Compile Include="IO\FileSugar.cs" />
     <Compile Include="Test\PerformanceTest.cs" />
     <Compile Include="TextType\XHtmlElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
