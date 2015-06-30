@@ -7,6 +7,13 @@ using System.Web;
 
 namespace SyntacticSugar
 {
+    /// <summary>
+    /// ** 描述：string操作类
+    /// ** 创始时间：2015-6-30
+    /// ** 修改时间：-
+    /// ** 作者：sunkaixuan
+    /// ** 使用说明：
+    /// </summary>
     public static class StringSugar
     {
         /// <summary>

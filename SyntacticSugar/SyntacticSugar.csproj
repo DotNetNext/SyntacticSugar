@@ -55,6 +55,7 @@
     <Compile Include="Form\UploadImage.cs" />
     <Compile Include="Form\ValidationSugar.cs" />
     <Compile Include="Generation\ClassGenerating.cs" />
+    <Compile Include="Http\RequestInfo.cs" />
     <Compile Include="Http\StorageObject\CacheManager.cs" />
     <Compile Include="Http\StorageObject\CookiesManager.cs" />
     <Compile Include="Http\StorageObject\IHttpStorageObject.cs" />
