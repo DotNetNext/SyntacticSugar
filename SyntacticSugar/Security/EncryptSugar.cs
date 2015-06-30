@@ -25,7 +25,7 @@ namespace SyntacticSugar
         /// <summary>
         /// 最大缓存条数
         /// </summary>
-        private static int _maxCacheNum = 1000;
+        private static int _maxCacheNum = 10000;
 
         /// <summary>
         /// 对称加密类的构造函数
@@ -85,7 +85,7 @@ namespace SyntacticSugar
             {
                 if (_cache.Count > _maxCacheNum)
                 {
-                    foreach (var it in _cache.Take(_maxCacheNum))
+                    foreach (var it in _cache.Take(_maxCacheNum/5))
                     {
 
                         _cache.Remove(it.Key);
