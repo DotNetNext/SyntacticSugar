@@ -51,6 +51,18 @@ namespace SyntacticSugar
         }
 
         /// <summary>
+        /// 在里面吗?
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="thisValue"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public static bool IsContainsIn(this string thisValue, params string[] inValues)
+        {
+            return inValues.Any(it => thisValue.Contains(it));
+        }
+
+        /// <summary>
         /// 是null或""?
         /// </summary>
         /// <returns></returns>

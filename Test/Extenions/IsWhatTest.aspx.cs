@@ -41,6 +41,16 @@ namespace Test.Extenions
             if (value.IsIn("a", "b", "c")) { 
             
             }
+            //【IsContainsIn】
+            //以前写法
+            if ("abcd".Contains("abc") || "abcd".Contains("xxx"))
+            { 
+            
+            }
+            //现在写法
+            if ("abcd".IsContainsIn("abc", "xxx")) { 
+            
+            }
 
             //【IsValuable与IsNullOrEmpty相反】
             string ss = "";
