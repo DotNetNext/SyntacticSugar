@@ -9,10 +9,6 @@ namespace SyntacticSugar
     public class ReflectionSugar
     {
         /// <summary>
-        /// 最大缓存条数
-        /// </summary>
-        private static int _maxCacheNum = 10000;
-        /// <summary>
         /// 创建对象实例
         /// </summary>
         /// <typeparam name="T"></typeparam>
