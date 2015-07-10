@@ -55,13 +55,14 @@
     <Compile Include="Form\UploadFile.cs" />
     <Compile Include="Form\UploadImage.cs" />
     <Compile Include="Form\ValidationSugar.cs" />
-    <Compile Include="Generation\ClassGenerating.cs" />
+    <Compile Include="IO\ClassGenerating.cs" />
     <Compile Include="Http\RequestInfo.cs" />
     <Compile Include="Http\StorageObject\CacheManager.cs" />
     <Compile Include="Http\StorageObject\CookiesManager.cs" />
     <Compile Include="Http\StorageObject\IHttpStorageObject.cs" />
     <Compile Include="Http\StorageObject\SessionHelper.cs" />
     <Compile Include="IO\FileSugar.cs" />
+    <Compile Include="IO\ReflectionSugar.cs" />
     <Compile Include="Security\EncryptSugar.cs" />
     <Compile Include="Test\PerformanceTest.cs" />
     <Compile Include="TextType\XHtmlElement.cs" />
