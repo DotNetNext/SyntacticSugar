@@ -100,7 +100,7 @@ namespace SyntacticSugar
         /// <param name="pageIndex">当前页数</param>
         /// <param name="query_string">Url参数</param>
         /// <returns></returns>
-        public string ToString(int total, int pageSize, int pageIndex, string query_string)
+        public string ToPageString(int total, int pageSize, int pageIndex, string query_string)
         {
 
             int allpage = 0;
