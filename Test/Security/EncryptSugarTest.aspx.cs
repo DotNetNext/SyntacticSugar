@@ -16,6 +16,7 @@ namespace Test.Security
              es.SetMaxCacheNum(0);
              string word = "abc";
              var wordEncrypt = es.Encrypto(word);
+             var wordEncrypt2 = es.Encrypto("22");
              var wordDecrypt = es.Decrypto(wordEncrypt);
              var wordMd5 = es.MD5(word);
         }

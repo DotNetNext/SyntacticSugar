@@ -23,11 +23,12 @@ namespace SyntacticSugar
         private static readonly object _cacheLock = new object();
         private static Dictionary<string, string> _cache = new Dictionary<string, string>();
         /// <summary>
-        /// 设置最大缓存条数
+        /// 设置最大缓存条数,最小值为5(默认值：5)
         /// </summary>
         /// <param name="i"></param>
-        public  void SetMaxCacheNum(int i = 0)
+        public  void SetMaxCacheNum(int i = 5)
         {
+            if (i < 5) i = 5;
             _maxCacheNum = 0;
         }
         /// <summary>
