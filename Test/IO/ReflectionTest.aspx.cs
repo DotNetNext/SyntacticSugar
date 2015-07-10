@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -52,6 +53,42 @@ namespace Test.IO
               },
              message => { Response.Write(message); });   //总共执行时间：1.35508秒
 
+
+            /******************************ExecuteMethod********************************/
+            //带cache
+            p.Execute(
+            i =>
+            {
+                ExecuteMethodByCache();//调用函数
+            },
+            message => { Response.Write(message); });   //总共执行时间：0.36202秒
+
+            //不带cache
+            p.Execute(
+              i =>
+              {
+                  ExecuteMethodNoCache();//调用函数
+              },
+             message => { Response.Write(message); });   //总共执行时间：1.35508秒
+
+
+            /******************************LoadFile********************************/
+            //带cache
+            p.Execute(
+            i =>
+            {
+                 LoadFileByCache();//调用函数
+            },
+            message => { Response.Write(message); });   //总共执行时间：0.11801
+
+            //不带cache
+            p.Execute(
+              i =>
+              {
+                  LoadFileNoCache();//调用函数
+              },
+             message => { Response.Write(message); });   //总共执行时间：4.89628秒
+
             //还有其它方法就不测试了
         }
 
@@ -79,6 +116,18 @@ namespace Test.IO
         {
             ReflectionSugar rs = new ReflectionSugar(0);//缓存0秒
             var path = rs.ExecuteMethod("SyntacticSugar", "FileSugar", "GetMapPath", "~/");
+        }
+        //加载程序集
+        private static void LoadFileByCache()
+        {
+            ReflectionSugar rs = new ReflectionSugar(100);//缓存100秒
+            Assembly ams = rs.LoadFile(@"D:\学习\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSugar.dll");
+        }
+        //加载程序集
+        private static void LoadFileNoCache()
+        {
+            ReflectionSugar rs = new ReflectionSugar(0);//缓存100秒
+            Assembly ams = rs.LoadFile(@"D:\学习\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSugar.dll");
         }
     }
 }
