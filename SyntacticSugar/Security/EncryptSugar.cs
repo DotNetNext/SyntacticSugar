@@ -23,6 +23,14 @@ namespace SyntacticSugar
         private static readonly object _cacheLock = new object();
         private static Dictionary<string, string> _cache = new Dictionary<string, string>();
         /// <summary>
+        /// 设置最大缓存条数
+        /// </summary>
+        /// <param name="i"></param>
+        public  void SetMaxCacheNum(int i = 0)
+        {
+            _maxCacheNum = 0;
+        }
+        /// <summary>
         /// 最大缓存条数
         /// </summary>
         private static int _maxCacheNum = 10000;
@@ -85,7 +93,7 @@ namespace SyntacticSugar
             {
                 if (_cache.Count > _maxCacheNum)
                 {
-                    foreach (var it in _cache.Take(_maxCacheNum/5))
+                    foreach (var it in _cache.Take(_maxCacheNum / 5))
                     {
 
                         _cache.Remove(it.Key);

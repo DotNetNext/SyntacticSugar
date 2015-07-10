@@ -8,6 +8,12 @@ namespace SyntacticSugar
 {
     public class ReflectionSugar
     {
+        private static readonly object _cacheLock = new object();
+        private static Dictionary<string, string> _cache = new Dictionary<string, string>();
+        /// <summary>
+        /// 最大缓存条数
+        /// </summary>
+        private static int _maxCacheNum = 10000;
         /// <summary>
         /// 创建对象实例
         /// </summary>

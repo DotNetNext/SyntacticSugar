@@ -29,7 +29,7 @@ namespace Test.UI
             int pageSize = 10;
             int pageIndex = Convert.ToInt32(Request["pageIndex"]);
 
-            var page = ps.ToString(total, pageSize, pageIndex, "/UI/PageStringTest.aspx?");
+            var page = ps.ToPageString(total, pageSize, pageIndex, "/UI/PageStringTest.aspx?");
 
             //获取 page html 输出
            Response.Write(page);

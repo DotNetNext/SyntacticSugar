@@ -13,6 +13,7 @@ namespace Test.Security
         protected void Page_Load(object sender, EventArgs e)
         {
              var es= EncryptSugar.GetInstance();
+             es.SetMaxCacheNum(0);
              string word = "abc";
              var wordEncrypt = es.Encrypto(word);
              var wordDecrypt = es.Decrypto(wordEncrypt);
