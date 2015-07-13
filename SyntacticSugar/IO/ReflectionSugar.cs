@@ -8,6 +8,14 @@ using System.Web.Caching;
 
 namespace SyntacticSugar
 {
+
+    /// <summary>
+    /// ** 描述：反射通用类
+    /// ** 创始时间：2010-2-28
+    /// ** 修改时间：-
+    /// ** 修改人：sunkaixuan
+    /// ** 使用说明： http://www.cnblogs.com/sunkaixuan/p/4635710.html
+    /// </summary>
     public class ReflectionSugar
     {
         public static int Minutes = 60;
