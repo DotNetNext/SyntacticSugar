@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -18,7 +19,7 @@ namespace SyntacticSugar
         private DateTime _beginTime;
         private DateTime _endTime;
         private ParamsModel _params;
-
+        private List<PerformanceTestChartModel> _CharSource = new List<PerformanceTestChartModel>();
         /// <summary>
         ///设置执行次数(默认:1)
         /// </summary>
@@ -50,7 +51,7 @@ namespace SyntacticSugar
         /// 执行函数
         /// </summary>
         /// <param name="action"></param>
-        public void Execute(Action<int> action, Action<string> rollBack)
+        public void Execute(Action<int> action, Action<string> rollBack, string name = null)
         {
             List<Thread> arr = new List<Thread>();
             _beginTime = DateTime.Now;
@@ -81,16 +82,27 @@ namespace SyntacticSugar
                 }
 
             }
-            rollBack(GetResult());
+
+            _CharSource.Add(new PerformanceTestChartModel() { Name = name, Time = GetTime(), CPU = GetCurrentProcessSize() });
+            rollBack(string.Format("总共执行时间：{0}秒", GetTime()));
         }
 
-        public string GetResult()
+        private double GetTime()
         {
             _endTime = DateTime.Now;
-            string totalTime = ((_endTime - _beginTime).TotalMilliseconds / 1000.0).ToString("n5");
-            string reval = string.Format("总共执行时间：{0}秒", totalTime);
-            Console.Write(reval);
-            return reval;
+            double totalTime = ((_endTime - _beginTime).TotalMilliseconds / 1000.0);
+            return totalTime;
+        }
+
+        public List<PerformanceTestChartModel> GetChartSource()
+        {
+            return _CharSource;
+        }
+        private Double GetCurrentProcessSize()
+        {
+            Process processes = Process.GetCurrentProcess();
+            var processesSize = (Double)(processes.WorkingSet64);
+            return processesSize;
         }
 
         private class ParamsModel
@@ -98,5 +110,13 @@ namespace SyntacticSugar
             public int RunCount { get; set; }
             public bool IsMultithread { get; set; }
         }
+        public class PerformanceTestChartModel
+        {
+            public string Name { get; set; }
+            public double Time { get; set; }
+            public double CPU { get; set; }
+        }
     }
+
+
 }

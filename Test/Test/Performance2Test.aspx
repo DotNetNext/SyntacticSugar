@@ -8,9 +8,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-    
-    </div>
+        <div>
+
+            <asp:GridView ID="Gridview1" runat="server"></asp:GridView>
+        </div>
     </form>
 </body>
 </html>

@@ -29,6 +29,8 @@ namespace Test.Test
              
             }
             );
+            Gridview1.DataSource = p.GetChartSource();
+            Gridview1.DataBind();
         }
     }
 }
