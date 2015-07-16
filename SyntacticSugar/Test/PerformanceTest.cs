@@ -102,7 +102,7 @@ namespace SyntacticSugar
         {
             Process processes = Process.GetCurrentProcess();
             var processesSize = (Double)(processes.WorkingSet64);
-            return processesSize;
+            return processesSize / (1024 * 1024);
         }
 
         private class ParamsModel
