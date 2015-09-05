@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 
-namespace SyntacticSugar.IO
+namespace SyntacticSugar
 {
     /// <summary>
     /// ** 描述：配置文件读取类

@@ -1,0 +1,7 @@
+D:\SyntacticSugar\SyntacticSugar\Test\bin\Test.dll
+D:\SyntacticSugar\SyntacticSugar\Test\bin\Test.pdb
+D:\SyntacticSugar\SyntacticSugar\Test\bin\SyntacticSugar.dll
+D:\SyntacticSugar\SyntacticSugar\Test\bin\SyntacticSugar.pdb
+D:\SyntacticSugar\SyntacticSugar\Test\obj\Release\Test.csprojResolveAssemblyReference.cache
+D:\SyntacticSugar\SyntacticSugar\Test\obj\Release\Test.dll
+D:\SyntacticSugar\SyntacticSugar\Test\obj\Release\Test.pdb

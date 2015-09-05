@@ -1,0 +1,4 @@
+D:\SyntacticSugar\SyntacticSugar\SyntacticSugar\bin\Release\SyntacticSugar.dll
+D:\SyntacticSugar\SyntacticSugar\SyntacticSugar\bin\Release\SyntacticSugar.pdb
+D:\SyntacticSugar\SyntacticSugar\SyntacticSugar\obj\Release\SyntacticSugar.dll
+D:\SyntacticSugar\SyntacticSugar\SyntacticSugar\obj\Release\SyntacticSugar.pdb
