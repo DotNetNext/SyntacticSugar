@@ -25,11 +25,11 @@ namespace SyntacticSugar
 
         #region 属性
         /// <summary>
-        /// 允许图片格式
+        /// 允许图片格式 （例如： .jpg|.gif ）
         /// </summary>
         public string SetAllowFormat { get; set; }
         /// <summary>
-        /// 允许上传图片大小
+        /// 允许上传图片大小 (单位:1M)
         /// </summary>
         public double SetAllowSize { get; set; }
         /// <summary>
@@ -88,13 +88,12 @@ namespace SyntacticSugar
         /// 裁剪图片
         /// </summary>
         /// <param name="PostedFile">HttpPostedFile控件</param>
-        /// <param name="SavePath">保存路径【sys.config配置路径】</param>
+        /// <param name="SaveFolder">保存路径【sys.config配置路径】</param>
         /// <param name="oImgWidth">图片宽度</param>
         /// <param name="oImgHeight">图片高度</param>
         /// <param name="cMode">剪切类型</param>
-        /// <param name="ext">返回格式</param>
         /// <returns>返回上传信息</returns>
-        public ResponseMessage FileCutSaveAs(System.Web.HttpPostedFile PostedFile, string SavePath, int oImgWidth, int oImgHeight, CutMode cMode)
+        public ResponseMessage FileCutSaveAs(System.Web.HttpPostedFile PostedFile, string SaveFolder, int oImgWidth, int oImgHeight, CutMode cMode)
         {
             ResponseMessage rm = new ResponseMessage();
             try
@@ -115,14 +114,14 @@ namespace SyntacticSugar
                     TryError(rm, 3);
                     return rm;  //超过文件上传大小
                 }
-                if (!System.IO.Directory.Exists(SavePath))
+                if (!System.IO.Directory.Exists(SaveFolder))
                 {
-                    System.IO.Directory.CreateDirectory(SavePath);
+                    System.IO.Directory.CreateDirectory(SaveFolder);
                 }
                 //重命名名称
                 string NewfileName = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString("000");
                 string fName = "s" + NewfileName + sEx;
-                string fullPath = Path.Combine(SavePath, fName);
+                string fullPath = Path.Combine(SaveFolder, fName);
                 PostedFile.SaveAs(fullPath);
 
                 //重命名名称
@@ -130,9 +129,9 @@ namespace SyntacticSugar
                 string sFName = sNewfileName + sEx;
                 rm.IsError = false;
                 rm.FileName = sFName;
-                string sFullPath = Path.Combine(SavePath, sFName);
+                string sFullPath = Path.Combine(SaveFolder, sFName);
                 rm.filePath = sFullPath;
-                rm.WebPath = "/"+sFullPath.Replace(HttpContext.Current.Server.MapPath("~/"), "").Replace("\\", "/");
+                rm.WebPath = "/" + sFullPath.Replace(HttpContext.Current.Server.MapPath("~/"), "").Replace("\\", "/");
                 CreateSmallPhoto(fullPath, oImgWidth, oImgHeight, sFullPath, SetPicWater, SetWordWater, cMode);
                 if (File.Exists(fullPath))
                 {
@@ -157,11 +156,9 @@ namespace SyntacticSugar
         /// 通用图片上传类
         /// </summary>
         /// <param name="PostedFile">HttpPostedFile控件</param>
-        /// <param name="SavePath">保存路径【sys.config配置路径】</param>
-        /// <param name="finame">返回文件名</param>
-        /// <param name="fisize">返回文件大小</param>
+        /// <param name="SaveFolder">保存路径【sys.config配置路径】</param>
         /// <returns>返回上传信息</returns>
-        public ResponseMessage FileSaveAs(System.Web.HttpPostedFile PostedFile, string SavePath)
+        public ResponseMessage FileSaveAs(System.Web.HttpPostedFile PostedFile, string SaveFolder)
         {
             ResponseMessage rm = new ResponseMessage();
             try
@@ -195,14 +192,14 @@ namespace SyntacticSugar
                 }
 
 
-                if (!System.IO.Directory.Exists(SavePath))
+                if (!System.IO.Directory.Exists(SaveFolder))
                 {
-                    System.IO.Directory.CreateDirectory(SavePath);
+                    System.IO.Directory.CreateDirectory(SaveFolder);
                 }
 
                 rm.FileName = NewfileName + sEx;
-                string fullPath = SavePath.Trim('\\') + "\\" + rm.FileName;
-                rm.WebPath = "/"+fullPath.Replace(HttpContext.Current.Server.MapPath("~/"), "").Replace("\\", "/");
+                string fullPath = SaveFolder.Trim('\\') + "\\" + rm.FileName;
+                rm.WebPath = "/" + fullPath.Replace(HttpContext.Current.Server.MapPath("~/"), "").Replace("\\", "/");
                 rm.filePath = fullPath;
                 rm.Size = PostFileSize;
                 PostedFile.SaveAs(fullPath);
@@ -230,7 +227,7 @@ namespace SyntacticSugar
                     int mWidth = SetMaxWidth;
                     int mHeight = mWidth * realHeight / realWidth;
 
-                    string tempFile = SavePath + Guid.NewGuid().ToString() + sEx;
+                    string tempFile = SaveFolder + Guid.NewGuid().ToString() + sEx;
                     File.Move(fullPath, tempFile);
                     CreateSmallPhoto(tempFile, mWidth, mHeight, fullPath, "", "");
                     File.Delete(tempFile);
@@ -268,7 +265,7 @@ namespace SyntacticSugar
                     if (Convert.ToInt32(oWidthArray[i]) <= 0 || Convert.ToInt32(oHeightArray[i]) <= 0)
                         continue;
 
-                    string sImg = SavePath.TrimEnd('\\') + '\\' + NewfileName + "_" + i.ToString() + sEx;
+                    string sImg = SaveFolder.TrimEnd('\\') + '\\' + NewfileName + "_" + i.ToString() + sEx;
 
                     //判断图片高宽是否大于生成高宽。否则用原图
                     if (realWidth > Convert.ToInt32(oWidthArray[i]))

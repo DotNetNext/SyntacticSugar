@@ -5,3 +5,10 @@ D:\SyntacticSugar\SyntacticSugar\Test\bin\SyntacticSugar.pdb
 D:\SyntacticSugar\SyntacticSugar\Test\obj\Release\Test.csprojResolveAssemblyReference.cache
 D:\SyntacticSugar\SyntacticSugar\Test\obj\Release\Test.dll
 D:\SyntacticSugar\SyntacticSugar\Test\obj\Release\Test.pdb
+E:\Code\Git\SyntackicSugar2\Test\bin\Test.dll
+E:\Code\Git\SyntackicSugar2\Test\bin\Test.pdb
+E:\Code\Git\SyntackicSugar2\Test\bin\SyntacticSugar.dll
+E:\Code\Git\SyntackicSugar2\Test\bin\SyntacticSugar.pdb
+E:\Code\Git\SyntackicSugar2\Test\obj\Release\Test.csprojResolveAssemblyReference.cache
+E:\Code\Git\SyntackicSugar2\Test\obj\Release\Test.dll
+E:\Code\Git\SyntackicSugar2\Test\obj\Release\Test.pdb
