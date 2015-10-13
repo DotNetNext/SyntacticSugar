@@ -112,6 +112,7 @@ namespace SyntacticSugar
 
         private void Add(string key, int cookiesDurationInSeconds, HttpCookie cookie, string setValue, HttpResponse response)
         {
+            setValue = context.Server.UrlEncode(setValue);
             if (!string.IsNullOrEmpty(key) && cookie.HasKeys)
                 cookie.Values.Set(key, setValue);
             else
@@ -132,6 +133,7 @@ namespace SyntacticSugar
             string value = string.Empty;
             if (context.Request.Cookies[key] != null)
                 value = context.Request.Cookies[key].Value;
+            value = context.Server.UrlDecode(value);
             if (typeof(V) == typeof(string))
             {
                 return (V)Convert.ChangeType(value, typeof(V));

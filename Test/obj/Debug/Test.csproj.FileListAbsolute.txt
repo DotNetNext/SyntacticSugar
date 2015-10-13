@@ -19,3 +19,10 @@ D:\SyntacticSugar\Test\bin\SyntacticSugar.dll
 D:\SyntacticSugar\Test\bin\SyntacticSugar.pdb
 D:\SyntacticSugar\Test\obj\Debug\Test.dll
 D:\SyntacticSugar\Test\obj\Debug\Test.pdb
+E:\Code\Git\SyntackicSugar2\Test\bin\Test.dll
+E:\Code\Git\SyntackicSugar2\Test\bin\Test.pdb
+E:\Code\Git\SyntackicSugar2\Test\bin\SyntacticSugar.dll
+E:\Code\Git\SyntackicSugar2\Test\bin\SyntacticSugar.pdb
+E:\Code\Git\SyntackicSugar2\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+E:\Code\Git\SyntackicSugar2\Test\obj\Debug\Test.dll
+E:\Code\Git\SyntackicSugar2\Test\obj\Debug\Test.pdb

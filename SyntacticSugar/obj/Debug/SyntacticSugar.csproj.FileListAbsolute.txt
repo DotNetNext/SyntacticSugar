@@ -13,3 +13,7 @@ D:\SyntacticSugar\SyntacticSugar\obj\Debug\ResolveAssemblyReference.cache
 D:\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.dll
 D:\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.pdb
 D:\学习\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.csprojResolveAssemblyReference.cache
+E:\Code\Git\SyntackicSugar2\SyntacticSugar\bin\Debug\SyntacticSugar.dll
+E:\Code\Git\SyntackicSugar2\SyntacticSugar\bin\Debug\SyntacticSugar.pdb
+E:\Code\Git\SyntackicSugar2\SyntacticSugar\obj\Debug\SyntacticSugar.dll
+E:\Code\Git\SyntackicSugar2\SyntacticSugar\obj\Debug\SyntacticSugar.pdb
