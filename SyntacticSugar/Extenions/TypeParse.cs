@@ -220,7 +220,7 @@ namespace SyntacticSugar
                 PropertyInfo[] propertys = typeof(T).GetProperties();
                 foreach (PropertyInfo pi in propertys)
                 {
-                    result.Columns.Add(pi.Name, pi.PropertyType);
+                    result.Columns.Add(pi.Name);
                 }
 
                 for (int i = 0; i < list.Count; i++)
@@ -258,7 +258,7 @@ namespace SyntacticSugar
                     PropertyInfo info = plist.Find(p => p.Name == dt.Columns[i].ColumnName);
                     if (info != null)
                     {
-                        if (!Convert.IsDBNull(item[i]))
+                        if (!Convert.IsDBNull(item[i]) && item[i]!=null)
                         {
                             info.SetValue(s, item[i], null);
                         }

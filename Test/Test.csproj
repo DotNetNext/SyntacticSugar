@@ -64,6 +64,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="Extenions\DataTable.aspx" />
     <Content Include="Extenions\EnumSugarExtenions.aspx" />
     <Content Include="Extenions\IsWhatTest.aspx" />
     <Content Include="Extenions\LogicTest.aspx" />
@@ -116,6 +117,13 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Extenions\DataTable.aspx.cs">
+      <DependentUpon>DataTable.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Extenions\DataTable.aspx.designer.cs">
+      <DependentUpon>DataTable.aspx</DependentUpon>
     </Compile>
     <Compile Include="Extenions\EnumSugarExtenions.aspx.cs">
       <DependentUpon>EnumSugarExtenions.aspx</DependentUpon>
@@ -256,7 +264,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>11985</DevelopmentServerPort>
+          <DevelopmentServerPort>24587</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
