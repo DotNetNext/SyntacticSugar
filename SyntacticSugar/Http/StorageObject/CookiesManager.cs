@@ -156,20 +156,15 @@ namespace SyntacticSugar
 
         public override void Remove(string key)
         {
-            HttpRequest request = HttpContext.Current.Request;
-            if (request != null)
+            HttpResponse response = HttpContext.Current.Response;
+            HttpCookie cookie = HttpContext.Current.Request.Cookies[key];
+            if (cookie != null)
             {
-                HttpCookie cookie = request.Cookies[key];
-                cookie.Expires = DateTime.Now.AddDays(-1);
-                if (cookie != null)
-                {
-                    if (!string.IsNullOrEmpty(key) && cookie.HasKeys)
-                        cookie.Values.Remove(key);
-                    else
-                        request.Cookies.Remove(key);
-                }
+                cookie.Expires = DateTime.Now.AddDays(-800);
+                response.Cookies.Add(cookie);
             }
         }
+
 
         public override void RemoveAll()
         {
