@@ -309,6 +309,7 @@ namespace SyntacticSugar
         /// <returns>bool</returns>
         public bool CheckValidExt(string allType, string chkType)
         {
+            allType = allType.Replace(",", "|");
             bool flag = false;
             string[] sArray = allType.Split('|');
             foreach (string temp in sArray)
