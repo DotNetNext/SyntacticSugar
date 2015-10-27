@@ -67,6 +67,7 @@
     <Compile Include="IO\FileSugar.cs" />
     <Compile Include="IO\ReflectionSugar.cs" />
     <Compile Include="Security\EncryptSugar.cs" />
+    <Compile Include="Security\GenerateRandomString.cs" />
     <Compile Include="Test\PerformanceTest.cs" />
     <Compile Include="DataType\TextType\XHtmlElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

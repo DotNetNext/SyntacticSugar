@@ -138,7 +138,7 @@ namespace SyntacticSugar
                 }
 
                 //文件名
-                string fileName = _params.IsUseOldFileName ? postFile.FileName : DateTime.Now.ToString("yyyyMMddhhmmssms") + Path.GetExtension(postFile.FileName);
+                string fileName = _params.IsUseOldFileName ?Path.GetFileName(postFile.FileName): DateTime.Now.ToString("yyyyMMddhhmmssms") + Path.GetExtension(postFile.FileName);
 
                 //验证格式
                 this.CheckingType(reval, postFile.FileName);
