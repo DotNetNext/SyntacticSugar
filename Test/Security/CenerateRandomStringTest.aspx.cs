@@ -11,9 +11,9 @@ namespace Test.Security
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-         
-                   Response.Write(GenerateRandomString.GetRandomNum(3)+"<br>");
-                   Response.Write(GenerateRandomString.GetRandomNum(3));
+
+            Response.Write(RandomSugar.GetRandChinese(3) + "<br>");
+                   Response.Write(RandomSugar.GetRandomNum(3));
       ;
         }
     }

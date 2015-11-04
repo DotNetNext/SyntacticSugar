@@ -13,108 +13,96 @@ namespace SyntacticSugar
     /// ** 修改人：sunkaixuan
     /// ** 使用说明： 
     /// </summary>
-    public class GenerateRandomString
+    public class  RandomSugar
     {
 
         private static readonly char[] RandChar = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
-        private static Random rand = new Random(unchecked((int)DateTime.Now.Ticks));
         private static int seed = 1;
 
-        private GenerateRandomString()
+        private RandomSugar()
         {
         }
-
-        /// <summary>
-        /// 获取随机汉字数组
-        /// </summary>
-        /// <param name="strlength">字符长度</param>
-        /// <returns></returns>
-        public static string GetRandChineseString(int strlength)
-        {
-            if (strlength == 0) return string.Empty;
-            return string.Join("", GetRandChineseArray(strlength));
-        }
-
-        /// <summary>
-        /// 获取随机汉字数组
-        /// </summary>
-        /// <param name="strlength">数组长度</param>
-        /// <returns></returns>
-        private static object[] GetRandChineseArray(int strlength)
-        {
-            //定义一个字符串数组储存汉字编码的组成元素
-            string[] rBase = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-
-
-            //定义一个object数组用来
-            object[] bytes = new object[strlength];
-
-            /**/
-            /*每循环一次产生一个含两个元素的十六进制字节数组，并将其放入bject数组中
-         每个汉字有四个区位码组成
-         区位码第1位和区位码第2位作为字节数组第一个元素
-         区位码第3位和区位码第4位作为字节数组第二个元素
-         */
-            for (int i = 0; i < strlength; i++)
-            {
-                lock (rand)
-                {
-                   rand= new Random(Convert.ToInt32(GetRandomNum(9)));
-                }
-                //区位码第1位
-                int r1 = rand.Next(11, 14);
-                string str_r1 = rBase[r1].Trim();
 
  
+
+        /// <summary>
+        /// 获取随机汉字数组
+        /// </summary>
+        /// <param name="strLength">数组长度</param>
+        /// <returns></returns>
+        public static string GetRandChinese(int strLength=1)
+        {
+            //定义一个字符串数组储存汉字编码的组成元素 
+            string[] rBase = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+
+            Random rnd = new Random();
+
+            //定义一个object数组用来 
+            object[] bytes = new object[strLength];
+
+            /**/
+            /*每循环一次产生一个含两个元素的十六进制字节数组，并将其放入bject数组中 
+每个汉字有四个区位码组成 
+区位码第1位和区位码第2位作为字节数组第一个元素 
+区位码第3位和区位码第4位作为字节数组第二个元素 
+*/
+            for (int i = 0; i < strLength; i++)
+            {
+                //区位码第1位 
+                int r1 = rnd.Next(11, 14);
+                string str_r1 = rBase[r1].Trim();
+
+                //区位码第2位 
+                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更换随机数发生器的 
+
+                //种子避免产生重复值 
                 int r2;
                 if (r1 == 13)
                 {
-                    r2 = rand.Next(0, 7);
+                    r2 = rnd.Next(0, 7);
                 }
                 else
                 {
-                    r2 = rand.Next(0, 16);
+                    r2 = rnd.Next(0, 16);
                 }
                 string str_r2 = rBase[r2].Trim();
 
- 
-                int r3 = rand.Next(10, 16);
+                //区位码第3位 
+                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r3 = rnd.Next(10, 16);
                 string str_r3 = rBase[r3].Trim();
 
-              
+                //区位码第4位 
+                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
                 int r4;
                 if (r3 == 10)
                 {
-                    r4 = rand.Next(1, 16);
+                    r4 = rnd.Next(1, 16);
                 }
                 else if (r3 == 15)
                 {
-                    r4 = rand.Next(0, 15);
+                    r4 = rnd.Next(0, 15);
                 }
                 else
                 {
-                    r4 = rand.Next(0, 16);
+                    r4 = rnd.Next(0, 16);
                 }
                 string str_r4 = rBase[r4].Trim();
 
-                //定义两个字节变量存储产生的随机汉字区位码
+                //定义两个字节变量存储产生的随机汉字区位码 
                 byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
                 byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
-                //将两个字节变量存储在字节数组中
+                //将两个字节变量存储在字节数组中 
                 byte[] str_r = new byte[] { byte1, byte2 };
 
-                //将产生的一个汉字的字节数组放入object数组中
+                //将产生的一个汉字的字节数组放入object数组中 
                 bytes.SetValue(str_r, i);
 
             }
-            //获取GB2312编码页（表）
             Encoding gb = Encoding.GetEncoding("gb2312");
-            List<string> array = new List<string>();
-            foreach (var it in bytes) {
-                array.Add(gb.GetString((byte[])Convert.ChangeType(bytes[0], typeof(byte[]))));
-            }
-            return array.ToArray();
-
+            var charList =bytes.Select(it=> gb.GetString((byte[])Convert.ChangeType(it, typeof(byte[]))));
+            string reval = string.Join("", charList);
+            return reval;
         }
 
         /// <summary>
@@ -124,6 +112,7 @@ namespace SyntacticSugar
         /// <returns>随机字符串</returns>
         public static string GetRandStringByPattern(string pattern)
         {
+            Random rand = new Random(unchecked((int)DateTime.Now.Ticks));
             if (!pattern.Contains("#") && !pattern.Contains("?") && !pattern.Contains("*"))
             {
                 return pattern;
@@ -180,6 +169,7 @@ namespace SyntacticSugar
         /// <returns>随机产生的字符串</returns>
         public static string GetRandomString(string pwdchars, int pwdlen)
         {
+            Random rand = new Random(unchecked((int)DateTime.Now.Ticks));
             StringBuilder tmpstr = new StringBuilder();
             int randNum;
 
@@ -219,6 +209,7 @@ namespace SyntacticSugar
         /// <returns>纯数字随机数字串</returns>
         public static string GetRandomNum(int intlong)
         {
+            Random rand = new Random(unchecked((int)DateTime.Now.Ticks));
             StringBuilder w = new StringBuilder(string.Empty);
 
             for (int i = 0; i < intlong; i++)

@@ -415,7 +415,7 @@
             <param name="strlength">字符长度</param>
             <returns></returns>
         </member>
-        <member name="M:SyntacticSugar.GenerateRandomString.GetRandChineseArray(System.Int32)">
+        <member name="M:SyntacticSugar.GenerateRandomString.GetRandChineseChar">
             <summary>
             获取随机汉字数组
             </summary>
