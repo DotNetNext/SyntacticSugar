@@ -72,6 +72,7 @@
     <Content Include="Form\UploadFileTest.aspx" />
     <Content Include="Form\UploadImageTest.aspx" />
     <Content Include="Form\ValidateionSugarTest.aspx" />
+    <Content Include="Http\ResponseSugarTest.aspx" />
     <Content Include="IO\ClassGeneratingTest.aspx" />
     <Content Include="Http\CacheManagerTest.aspx" />
     <Content Include="Http\CookiesManagerTest.aspx" />
@@ -175,6 +176,13 @@
     <Compile Include="Form\ValidateionSugarTest.aspx.designer.cs">
       <DependentUpon>ValidateionSugarTest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Http\ResponseSugarTest.aspx.cs">
+      <DependentUpon>ResponseSugarTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Http\ResponseSugarTest.aspx.designer.cs">
+      <DependentUpon>ResponseSugarTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="IO\ClassGeneratingTest.aspx.cs">
       <DependentUpon>ClassGeneratingTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -258,6 +266,9 @@
       <Project>{48225611-95D6-4C3A-AEC0-D690FF3B20F0}</Project>
       <Name>SyntacticSugar</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestFIle\ok.docx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
