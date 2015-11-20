@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 namespace SyntacticSugar
 {
+    /// <summary>
+    /// IEnumerable扩展函数
+    /// </summary>
     public static class IEnumerableExtensions
     {
         /// <summary>

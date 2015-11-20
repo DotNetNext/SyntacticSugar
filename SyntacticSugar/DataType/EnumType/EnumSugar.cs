@@ -5,6 +5,9 @@ using System.Text;
 using System.Reflection;
 namespace SyntacticSugar
 {
+    /// <summary>
+    /// 枚举扩展函数
+    /// </summary>
     public static class EnumSugarExtenions
     {
 
