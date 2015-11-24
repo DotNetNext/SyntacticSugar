@@ -44,8 +44,8 @@ namespace Test.Extenions
 
 
             //list和dataTable转换
-            var dt = new List<ModelTest>().ListToDataTable();
-            var list = dt.DataTableToList<ModelTest>();
+            var dt = new List<ModelTest>().TryToDataTable();
+            var list = dt.TryToList<ModelTest>();
 
         }
         public class ModelTest

@@ -50,6 +50,7 @@
     <Compile Include="DataType\EnumType\EnumSugar.cs" />
     <Compile Include="DataType\IEnumerable\IEnumerable.cs" />
     <Compile Include="Http\ResponseSugar.cs" />
+    <Compile Include="Http\WebRequestSugar.cs" />
     <Compile Include="OthersExtenions\IsWhat.cs" />
     <Compile Include="OthersExtenions\LogicSugar.cs" />
     <Compile Include="DataType\StringType\StringSugar.cs" />

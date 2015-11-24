@@ -6,6 +6,7 @@ using System.Web.Script.Serialization;
 using System.Data;
 using System.Reflection;
 using System.Collections;
+using System.IO;
 
 namespace SyntacticSugar
 {
@@ -212,7 +213,7 @@ namespace SyntacticSugar
         /// </summary>
         /// <param name="list">集合</param>
         /// <returns></returns>
-        public static DataTable ListToDataTable<T>(this List<T> list)
+        public static DataTable TryToDataTable<T>(this List<T> list)
         {
             DataTable result = new DataTable();
             if (list.Count > 0)
@@ -244,7 +245,7 @@ namespace SyntacticSugar
         /// <typeparam name="T"></typeparam>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public static List<T> DataTableToList<T>(this DataTable dt)
+        public static List<T> TryToList<T>(this DataTable dt)
         {
             var list = new List<T>();
             Type t = typeof(T);
@@ -267,6 +268,33 @@ namespace SyntacticSugar
                 list.Add(s);
             }
             return list;
+        } 
+        #endregion
+
+        #region IO
+        /// <summary>
+        /// 将流转成btye
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
+        public static byte[] TryToBytes(this Stream stream)
+        {
+            byte[] bytes = new byte[stream.Length];
+            stream.Read(bytes, 0, bytes.Length);
+            // 设置当前流的位置为流的开始
+            stream.Seek(0, SeekOrigin.Begin);
+            return bytes;
+        }
+
+        /// <summary>
+        /// 将btye转成流
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static Stream TryToStream(this byte[] bytes)
+        {
+            Stream stream = new MemoryStream(bytes);
+            return stream;
         } 
         #endregion
 

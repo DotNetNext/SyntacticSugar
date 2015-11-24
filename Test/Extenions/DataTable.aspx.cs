@@ -12,7 +12,7 @@ namespace Test.Extenions
         protected void Page_Load(object sender, EventArgs e)
         {
             var dt = DataTableSugar.CreateEasyTable("id").AddRow(DBNull.Value);
-            var x = dt.DataTableToList<a>();
+            var x = dt.TryToList<a>();
         }
 
         public class a {

@@ -72,7 +72,9 @@
     <Content Include="Form\UploadFileTest.aspx" />
     <Content Include="Form\UploadImageTest.aspx" />
     <Content Include="Form\ValidateionSugarTest.aspx" />
+    <Content Include="Http\HttpTest.aspx" />
     <Content Include="Http\ResponseSugarTest.aspx" />
+    <Content Include="Http\WebRequestSugarTest.aspx" />
     <Content Include="IO\ClassGeneratingTest.aspx" />
     <Content Include="Http\CacheManagerTest.aspx" />
     <Content Include="Http\CookiesManagerTest.aspx" />
@@ -176,12 +178,26 @@
     <Compile Include="Form\ValidateionSugarTest.aspx.designer.cs">
       <DependentUpon>ValidateionSugarTest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Http\HttpTest.aspx.cs">
+      <DependentUpon>HttpTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Http\HttpTest.aspx.designer.cs">
+      <DependentUpon>HttpTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Http\ResponseSugarTest.aspx.cs">
       <DependentUpon>ResponseSugarTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Http\ResponseSugarTest.aspx.designer.cs">
       <DependentUpon>ResponseSugarTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Http\WebRequestSugarTest.aspx.cs">
+      <DependentUpon>WebRequestSugarTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Http\WebRequestSugarTest.aspx.designer.cs">
+      <DependentUpon>WebRequestSugarTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="IO\ClassGeneratingTest.aspx.cs">
       <DependentUpon>ClassGeneratingTest.aspx</DependentUpon>
