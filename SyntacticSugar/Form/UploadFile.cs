@@ -157,7 +157,7 @@ namespace SyntacticSugar
                     if (_params.IsRenameSameFile)
                     {
                         filePath = directory + DateTime.Now.ToString("yyyyMMddhhssms") + "-" + fileName;
-                        fileName = Path.GetFileName(fileName);
+                        fileName = Path.GetFileName(filePath);
                     }
                     else
                     {

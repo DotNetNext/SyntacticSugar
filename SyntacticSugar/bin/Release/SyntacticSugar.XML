@@ -219,261 +219,34 @@
             获取文件名
             </summary>
         </member>
-        <member name="T:SyntacticSugar.TypeParseExtenions">
+        <!-- 对于成员“T:SyntacticSugar.ResponseSugar”忽略有格式错误的 XML 注释 -->
+        <member name="M:SyntacticSugar.ResponseSugar.ResponseFile(System.String,System.String)">
             <summary>
-            ** 描述：类型转换
-            ** 创始时间：2015-6-2
-            ** 修改时间：-
-            ** 作者：sunkaixuan
-            ** 使用说明：http://www.cnblogs.com/sunkaixuan/p/4548028.html
+            下载文件到本地,根据物理路径
             </summary>
+            <param name="path">下载文件的物理路径，含路径、文件名</param>
+            <param name="fileName">保存的文件名</param>
         </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.TryToInt(System.Object)">
+        <member name="M:SyntacticSugar.ResponseSugar.ResponseBigFile(System.String,System.String,System.Int64)">
             <summary>
-            强转成int 如果失败返回 0
+            下载文件，支持大文件、续传、速度限制。支持续传的响应头Accept-Ranges、ETag，请求头Range 。
+            Accept-Ranges：响应头，向客户端指明，此进程支持可恢复下载.实现后台智能传输服务（BITS），值为：bytes；
+            ETag：响应头，用于对客户端的初始（200）响应，以及来自客户端的恢复请求，
+            必须为每个文件提供一个唯一的ETag值（可由文件名和文件最后被修改的日期组成），这使客户端软件能够验证它们已经下载的字节块是否仍然是最新的。
+            Range：续传的起始位置，即已经下载到客户端的字节数，值如：bytes=1474560- 。
+            另外：UrlEncode编码后会把文件名中的空格转换中+（+转换为%2b），但是浏览器是不能理解加号为空格的，所以在浏览器下载得到的文件，空格就变成了加号；
+            解决办法：UrlEncode 之后, 将 "+" 替换成 "%20"，因为浏览器将%20转换为空格
             </summary>
-            <param name="thisValue"></param>
-            <param name="i"></param>
-            <returns></returns>
+            <param name="_context">当前请求的HttpContext</param>
+            <param name="filePath">下载文件的物理路径，含路径、文件名</param>
+            <param name="fileName">文件名</param>
+            <param name="speed">下载速度：每秒允许下载的字节数</param>
+            <returns>true下载成功，false下载失败</returns>
         </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.TryToInt(System.Object,System.Int32)">
+        <member name="P:SyntacticSugar.ResponseSugar._context">
             <summary>
-            强转成int 如果失败返回 errorValue
+            当前上下文
             </summary>
-            <param name="thisValue"></param>
-            <param name="i"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.TryToMoney(System.Object)">
-            <summary>
-            强转成money 如果失败返回 0
-            </summary>
-            <param name="thisValue"></param>
-            <param name="i"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.TryToMoney(System.Object,System.Double)">
-            <summary>
-            强转成double 如果失败返回 errorValue
-            </summary>
-            <param name="thisValue"></param>
-            <param name="errorValue"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.TryToString(System.Object)">
-            <summary>
-            强转成string 如果失败返回 ""
-            </summary>
-            <param name="thisValue"></param>
-            <param name="i"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.TryToString(System.Object,System.String)">
-            <summary>
-            强转成string 如果失败返回 str
-            </summary>
-            <param name="thisValue"></param>
-            <param name="errorValue"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.TryToDecimal(System.Object)">
-            <summary>
-            强转成Decimal 如果失败返回 0
-            </summary>
-            <param name="thisValue"></param>
-            <param name="i"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.TryToDecimal(System.Object,System.Decimal)">
-            <summary>
-            强转成Decimal 如果失败返回 errorValue
-            </summary>
-            <param name="thisValue"></param>
-            <param name="errorValue"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.TryToDate(System.Object)">
-            <summary>
-            强转成DateTime 如果失败返回 DateTime.MinValue
-            </summary>
-            <param name="thisValue"></param>
-            <param name="i"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.TryToDate(System.Object,System.DateTime)">
-            <summary>
-            强转成DateTime 如果失败返回 errorValue
-            </summary>
-            <param name="thisValue"></param>
-            <param name="errorValue"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.JsonToModel``1(System.String)">
-            <summary>
-            将json序列化为实体
-            </summary>
-            <typeparam name="TEntity"></typeparam>
-            <param name="json"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.ModelToJson``1(``0)">
-            <summary>
-            将实体序列化为json
-            </summary>
-            <param name="model"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.ListToDataTable``1(System.Collections.Generic.List{``0})">
-            <summary>
-            将集合类转换成DataTable
-            </summary>
-            <param name="list">集合</param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.TypeParseExtenions.DataTableToList``1(System.Data.DataTable)">
-            <summary>
-            将datatable转为list
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="dt"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SyntacticSugar.StringSugar">
-            <summary>
-            ** 描述：string操作类
-            ** 创始时间：2015-6-30
-            ** 修改时间：-
-            ** 作者：sunkaixuan
-            ** 使用说明：
-            </summary>
-        </member>
-        <member name="M:SyntacticSugar.StringSugar.ToFormat(System.String,System.Object[])">
-            <summary>
-            获取格式化字符串,等同于string.Format
-            </summary>
-            <param name="value"></param>
-            <param name="args"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.StringSugar.ToCutString(System.String,System.Int32,System.String)">
-            <summary>
-            截取字符。不区分中英文
-            </summary>
-            <param name="value"></param>
-            <param name="cutLength"></param>
-            <param name="bdot"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.StringSugar.ToHtmlDecode(System.String)">
-            <summary>
-            对 HTML 编码的字符串进行解码，并返回已解码的字符串。
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.StringSugar.ToHtmlEncode(System.String)">
-            <summary>
-              对字符串进行 HTML 编码并返回已编码的字符串。
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.StringSugar.ToUrlDecode(System.String)">
-            <summary>
-            对字符串进行 URL 解码并返回已解码的字符串。
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.StringSugar.ToUrlEncode(System.String)">
-            <summary>
-             对字符串进行 URL 编码，并返回已编码的字符串。
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.StringSugar.ToHtmlByText(System.String)">
-            <summary>
-            将文本转换成html
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SyntacticSugar.GenerateRandomString">
-            <summary>
-            ** 描述：根据条件生成随机字符串
-            ** 创始时间：2010-2-28
-            ** 修改时间：-
-            ** 修改人：sunkaixuan
-            ** 使用说明： 
-            </summary>
-        </member>
-        <member name="M:SyntacticSugar.GenerateRandomString.GetRandChineseString(System.Int32)">
-            <summary>
-            获取随机汉字数组
-            </summary>
-            <param name="strlength">字符长度</param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.GenerateRandomString.GetRandChineseChar">
-            <summary>
-            获取随机汉字数组
-            </summary>
-            <param name="strlength">数组长度</param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.GenerateRandomString.GetRandStringByPattern(System.String)">
-            <summary>
-            根据规则随机生成字符串
-            </summary>
-            <param name="pattern">样式："?"代表一个字符，"#"代表一个一位数字，"*"代表一个字符串或一个一位数字</param>
-            <returns>随机字符串</returns>
-        </member>
-        <member name="M:SyntacticSugar.GenerateRandomString.GetFormatedNumeric(System.Int32,System.Int32)">
-            <summary>
-            生成随机的数值
-            </summary>
-            <param name="min">随机数可取该下界值</param>
-            <param name="max">随机数的上界</param>
-            <returns>随机的数值</returns>
-        </member>
-        <member name="M:SyntacticSugar.GenerateRandomString.GetRandomString(System.String,System.Int32)">
-            <summary>
-            获取指定长度和字符的随机字符串
-            通过调用 Random 类的 Next() 方法，先获得一个大于或等于 0 而小于 pwdchars 长度的整数
-            以该数作为索引值，从可用字符串中随机取字符，以指定的密码长度为循环次数
-            依次连接取得的字符，最后即得到所需的随机密码串了。
-            </summary>
-            <param name="pwdchars">随机字符串里包含的字符</param>
-            <param name="pwdlen">随机字符串的长度</param>
-            <returns>随机产生的字符串</returns>
-        </member>
-        <member name="M:SyntacticSugar.GenerateRandomString.GetRandomString(System.Int32)">
-            <summary>
-            获取指定长度的随机字符串
-            </summary>
-            <param name="pwdlen">随机字符串的长度</param>
-            <returns>随机产生的字符串</returns>
-        </member>
-        <member name="M:SyntacticSugar.GenerateRandomString.GetRandWord(System.Int32)">
-            <summary>
-            获取指定长度的纯字母随机字符串
-            </summary>
-            <param name="pwdlen">数字串长度</param>
-            <returns>纯字母随机字符串</returns>
-        </member>
-        <member name="M:SyntacticSugar.GenerateRandomString.GetRandomNum(System.Int32)">
-            <summary>
-            获取指定长度的纯数字随机数字串
-            </summary>
-            <param name="intlong">数字串长度</param>
-            <returns>纯数字随机数字串</returns>
-        </member>
-        <member name="M:SyntacticSugar.GenerateRandomString.GetFileRndName">
-            <summary>
-            获取按照年月时分秒随机数生成的文件名
-            </summary>
-            <returns>随机文件名</returns>
         </member>
         <member name="T:SyntacticSugar.IsWhatExtenions">
             <summary>
@@ -727,25 +500,135 @@
             函数
             </summary>
         </member>
-        <member name="M:SyntacticSugar.IEnumerableExtensions.TryForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
+        <member name="T:SyntacticSugar.StringSugar">
             <summary>
-            foreach 用法:xx.ForEach(i=>{  })
+            ** 描述：string操作类
+            ** 创始时间：2015-6-30
+            ** 修改时间：-
+            ** 作者：sunkaixuan
+            ** 使用说明：
             </summary>
-            <typeparam name="T"></typeparam>
-            <typeparam name="?"></typeparam>
-            <param name="source"></param>
-            <param name="action"></param>
+        </member>
+        <member name="M:SyntacticSugar.StringSugar.ToFormat(System.String,System.Object[])">
+            <summary>
+            获取格式化字符串,等同于string.Format
+            </summary>
+            <param name="value"></param>
+            <param name="args"></param>
             <returns></returns>
         </member>
-        <member name="M:SyntacticSugar.IEnumerableExtensions.TryForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+        <member name="M:SyntacticSugar.StringSugar.ToCutString(System.String,System.Int32,System.String)">
             <summary>
-            foreach 用法:xx.ForEach({  })
+            截取字符。不区分中英文
             </summary>
-            <typeparam name="T"></typeparam>
-            <typeparam name="?"></typeparam>
-            <param name="source"></param>
-            <param name="action"></param>
+            <param name="value"></param>
+            <param name="cutLength"></param>
+            <param name="bdot"></param>
             <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.StringSugar.ToHtmlDecode(System.String)">
+            <summary>
+            对 HTML 编码的字符串进行解码，并返回已解码的字符串。
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.StringSugar.ToHtmlEncode(System.String)">
+            <summary>
+              对字符串进行 HTML 编码并返回已编码的字符串。
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.StringSugar.ToUrlDecode(System.String)">
+            <summary>
+            对字符串进行 URL 解码并返回已解码的字符串。
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.StringSugar.ToUrlEncode(System.String)">
+            <summary>
+             对字符串进行 URL 编码，并返回已编码的字符串。
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.StringSugar.ToHtmlByText(System.String)">
+            <summary>
+            将文本转换成html
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SyntacticSugar.RandomSugar">
+            <summary>
+            ** 描述：根据条件生成随机字符串
+            ** 创始时间：2010-2-28
+            ** 修改时间：-
+            ** 修改人：sunkaixuan
+            ** 使用说明： 
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.RandomSugar.GetRandChinese(System.Int32)">
+            <summary>
+            获取随机汉字数组
+            </summary>
+            <param name="strLength">数组长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.RandomSugar.GetRandStringByPattern(System.String)">
+            <summary>
+            根据规则随机生成字符串
+            </summary>
+            <param name="pattern">样式："?"代表一个字符，"#"代表一个一位数字，"*"代表一个字符串或一个一位数字</param>
+            <returns>随机字符串</returns>
+        </member>
+        <member name="M:SyntacticSugar.RandomSugar.GetFormatedNumeric(System.Int32,System.Int32)">
+            <summary>
+            生成随机的数值
+            </summary>
+            <param name="min">随机数可取该下界值</param>
+            <param name="max">随机数的上界</param>
+            <returns>随机的数值</returns>
+        </member>
+        <member name="M:SyntacticSugar.RandomSugar.GetRandomString(System.String,System.Int32)">
+            <summary>
+            获取指定长度和字符的随机字符串
+            通过调用 Random 类的 Next() 方法，先获得一个大于或等于 0 而小于 pwdchars 长度的整数
+            以该数作为索引值，从可用字符串中随机取字符，以指定的密码长度为循环次数
+            依次连接取得的字符，最后即得到所需的随机密码串了。
+            </summary>
+            <param name="pwdchars">随机字符串里包含的字符</param>
+            <param name="pwdlen">随机字符串的长度</param>
+            <returns>随机产生的字符串</returns>
+        </member>
+        <member name="M:SyntacticSugar.RandomSugar.GetRandomString(System.Int32)">
+            <summary>
+            获取指定长度的随机字符串
+            </summary>
+            <param name="pwdlen">随机字符串的长度</param>
+            <returns>随机产生的字符串</returns>
+        </member>
+        <member name="M:SyntacticSugar.RandomSugar.GetRandWord(System.Int32)">
+            <summary>
+            获取指定长度的纯字母随机字符串
+            </summary>
+            <param name="pwdlen">数字串长度</param>
+            <returns>纯字母随机字符串</returns>
+        </member>
+        <member name="M:SyntacticSugar.RandomSugar.GetRandomNum(System.Int32)">
+            <summary>
+            获取指定长度的纯数字随机数字串
+            </summary>
+            <param name="intlong">数字串长度</param>
+            <returns>纯数字随机数字串</returns>
+        </member>
+        <member name="M:SyntacticSugar.RandomSugar.GetFileRndName">
+            <summary>
+            获取按照年月时分秒随机数生成的文件名
+            </summary>
+            <returns>随机文件名</returns>
         </member>
         <member name="T:SyntacticSugar.CacheManager`1">
             <summary>
@@ -846,77 +729,6 @@
             根据key获取value     
              </summary>         
              <value></value>      
-        </member>
-        <member name="T:SyntacticSugar.LogicSugarExtenions">
-            <summary>
-            ** 描述：逻辑糖来简化你的代码
-            ** 创始时间：2015-6-1
-            ** 修改时间：-
-            ** 作者：sunkaixuan
-            ** 使用说明：http://www.cnblogs.com/sunkaixuan/p/4545338.html
-            </summary>
-        </member>
-        <member name="M:SyntacticSugar.LogicSugarExtenions.IIF``1(System.Boolean,``0,``0)">
-            <summary>
-            根据表达式的值，来返回两部分中的其中一个。
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="thisValue"></param>
-            <param name="trueValue">值为true返回 trueValue</param>
-            <param name="falseValue">值为false返回 falseValue</param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.LogicSugarExtenions.IIF(System.Boolean,System.String)">
-            <summary>
-            根据表达式的值,true返回trueValue,false返回string.Empty;
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="thisValue"></param>
-            <param name="trueValue">值为true返回 trueValue</param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.LogicSugarExtenions.IIF(System.Boolean,System.Int32)">
-            <summary>
-            根据表达式的值,true返回trueValue,false返回0
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="thisValue"></param>
-            <param name="trueValue">值为true返回 trueValue</param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.LogicSugarExtenions.IIF``1(System.Nullable{System.Boolean},``0,``0)">
-            <summary>
-            根据表达式的值，来返回两部分中的其中一个。
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="thisValue"></param>
-            <param name="trueValue">值为true返回 trueValue</param>
-            <param name="falseValue">值为false返回 falseValue</param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.LogicSugarExtenions.And(System.Boolean,System.Boolean[])">
-            <summary>
-            所有值为true，则返回true否则返回false
-            </summary>
-            <param name="thisValue"></param>
-            <param name="andValues"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.LogicSugarExtenions.Or(System.Boolean,System.Boolean[])">
-            <summary>
-            只要有一个值为true,则返回true否则返回false
-            </summary>
-            <param name="thisValue"></param>
-            <param name="andValues"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.LogicSugarExtenions.Switch``1(``0)">
-            <summary>
-            Switch().Case().Default().Break()
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="thisValue"></param>
-            <returns></returns>
         </member>
         <member name="T:SyntacticSugar.MailSmtp">
             <summary>
@@ -1068,77 +880,6 @@
             string.Format("{0}{1}{2}","总记录数","当前页数","总页数")
             默认值：《span class=\"pagetext\"》《strong》总共《/strong》:{0} 条 《strong》当前《/strong》:{1}/{2}《/span》
             </summary>
-        </member>
-        <member name="T:SyntacticSugar.XHtmlElement">
-            <summary>
-            ** 描述：html解析类
-            ** 创始时间：2015-4-23
-            ** 修改时间：-
-            ** 作者：sunkaixuan
-            ** qq：610262374 欢迎交流,共同提高 ,命名语法等写的不好的地方欢迎大家的给出宝贵建议
-            ** 使用说明:http://www.cnblogs.com/sunkaixuan/p/4482121.html
-            </summary>
-        </member>
-        <member name="M:SyntacticSugar.XHtmlElement.Descendants(System.String)">
-            <summary>
-            获取最近的相同层级的HTML元素
-            </summary>
-            <param name="elementName">等于null为所有元素</param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.XHtmlElement.RootDescendants(System.String)">
-            <summary>
-            获取第一级元素
-            </summary>
-            <param name="elementName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.XHtmlElementExtendsion.Descendants(System.Collections.Generic.IEnumerable{SyntacticSugar.HtmlInfo},System.String)">
-            <summary>
-            获取最近的相同层级的HTML元素
-            </summary>
-            <param name="elementName">等于null为所有元素</param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.XHtmlElementExtendsion.ChildDescendants(System.Collections.Generic.IEnumerable{SyntacticSugar.HtmlInfo},System.String)">
-            <summary>
-            获取下级元素
-            </summary>
-            <param name="elementName"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SyntacticSugar.XHtmlElementExtendsion.ParentDescendant(System.Collections.Generic.IEnumerable{SyntacticSugar.HtmlInfo},System.String)">
-            <summary>
-            获取父级
-            </summary>
-            <param name="htmlInfoList"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SyntacticSugar.HtmlInfo">
-            <summary>
-            html信息类
-            </summary>
-        </member>
-        <member name="P:SyntacticSugar.HtmlInfo.TagName">
-            <summary>
-            元素名
-            </summary>
-        </member>
-        <member name="P:SyntacticSugar.HtmlInfo.Attributes">
-            <summary>
-            元素属性
-            </summary>
-        </member>
-        <member name="P:SyntacticSugar.HtmlInfo.InnerHtml">
-            <summary>
-            元素内部html
-            </summary>
-        </member>
-        <member name="P:SyntacticSugar.HtmlInfo.FullHtml">
-            <summary>
-            得到元素的html
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:SyntacticSugar.PerformanceTest">
             <summary>
@@ -1501,6 +1242,77 @@
             <param name="strFilePath"></param>
             <param name="strValue"></param>
         </member>
+        <member name="T:SyntacticSugar.XHtmlElement">
+            <summary>
+            ** 描述：html解析类
+            ** 创始时间：2015-4-23
+            ** 修改时间：-
+            ** 作者：sunkaixuan
+            ** qq：610262374 欢迎交流,共同提高 ,命名语法等写的不好的地方欢迎大家的给出宝贵建议
+            ** 使用说明:http://www.cnblogs.com/sunkaixuan/p/4482121.html
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.XHtmlElement.Descendants(System.String)">
+            <summary>
+            获取最近的相同层级的HTML元素
+            </summary>
+            <param name="elementName">等于null为所有元素</param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.XHtmlElement.RootDescendants(System.String)">
+            <summary>
+            获取第一级元素
+            </summary>
+            <param name="elementName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.XHtmlElementExtendsion.Descendants(System.Collections.Generic.IEnumerable{SyntacticSugar.HtmlInfo},System.String)">
+            <summary>
+            获取最近的相同层级的HTML元素
+            </summary>
+            <param name="elementName">等于null为所有元素</param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.XHtmlElementExtendsion.ChildDescendants(System.Collections.Generic.IEnumerable{SyntacticSugar.HtmlInfo},System.String)">
+            <summary>
+            获取下级元素
+            </summary>
+            <param name="elementName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.XHtmlElementExtendsion.ParentDescendant(System.Collections.Generic.IEnumerable{SyntacticSugar.HtmlInfo},System.String)">
+            <summary>
+            获取父级
+            </summary>
+            <param name="htmlInfoList"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SyntacticSugar.HtmlInfo">
+            <summary>
+            html信息类
+            </summary>
+        </member>
+        <member name="P:SyntacticSugar.HtmlInfo.TagName">
+            <summary>
+            元素名
+            </summary>
+        </member>
+        <member name="P:SyntacticSugar.HtmlInfo.Attributes">
+            <summary>
+            元素属性
+            </summary>
+        </member>
+        <member name="P:SyntacticSugar.HtmlInfo.InnerHtml">
+            <summary>
+            元素内部html
+            </summary>
+        </member>
+        <member name="P:SyntacticSugar.HtmlInfo.FullHtml">
+            <summary>
+            得到元素的html
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:SyntacticSugar.EncryptSugar">
             <summary>
             ** 描述：加密类
@@ -1696,10 +1508,287 @@
             获取Cache根据key  
              </summary>                 
         </member>
+        <member name="T:SyntacticSugar.VerifyCodeSugar">
+            <summary>
+            ** 描述：验证码类
+            ** 创始时间：2015-6-30
+            ** 修改时间：-
+            ** 修改人：sunkaixuan
+            ** 使用说明：http://www.cnblogs.com/sunkaixuan/p/4923431.html
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.VerifyCodeSugar.SetLength">
+            <summary>
+            //验证码长度
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.VerifyCodeSugar.SetAddLowerLetter">
+            <summary>
+            是否加入小写字母
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.VerifyCodeSugar.SetAddUpperLetter">
+            <summary>
+            是否加入大写字母
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.VerifyCodeSugar.SetFontSize">
+            <summary>
+            字体大小
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.VerifyCodeSugar.SetFontColor">
+            <summary>
+             //字体颜色
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.VerifyCodeSugar.SetFontFamily">
+            <summary>
+            字体类型
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.VerifyCodeSugar.SetBackgroundColor">
+            <summary>
+            背景色
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.VerifyCodeSugar.SetForeNoisePointCount">
+            <summary>
+            前景噪点数量
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.VerifyCodeSugar.SetRandomAngle">
+            <summary>
+            随机码的旋转角度
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.VerifyCodeSugar.SetIsRandomColor">
+            <summary>
+            是否随机字体颜色
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.VerifyCodeSugar.GetVerifyCodeText">
+            <summary>
+            得到验证码字符串
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.VerifyCodeSugar.GetVerifyCodeImage">
+            <summary>
+            得到验证码图片
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.VerifyCodeSugar.AddForeNoisePoint(System.Drawing.Bitmap)">
+            <summary>
+            添加前景噪点
+            </summary>
+            <param name="objBitmap"></param>
+        </member>
+        <member name="M:SyntacticSugar.VerifyCodeSugar.AddBackgroundNoisePoint(System.Drawing.Bitmap,System.Drawing.Graphics)">
+            <summary>
+            添加背景噪点
+            </summary>
+            <param name="objBitmap"></param>
+            <param name="objGraphics"></param>
+        </member>
+        <member name="M:SyntacticSugar.VerifyCodeSugar.GetRandomColor">
+            <summary>
+            获取随机颜色
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.VerifyCodeSugar.OutputImage(System.Web.HttpResponse)">
+            <summary>
+            输出验证码图片
+            </summary>
+            <param name="objHttpResponse">Http响应实例</param>
+            <returns>输出是否成功</returns>
+        </member>
+        <member name="M:SyntacticSugar.VerifyCodeSugar.GetQuestion(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            获取问题
+            </summary>
+            <param name="questionList">默认数字加减验证</param>
+            <returns></returns>
+        </member>
+        <member name="P:SyntacticSugar.VerifyCodeSugar.SetVerifyCodeText">
+            <summary>
+            验证码字符串
+            </summary>
+        </member>
+        <member name="P:SyntacticSugar.VerifyCodeSugar.SetWith">
+            <summary>
+            图片宽度
+            </summary>
+        </member>
+        <member name="P:SyntacticSugar.VerifyCodeSugar.SetHeight">
+            <summary>
+            图片高度
+            </summary>
+        </member>
+        <member name="T:SyntacticSugar.WebRequestSugar">
+            <summary>
+            ** 描述：模拟HTTP POST GET请求并获取数据
+            ** 创始时间：2015-11-24
+            ** 修改时间：-
+            ** 作者：sunkaixuan
+            ** 使用说明：
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.WebRequestSugar.cookie">
+            <summary>
+            设置cookie
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.WebRequestSugar.allowAutoRedirect">
+            <summary>
+            是否允许重定向
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.WebRequestSugar.contentType">
+            <summary>
+            contentType
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.WebRequestSugar.accept">
+            <summary>
+            accept
+            </summary>
+        </member>
+        <member name="F:SyntacticSugar.WebRequestSugar.time">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.SetTimeOut(System.Int32)">
+            <summary>
+            设置请求过期时间（单位：毫秒）（默认：5000）
+            </summary>
+            <param name="time"></param>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.SetAccept(System.String)">
+            <summary>
+            设置accept(默认:*/*)
+            </summary>
+            <param name="accept"></param>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.SetContentType(System.String)">
+            <summary>
+            设置contentType(默认:application/x-www-form-urlencoded)
+            </summary>
+            <param name="contentType"></param>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.SetCookie(System.Net.CookieContainer)">
+            <summary>
+            设置Cookie
+            </summary>
+            <param name="cookie"></param>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.SetIsAllowAutoRedirect(System.Boolean)">
+            <summary>
+            是否允许重定向(默认:true)
+            </summary>
+            <param name="allowAutoRedirect"></param>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.HttpPost(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            post请求返回html
+            </summary>
+            <param name="url"></param>
+            <param name="postDataStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.HttpGet(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            get请求获取返回的html
+            </summary>
+            <param name="url">无参URL</param>
+            <param name="querydata">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.HttpGet(System.String)">
+            <summary>
+            get请求获取返回的html
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.HttpUploadFile(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            POST文件
+            </summary>
+            <param name="url"></param>
+            <param name="file">文件路径</param>
+            <param name="postdata"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.HttpUploadFile(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Text.Encoding)">
+            <summary>
+            POST文件
+            </summary>
+            <param name="url"></param>
+            <param name="file">文件路径</param>
+            <param name="postdata">参数</param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.HttpUploadFile(System.String,System.String[],System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            POST文件
+            </summary>
+            <param name="url"></param>
+            <param name="files">文件路径</param>
+            <param name="postdata">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.HttpUploadFile(System.String,System.String[],System.Collections.Generic.Dictionary{System.String,System.String},System.Text.Encoding)">
+            <summary>
+            POST文件
+            </summary>
+            <param name="url"></param>
+            <param name="files">文件路径</param>
+            <param name="postdata">参数</param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.GetResponseImage(System.String)">
+            <summary>
+            获得响应中的图像
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.GetStringByRegex(System.String,System.String)">
+            <summary>
+            正则获取匹配的第一个值
+            </summary>
+            <param name="html"></param>
+            <param name="pattern"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.VerifyResponseHtml(System.String,System.String)">
+            <summary>
+            正则验证返回的response是否正确
+            </summary>
+            <param name="html"></param>
+            <param name="pattern"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.WebRequestSugar.RemoteCertificateValidate(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+            <summary>  
+            远程证书验证，固定返回true 
+            </summary>  
+        </member>
         <!-- 对于成员“T:SyntacticSugar.ConfigSugar”忽略有格式错误的 XML 注释 -->
         <member name="M:SyntacticSugar.ConfigSugar.GetConfigString(System.String)">
             <summary>
-            获得Web.config里的配置信息
+            获得Web.config ConnectionString 里的配置信息
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.ConfigSugar.GetConnectionString(System.String)">
+            <summary>
+            获得Web.config ConnectionString 里的配置信息
             </summary>
             <param name="key"></param>
             <returns></returns>
@@ -1753,6 +1842,139 @@
             <param name="value"></param>
             <param name="cookiesDurationInSeconds">有效时间单位秒</param>
         </member>
+        <member name="T:SyntacticSugar.TypeParseExtenions">
+            <summary>
+            ** 描述：类型转换
+            ** 创始时间：2015-6-2
+            ** 修改时间：-
+            ** 作者：sunkaixuan
+            ** 使用说明：http://www.cnblogs.com/sunkaixuan/p/4548028.html
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToInt(System.Object)">
+            <summary>
+            强转成int 如果失败返回 0
+            </summary>
+            <param name="thisValue"></param>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToInt(System.Object,System.Int32)">
+            <summary>
+            强转成int 如果失败返回 errorValue
+            </summary>
+            <param name="thisValue"></param>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToMoney(System.Object)">
+            <summary>
+            强转成money 如果失败返回 0
+            </summary>
+            <param name="thisValue"></param>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToMoney(System.Object,System.Double)">
+            <summary>
+            强转成double 如果失败返回 errorValue
+            </summary>
+            <param name="thisValue"></param>
+            <param name="errorValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToString(System.Object)">
+            <summary>
+            强转成string 如果失败返回 ""
+            </summary>
+            <param name="thisValue"></param>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToString(System.Object,System.String)">
+            <summary>
+            强转成string 如果失败返回 str
+            </summary>
+            <param name="thisValue"></param>
+            <param name="errorValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToDecimal(System.Object)">
+            <summary>
+            强转成Decimal 如果失败返回 0
+            </summary>
+            <param name="thisValue"></param>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToDecimal(System.Object,System.Decimal)">
+            <summary>
+            强转成Decimal 如果失败返回 errorValue
+            </summary>
+            <param name="thisValue"></param>
+            <param name="errorValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToDate(System.Object)">
+            <summary>
+            强转成DateTime 如果失败返回 DateTime.MinValue
+            </summary>
+            <param name="thisValue"></param>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToDate(System.Object,System.DateTime)">
+            <summary>
+            强转成DateTime 如果失败返回 errorValue
+            </summary>
+            <param name="thisValue"></param>
+            <param name="errorValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.JsonToModel``1(System.String)">
+            <summary>
+            将json序列化为实体
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.ModelToJson``1(``0)">
+            <summary>
+            将实体序列化为json
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToDataTable``1(System.Collections.Generic.List{``0})">
+            <summary>
+            将集合类转换成DataTable
+            </summary>
+            <param name="list">集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToList``1(System.Data.DataTable)">
+            <summary>
+            将datatable转为list
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToBytes(System.IO.Stream)">
+            <summary>
+            将流转成btye
+            </summary>
+            <param name="stream"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToStream(System.Byte[])">
+            <summary>
+            将btye转成流
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
         <member name="T:SyntacticSugar.RequestInfo">
             <summary>
             ** 描述：Request信息
@@ -1803,6 +2025,50 @@
             <summary>
             ip地址
             </summary>
+        </member>
+        <member name="T:SyntacticSugar.EnumSugarExtenions">
+            <summary>
+            枚举扩展函数
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.EnumSugarExtenions.GetAttributeValue(System.Enum)">
+            <summary>
+            获得枚举字段的特性(Attribute)，该属性不允许多次定义。
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.EnumSugarExtenions.GetAttribute``1(System.Enum)">
+            <summary>
+            获得枚举字段的特性(Attribute)，该属性不允许多次定义。
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.EnumSugarExtenions.GetName(System.Enum)">
+            <summary>
+            获得枚举字段的名称。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.EnumSugarExtenions.GetValue``1(System.Enum)">
+            <summary>
+            获得枚举字段的值。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SyntacticSugar.Desc">
+            <summary>
+            字段或属性的中文解释属性
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.Desc.#ctor(System.String)">
+            <summary>
+            初始化创建一个 <see cref="T:SyntacticSugar.Desc"/> 类的实例, 用于指示字段或属性的解释说明.
+            </summary>
+            <param name="value">字段或属性的解释说明.</param>
+        </member>
+        <member name="P:SyntacticSugar.Desc.Value">
+            <summary>
+            获得字段或属性的中文解释.
+            </summary>
+            <value>字段或属性的中文解释.</value>
         </member>
         <member name="T:SyntacticSugar.UploadImage">
             <summary>
@@ -2022,6 +2288,77 @@
             图片目录
             </summary>
         </member>
+        <member name="T:SyntacticSugar.LogicSugarExtenions">
+            <summary>
+            ** 描述：逻辑糖来简化你的代码
+            ** 创始时间：2015-6-1
+            ** 修改时间：-
+            ** 作者：sunkaixuan
+            ** 使用说明：http://www.cnblogs.com/sunkaixuan/p/4545338.html
+            </summary>
+        </member>
+        <member name="M:SyntacticSugar.LogicSugarExtenions.IIF``1(System.Boolean,``0,``0)">
+            <summary>
+            根据表达式的值，来返回两部分中的其中一个。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="thisValue"></param>
+            <param name="trueValue">值为true返回 trueValue</param>
+            <param name="falseValue">值为false返回 falseValue</param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.LogicSugarExtenions.IIF(System.Boolean,System.String)">
+            <summary>
+            根据表达式的值,true返回trueValue,false返回string.Empty;
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="thisValue"></param>
+            <param name="trueValue">值为true返回 trueValue</param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.LogicSugarExtenions.IIF(System.Boolean,System.Int32)">
+            <summary>
+            根据表达式的值,true返回trueValue,false返回0
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="thisValue"></param>
+            <param name="trueValue">值为true返回 trueValue</param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.LogicSugarExtenions.IIF``1(System.Nullable{System.Boolean},``0,``0)">
+            <summary>
+            根据表达式的值，来返回两部分中的其中一个。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="thisValue"></param>
+            <param name="trueValue">值为true返回 trueValue</param>
+            <param name="falseValue">值为false返回 falseValue</param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.LogicSugarExtenions.And(System.Boolean,System.Boolean[])">
+            <summary>
+            所有值为true，则返回true否则返回false
+            </summary>
+            <param name="thisValue"></param>
+            <param name="andValues"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.LogicSugarExtenions.Or(System.Boolean,System.Boolean[])">
+            <summary>
+            只要有一个值为true,则返回true否则返回false
+            </summary>
+            <param name="thisValue"></param>
+            <param name="andValues"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.LogicSugarExtenions.Switch``1(``0)">
+            <summary>
+            Switch().Case().Default().Break()
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="thisValue"></param>
+            <returns></returns>
+        </member>
         <member name="T:SyntacticSugar.RequestToModel">
             <summary>
             ** 描述：表单帮助类
@@ -2072,44 +2409,30 @@
             <typeparam name="index">表单控件中第一个控件，对应类中字段在该类中的索引号,特殊情况可以是第二第三控件</typeparam>
             <returns></returns>
         </member>
-        <member name="M:SyntacticSugar.EnumSugarExtenions.GetAttributeValue(System.Enum)">
+        <member name="T:SyntacticSugar.IEnumerableExtensions">
             <summary>
-            获得枚举字段的特性(Attribute)，该属性不允许多次定义。
+            IEnumerable扩展函数
             </summary>
         </member>
-        <member name="M:SyntacticSugar.EnumSugarExtenions.GetAttribute``1(System.Enum)">
+        <member name="M:SyntacticSugar.IEnumerableExtensions.TryForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
             <summary>
-            获得枚举字段的特性(Attribute)，该属性不允许多次定义。
+            foreach 用法:xx.ForEach(i=>{  })
             </summary>
-        </member>
-        <member name="M:SyntacticSugar.EnumSugarExtenions.GetName(System.Enum)">
-            <summary>
-            获得枚举字段的名称。
-            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="?"></typeparam>
+            <param name="source"></param>
+            <param name="action"></param>
             <returns></returns>
         </member>
-        <member name="M:SyntacticSugar.EnumSugarExtenions.GetValue``1(System.Enum)">
+        <member name="M:SyntacticSugar.IEnumerableExtensions.TryForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
             <summary>
-            获得枚举字段的值。
+            foreach 用法:xx.ForEach({  })
             </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="?"></typeparam>
+            <param name="source"></param>
+            <param name="action"></param>
             <returns></returns>
-        </member>
-        <member name="T:SyntacticSugar.Desc">
-            <summary>
-            字段或属性的中文解释属性
-            </summary>
-        </member>
-        <member name="M:SyntacticSugar.Desc.#ctor(System.String)">
-            <summary>
-            初始化创建一个 <see cref="T:SyntacticSugar.Desc"/> 类的实例, 用于指示字段或属性的解释说明.
-            </summary>
-            <param name="value">字段或属性的解释说明.</param>
-        </member>
-        <member name="P:SyntacticSugar.Desc.Value">
-            <summary>
-            获得字段或属性的中文解释.
-            </summary>
-            <value>字段或属性的中文解释.</value>
         </member>
     </members>
 </doc>
