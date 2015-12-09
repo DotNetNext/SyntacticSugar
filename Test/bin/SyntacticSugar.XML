@@ -2434,5 +2434,30 @@
             <param name="action"></param>
             <returns></returns>
         </member>
+        <member name="M:SyntacticSugar.IEnumerableExtensions.OrderBy``1(System.Collections.Generic.IEnumerable{``0},System.String,SyntacticSugar.IEnumerableExtensions.OrderByType)">
+            <summary>
+            排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="sortField"></param>
+            <param name="orderByType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.IEnumerableExtensions.ThenBy``1(System.Linq.IOrderedEnumerable{``0},System.String,SyntacticSugar.IEnumerableExtensions.OrderByType)">
+            <summary>
+            排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="sortField"></param>
+            <param name="orderByType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SyntacticSugar.IEnumerableExtensions.OrderByType">
+            <summary>
+            排序类型
+            </summary>
+        </member>
     </members>
 </doc>
