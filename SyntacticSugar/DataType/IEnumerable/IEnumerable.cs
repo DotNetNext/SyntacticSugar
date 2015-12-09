@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
+using System.Data;
 namespace SyntacticSugar
 {
     /// <summary>
@@ -88,6 +89,40 @@ namespace SyntacticSugar
                 return list.ThenByDescending(x => prop.GetValue(x, null));
             else
                 return list.ThenBy(x => prop.GetValue(x, null));
+
+        }
+        /// <summary>
+        /// 排序
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="sortField"></param>
+        /// <param name="orderByType"></param>
+        /// <returns></returns>
+        public static IOrderedEnumerable<T> OrderByDataRow<T>(this IEnumerable<T> list, string sortField, OrderByType orderByType) where T : DataRow
+        {
+            PropertyInfo prop = typeof(T).GetProperty(sortField);
+            if (orderByType == OrderByType.desc)
+                return list.OrderByDescending(it => it[sortField]);
+            else
+                return list.OrderBy(it => it[sortField]);
+
+        }
+        /// <summary>
+        /// 排序
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="sortField"></param>
+        /// <param name="orderByType"></param>
+        /// <returns></returns>
+        public static IOrderedEnumerable<T> ThenByDataRow<T>(this IOrderedEnumerable<T> list, string sortField, OrderByType orderByType) where T : DataRow
+        {
+            PropertyInfo prop = typeof(T).GetProperty(sortField);
+            if (orderByType == OrderByType.desc)
+                return list.ThenByDescending(it => it[sortField]);
+            else
+                return list.ThenBy(it => it[sortField]);
 
         }
         /// <summary>
