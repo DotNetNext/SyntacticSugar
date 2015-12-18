@@ -31,7 +31,7 @@ namespace SyntacticSugar
                 FileType = ".pdf,.xls,.xlsx,.doc,.docx,.txt,.png,.jpg,.gif",
                 MaxSizeM = 10,
                 PathSaveType = PathSaveType.dateTimeNow,
-                IsRenameSameFile=true
+                IsRenameSameFile = true
             };
         }
 
@@ -86,7 +86,7 @@ namespace SyntacticSugar
         public void SetIsRenameSameFile(bool isRenameSameFile)
         {
             _params.IsRenameSameFile = isRenameSameFile;
-        } 
+        }
         #endregion
 
         #region main mehtod
@@ -112,11 +112,11 @@ namespace SyntacticSugar
             _params.PathSaveType = PathSaveType.code;
             _number = number;
             return CommonSave(postFile);
-        } 
+        }
         #endregion
 
         #region private method
-  
+
 
         /// <summary>
         /// 保存表单文件,根据HttpPostedFile
@@ -138,7 +138,7 @@ namespace SyntacticSugar
                 }
 
                 //文件名
-                string fileName = _params.IsUseOldFileName ?Path.GetFileName(postFile.FileName): DateTime.Now.ToString("yyyyMMddhhmmssms") + Path.GetExtension(postFile.FileName);
+                string fileName = _params.IsUseOldFileName ? Path.GetFileName(postFile.FileName) : DateTime.Now.ToString("yyyyMMddhhmmssms") + Path.GetExtension(postFile.FileName);
 
                 //验证格式
                 this.CheckingType(reval, postFile.FileName);
@@ -211,19 +211,33 @@ namespace SyntacticSugar
             string directory = _params.FileDirectory;
 
             // 目录格式
-            string childDirectory = DateTime.Now.ToString("yyyy-MM/dd");
+            string childDirectory = DateTime.Now.ToString("yyyy-MM-dd");
             if (_params.PathSaveType == PathSaveType.code)
             {
                 childDirectory = _number;
             }
             webDir = directory.TrimEnd('/') + "/" + childDirectory + '/';
-            string dir = sever.MapPath(webDir);
+            string dir = GetUrlMapPath(webDir);
             // 创建目录
             if (Directory.Exists(dir) == false)
                 Directory.CreateDirectory(dir);
             return dir;
         }
-
+        /// <summary>
+        /// 获取更目录下的路径
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        private static string GetUrlMapPath(string filePath)
+        {
+            string rootPath = System.AppDomain.CurrentDomain.BaseDirectory;
+            if (filePath.IndexOf('/') == 0 || filePath.IndexOf('\\') == 0)
+            {
+                filePath = filePath.Substring(1);
+            }
+            string path = System.IO.Path.Combine(rootPath, filePath);
+            return path;
+        }
         /// <summary>
         /// 验证文件类型)
         /// </summary>
@@ -252,7 +266,7 @@ namespace SyntacticSugar
         {
             message.Error = true;
             message.Message = msg;
-        } 
+        }
         #endregion
 
         #region model

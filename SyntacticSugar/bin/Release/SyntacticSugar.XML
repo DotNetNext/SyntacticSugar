@@ -132,6 +132,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SyntacticSugar.UploadFile.GetUrlMapPath(System.String)">
+            <summary>
+            获取更目录下的路径
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
         <member name="M:SyntacticSugar.UploadFile.CheckingType(SyntacticSugar.UploadFile.ResponseMessage,System.String)">
             <summary>
             验证文件类型)
