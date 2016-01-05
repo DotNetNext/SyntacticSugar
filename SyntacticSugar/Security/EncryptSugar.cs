@@ -65,46 +65,48 @@ namespace SyntacticSugar
         /// <returns>经过加密的串</returns>
         public string Encrypto(string source)
         {
-            if (_cache.ContainsKey(source))
+            lock (_cache)
             {
-                return _cache[source];
-            }
-
-            byte[] bytIn = UTF8Encoding.UTF8.GetBytes(source);
-
-            MemoryStream ms = new MemoryStream();
-
-            mobjCryptoService.Key = GetLegalKey();
-
-            mobjCryptoService.IV = GetLegalIV();
-
-            ICryptoTransform encrypto = mobjCryptoService.CreateEncryptor();
-
-            CryptoStream cs = new CryptoStream(ms, encrypto, CryptoStreamMode.Write);
-
-            cs.Write(bytIn, 0, bytIn.Length);
-
-            cs.FlushFinalBlock();
-
-            ms.Close();
-
-            byte[] bytOut = ms.ToArray();
-            string reval = Convert.ToBase64String(bytOut);
-            lock (_cacheLock)
-            {
-                if (_cache.Count > _maxCacheNum)
+                if (_cache.ContainsKey(source))
                 {
-                    foreach (var it in _cache.Take(_maxCacheNum / 5))
-                    {
-
-                        _cache.Remove(it.Key);
-
-                    }
+                    return _cache[source];
                 }
-                _cache.Add(source, reval);
-            }
-            return reval; ;
 
+                byte[] bytIn = UTF8Encoding.UTF8.GetBytes(source);
+
+                MemoryStream ms = new MemoryStream();
+
+                mobjCryptoService.Key = GetLegalKey();
+
+                mobjCryptoService.IV = GetLegalIV();
+
+                ICryptoTransform encrypto = mobjCryptoService.CreateEncryptor();
+
+                CryptoStream cs = new CryptoStream(ms, encrypto, CryptoStreamMode.Write);
+
+                cs.Write(bytIn, 0, bytIn.Length);
+
+                cs.FlushFinalBlock();
+
+                ms.Close();
+
+                byte[] bytOut = ms.ToArray();
+                string reval = Convert.ToBase64String(bytOut);
+                lock (_cacheLock)
+                {
+                    if (_cache.Count > _maxCacheNum)
+                    {
+                        foreach (var it in _cache.Take(_maxCacheNum / 5))
+                        {
+
+                            _cache.Remove(it.Key);
+
+                        }
+                    }
+                    _cache.Add(source, reval);
+                }
+                return reval; ;
+            }
         }
 
         /// <summary>
@@ -114,30 +116,32 @@ namespace SyntacticSugar
         /// <returns>经过解密的串</returns>
         public string Decrypto(string source)
         {
-            lock (_cacheLock)
+            lock (_cache)
             {
-                if (_cache.Any(it => it.Value == source))
+                lock (_cacheLock)
                 {
-                    return _cache.Single(it => it.Value == source).Key;
+                    if (_cache.Any(it => it.Value == source))
+                    {
+                        return _cache.Single(it => it.Value == source).Key;
+                    }
                 }
+
+                byte[] bytIn = Convert.FromBase64String(source);
+
+                MemoryStream ms = new MemoryStream(bytIn, 0, bytIn.Length);
+
+                mobjCryptoService.Key = GetLegalKey();
+
+                mobjCryptoService.IV = GetLegalIV();
+
+                ICryptoTransform encrypto = mobjCryptoService.CreateDecryptor();
+
+                CryptoStream cs = new CryptoStream(ms, encrypto, CryptoStreamMode.Read);
+
+                StreamReader sr = new StreamReader(cs);
+
+                return sr.ReadToEnd();
             }
-
-            byte[] bytIn = Convert.FromBase64String(source);
-
-            MemoryStream ms = new MemoryStream(bytIn, 0, bytIn.Length);
-
-            mobjCryptoService.Key = GetLegalKey();
-
-            mobjCryptoService.IV = GetLegalIV();
-
-            ICryptoTransform encrypto = mobjCryptoService.CreateDecryptor();
-
-            CryptoStream cs = new CryptoStream(ms, encrypto, CryptoStreamMode.Read);
-
-            StreamReader sr = new StreamReader(cs);
-
-            return sr.ReadToEnd();
-
         }
 
         /// <summary>

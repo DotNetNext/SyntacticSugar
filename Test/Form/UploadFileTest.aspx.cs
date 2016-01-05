@@ -22,7 +22,7 @@ namespace Test.file
             uf.SetIsUseOldFileName(true);//是否使用原始文件名作为新文件的文件名(默认:true),true原始文件名,false系统生成新文件名
             uf.SetFileDirectory(Server.MapPath("/Form/temp/"));//文件保存路径(默认:/upload)
             uf.SetFileType("*");//允许上传的文件类型, 逗号分割,必须全部小写! *表示所有 (默认值: .pdf,.xls,.xlsx,.doc,.docx,.txt,.png,.jpg,.gif )  
-            uf.SetIsRenameSameFile(true);//重命名同名文件？ 
+            uf.SetIsRenameSameFile(false);//重命名同名文件？ 
 
 
             //文件以时间分目录保存
