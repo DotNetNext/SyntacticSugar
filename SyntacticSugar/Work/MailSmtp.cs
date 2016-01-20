@@ -179,8 +179,7 @@ namespace SyntacticSugar
             }
             catch (Exception ex)
             {
-
-                Console.WriteLine(ex.Message);
+                this.Result = ex.Message;
             }
 
             return false;
