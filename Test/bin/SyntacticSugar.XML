@@ -1249,6 +1249,13 @@
             <param name="strFilePath"></param>
             <param name="strValue"></param>
         </member>
+        <member name="M:SyntacticSugar.FileSugar.MergeUrl(System.String[])">
+            <summary>
+            按数顺序合并URL
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
         <member name="T:SyntacticSugar.XHtmlElement">
             <summary>
             ** 描述：html解析类
@@ -1857,6 +1864,13 @@
             ** 作者：sunkaixuan
             ** 使用说明：http://www.cnblogs.com/sunkaixuan/p/4548028.html
             </summary>
+        </member>
+        <member name="M:SyntacticSugar.TypeParseExtenions.TryToBoolean(System.Object)">
+            <summary>
+            强转成bool 如果失败返回 false
+            </summary>
+            <param name="thisValue"></param>
+            <returns></returns>
         </member>
         <member name="M:SyntacticSugar.TypeParseExtenions.TryToInt(System.Object)">
             <summary>

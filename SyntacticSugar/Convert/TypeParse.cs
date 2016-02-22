@@ -19,6 +19,22 @@ namespace SyntacticSugar
     /// </summary>
     public static class TypeParseExtenions
     {
+        #region 强转成bool 如果失败返回 0
+        /// <summary>
+        /// 强转成bool 如果失败返回 false
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static bool TryToBoolean(this object thisValue)
+        {
+            bool reval = false;
+            if (thisValue != null && Boolean.TryParse(thisValue.ToString(), out reval))
+            {
+                return reval;
+            }
+            return reval;
+        }
+        #endregion
         #region 强转成int 如果失败返回 0
         /// <summary>
         /// 强转成int 如果失败返回 0

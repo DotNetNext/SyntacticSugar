@@ -70,7 +70,7 @@ namespace SyntacticSugar
             }
             return path;
 
-        } 
+        }
         #endregion
 
         #region 获得当前绝对路径
@@ -1077,6 +1077,15 @@ namespace SyntacticSugar
         }
         #endregion
 
+        /// <summary>
+        /// 按数顺序合并URL
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public static string MergeUrl(params string[] urls)
+        {
+            return System.IO.Path.Combine(urls);
+        }
     }
 
 }
