@@ -7,3 +7,4 @@ E:\Code\Git\SyntackicSugar2\SyntacticSugar\bin\Release\SyntacticSugar.pdb
 E:\Code\Git\SyntackicSugar2\SyntacticSugar\obj\Release\SyntacticSugar.dll
 E:\Code\Git\SyntackicSugar2\SyntacticSugar\obj\Release\SyntacticSugar.pdb
 E:\Code\Git\SyntackicSugar2\SyntacticSugar\bin\Release\SyntacticSugar.XML
+E:\Code\Git\SyntackicSugar2\SyntacticSugar\obj\Release\SyntacticSugar.csprojResolveAssemblyReference.cache

@@ -231,5 +231,23 @@ namespace SyntacticSugar
             Regex reg = new Regex(pattern);
             return reg.IsMatch(thisValue.ToString());
         }
+        /// <summary>
+        /// 是true?
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static bool IsTrue(this object thisValue)
+        {
+            return Convert.ToBoolean(thisValue);
+        }
+        /// <summary>
+        /// 是false?
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static bool IsFalse(this object thisValue)
+        {
+            return !Convert.ToBoolean(thisValue);
+        }
     }
 }

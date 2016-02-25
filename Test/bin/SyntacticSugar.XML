@@ -407,6 +407,20 @@
              <param name="end">小于等于end</param>
              <returns></returns>
         </member>
+        <member name="M:SyntacticSugar.IsWhatExtenions.IsTrue(System.Object)">
+            <summary>
+            是true?
+            </summary>
+            <param name="thisValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SyntacticSugar.IsWhatExtenions.IsFalse(System.Object)">
+            <summary>
+            是false?
+            </summary>
+            <param name="thisValue"></param>
+            <returns></returns>
+        </member>
         <member name="T:SyntacticSugar.ValidationSugar">
             <summary>
             ** 描述：可以方便实现前后端双验证,基于jquery

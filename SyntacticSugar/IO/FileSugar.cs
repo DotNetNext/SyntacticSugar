@@ -7,6 +7,7 @@ using System.IO;
 using System.Web;
 using System.Threading;
 using System.Web.UI.WebControls;
+using System.Linq;
 #endregion
 
 namespace SyntacticSugar
@@ -1084,7 +1085,37 @@ namespace SyntacticSugar
         /// <returns></returns>
         public static string MergeUrl(params string[] urls)
         {
-            return System.IO.Path.Combine(urls);
+            if (urls == null || urls.Length == 0)
+            {
+                return null;
+            }
+            else if (urls.Length == 1)
+            {
+                return urls[0];
+            }
+            StringBuilder reval = new StringBuilder();
+            int i = 0;
+            char slash='\\';
+            if (!urls.Any(it => it.Contains(slash.ToString()))) {
+                slash = '/';
+            }
+            foreach (var url in urls)
+            {
+                string itUrl=url;
+                var isFirst = i == 0;
+                var isLast = i == urls.Length-1;
+                if (!isFirst) {
+                    itUrl=itUrl.TrimStart(slash);
+                }
+                if (!isLast)
+                {
+                    itUrl = url.TrimEnd(slash) + slash;
+                }
+                ++i;
+                reval.Append(itUrl);
+                itUrl = null;
+            }
+            return reval.ToString();
         }
     }
 
