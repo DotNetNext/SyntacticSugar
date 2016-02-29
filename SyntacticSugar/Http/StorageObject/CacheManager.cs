@@ -93,7 +93,7 @@ namespace SyntacticSugar
         /// <param name="key"> key</param>         
         /// <param name="value">value</param>         
         /// <param name="cacheDurationInSeconds">过期时间单位秒</param>         
-        public  void Add(string key, V value, int cacheDurationInSeconds)
+        public override  void Add(string key, V value, int cacheDurationInSeconds)
         {
             Add(key, value, cacheDurationInSeconds, CacheItemPriority.Default);
         }

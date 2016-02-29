@@ -87,5 +87,10 @@ namespace SyntacticSugar
         {
             get { return (V)context.Session[key]; }
         }
+
+        public override void Add(string key, V value, int cacheDurationInSeconds)
+        {
+            throw new NotImplementedException("session无法设置过期时间,请到webconfig更改设置");
+        }
     }
 }

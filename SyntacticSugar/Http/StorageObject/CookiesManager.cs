@@ -52,7 +52,7 @@ namespace SyntacticSugar
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <param name="cookiesDurationInSeconds">有效时间单位秒</param>
-        public void Add(string key, V value, int cookiesDurationInSeconds)
+        public override void Add(string key, V value, int cookiesDurationInSeconds)
         {
             HttpResponse response = HttpContext.Current.Response;
             if (response != null)
