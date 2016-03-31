@@ -77,8 +77,18 @@ namespace SyntacticSugar
             List<T> t = SetList<T>(appstr, index);
             return t;
         }
+        /// <summary>
+        /// 需要允许特殊字符使用外部函数获取Request，为NULL使用默认用Requst[]获取参数
+        /// </summary>
+        public static Func<string, string> SetIsUnvalidatedFrom = null;
+        private static string RequestPars(string key)
+        {
+            if (SetIsUnvalidatedFrom == null)
+                return System.Web.HttpContext.Current.Request[key];
+            else
+                return SetIsUnvalidatedFrom(key);
 
-
+        }
 
         private static List<T> SetList<T>(string appendstr, int index) where T : new()
         {
@@ -86,14 +96,14 @@ namespace SyntacticSugar
             try
             {
                 var properties = new T().GetType().GetProperties();
-                var subNum = System.Web.HttpContext.Current.Request[appendstr + properties[index].Name].Split(',').Length;
+                var subNum = RequestPars(appendstr + properties[index].Name).Split(',').Length;
                 for (int i = 0; i < subNum; i++)
                 {
                     var r = properties;
                     var model = new T();
                     foreach (var p in properties)
                     {
-                        string pval = System.Web.HttpContext.Current.Request[appendstr + p.Name + ""];
+                        string pval = RequestPars(appendstr + p.Name + "");
                         if (!string.IsNullOrEmpty(pval))
                         {
                             pval = pval.Split(',')[i];
