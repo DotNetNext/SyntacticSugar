@@ -81,6 +81,7 @@ namespace SyntacticSugar
         /// 需要允许特殊字符使用外部函数获取Request，为NULL使用默认用Requst[]获取参数
         /// </summary>
         public static Func<string, string> SetIsUnvalidatedFrom = null;
+        public static string COMMAS = "$^douhao^$";
         private static string RequestPars(string key)
         {
             if (SetIsUnvalidatedFrom == null)
@@ -107,6 +108,10 @@ namespace SyntacticSugar
                         if (!string.IsNullOrEmpty(pval))
                         {
                             pval = pval.Split(',')[i];
+                            if (pval != null)
+                            {
+                                pval = pval.Replace(COMMAS, ",");
+                            }
                             string pptypeName = p.PropertyType.Name;
                             p.SetValue(model, Convert.ChangeType(pval, p.PropertyType), null);
                         }

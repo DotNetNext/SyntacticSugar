@@ -69,6 +69,7 @@
     <Content Include="Extenions\IsWhatTest.aspx" />
     <Content Include="Extenions\LogicTest.aspx" />
     <Content Include="Extenions\TryParseTest.aspx" />
+    <Content Include="Form\RequestToModelTest.aspx" />
     <Content Include="Form\UploadFileTest.aspx" />
     <Content Include="Form\UploadImageTest.aspx" />
     <Content Include="Form\ValidateionSugarTest.aspx" />
@@ -156,6 +157,13 @@
     </Compile>
     <Compile Include="Extenions\TryParseTest.aspx.designer.cs">
       <DependentUpon>TryParseTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\RequestToModelTest.aspx.cs">
+      <DependentUpon>RequestToModelTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\RequestToModelTest.aspx.designer.cs">
+      <DependentUpon>RequestToModelTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\UploadFileTest.aspx.cs">
       <DependentUpon>UploadFileTest.aspx</DependentUpon>

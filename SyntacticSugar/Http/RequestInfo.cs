@@ -92,7 +92,15 @@ namespace SyntacticSugar
                 return str;
             }
         }
-  
+
+        public static System.Collections.Specialized.NameValueCollection RequestQueryString
+        {
+            get
+            {
+                return System.Web.HttpContext.Current.Request.QueryString;
+            }
+        }
+
         /// <summary>
         /// ip地址
         /// </summary>
