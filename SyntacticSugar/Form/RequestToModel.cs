@@ -97,7 +97,12 @@ namespace SyntacticSugar
             try
             {
                 var properties = new T().GetType().GetProperties();
-                var subNum = RequestPars(appendstr + properties[index].Name).Split(',').Length;
+                var pars = RequestPars(appendstr + properties[index].Name);
+                if (pars == null || pars == "")
+                {
+                    return null;
+                }
+                var subNum = pars.Split(',').Length;
                 for (int i = 0; i < subNum; i++)
                 {
                     var r = properties;
