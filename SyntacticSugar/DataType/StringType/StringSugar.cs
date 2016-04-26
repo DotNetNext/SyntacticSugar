@@ -93,6 +93,20 @@ namespace SyntacticSugar
         {
             return System.Web.HttpContext.Current.Server.UrlEncode(value);
         }
+
+        /// <summary>
+        ///  对字符串进行 URL 编码，并返回已编码的字符串。
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToUrlEncodeWithPlusSign(this string value)
+        {
+            if (value == null) return null;
+            var guid = Guid.NewGuid().ToString();
+            value = value.Replace("+", guid);
+            return System.Web.HttpContext.Current.Server.UrlEncode(value).Replace(guid,"+");
+        }
+
         /// <summary>
         /// 将文本转换成html
         /// </summary>
