@@ -208,6 +208,7 @@ namespace SyntacticSugar
         public static TEntity JsonToModel<TEntity>(this string json)
         {
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+            jsSerializer.MaxJsonLength = int.MaxValue;
             return jsSerializer.Deserialize<TEntity>(json);
         }
         /// <summary>
@@ -218,6 +219,7 @@ namespace SyntacticSugar
         public static string ModelToJson<T>(this T model)
         {
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+            jsSerializer.MaxJsonLength = int.MaxValue;
             return jsSerializer.Serialize(model);
         }
 

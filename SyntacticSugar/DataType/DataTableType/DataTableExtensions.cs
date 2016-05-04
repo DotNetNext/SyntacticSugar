@@ -15,6 +15,7 @@ namespace SyntacticSugar
         public static  string DataTableToJson(this DataTable table)
         {
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
+            jsSerializer.MaxJsonLength = int.MaxValue;
             List<Dictionary<string, object>> parentRow = new List<Dictionary<string, object>>();
             Dictionary<string, object> childRow;
             foreach (DataRow row in table.Rows)
