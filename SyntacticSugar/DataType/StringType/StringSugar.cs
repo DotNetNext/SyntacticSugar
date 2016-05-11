@@ -120,21 +120,27 @@ namespace SyntacticSugar
             value = value.Replace("\t", " ");
             return value;
         }
+
         /// <summary>
         /// 追加字符串
         /// </summary>
+        /// <param name="value"></param>
+        /// <param name="appendString"></param>
         /// <param name="symbol">两个字符串之间的符号</param>
+        /// <param name="valueIsNullAppendSymbol">当VALUE是NULL时默认 symbol是追加的 ，设成false则不会添加到拼接当中</param>
         /// <returns></returns>
-        public static string AppendString(this string value, string appendString, string symbol = null, string thisValueIsNullPrevString = null)
+        public static string AppendString(this string value, string appendString, string symbol = null, bool valueIsNullAppendSymbol = true)
         {
-            if (value == null || value == "")
-            {
-                return thisValueIsNullPrevString + value + symbol + appendString;
-            }
-            else
+
+            if (valueIsNullAppendSymbol)
             {
                 return value + symbol + appendString;
             }
+            else
+            {
+                return value + (string.IsNullOrEmpty(value) ? "" : symbol) + appendString;
+            }
+
         }
     }
 }
