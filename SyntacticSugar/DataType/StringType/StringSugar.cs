@@ -104,7 +104,7 @@ namespace SyntacticSugar
             if (value == null) return null;
             var guid = Guid.NewGuid().ToString();
             value = value.Replace("+", guid);
-            return System.Web.HttpContext.Current.Server.UrlDecode(value).Replace(guid,"+");
+            return System.Web.HttpContext.Current.Server.UrlDecode(value).Replace(guid, "+");
         }
 
         /// <summary>
@@ -120,6 +120,14 @@ namespace SyntacticSugar
             value = value.Replace("\t", " ");
             return value;
         }
- 
+        /// <summary>
+        /// 追加字符串
+        /// </summary>
+        /// <param name="symbol">两个字符串之间的符号</param>
+        /// <returns></returns>
+        public static string AppendString(this string value, string appendString, string symbol = null)
+        {
+            return value + symbol + appendString;
+        }
     }
 }
