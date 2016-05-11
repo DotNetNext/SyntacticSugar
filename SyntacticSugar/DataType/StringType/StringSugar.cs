@@ -125,9 +125,16 @@ namespace SyntacticSugar
         /// </summary>
         /// <param name="symbol">两个字符串之间的符号</param>
         /// <returns></returns>
-        public static string AppendString(this string value, string appendString, string symbol = null)
+        public static string AppendString(this string value, string appendString, string symbol = null, string thisValueIsNullPrevString = null)
         {
-            return value + symbol + appendString;
+            if (value == null || value == "")
+            {
+                return thisValueIsNullPrevString + value + symbol + appendString;
+            }
+            else
+            {
+                return value + symbol + appendString;
+            }
         }
     }
 }
