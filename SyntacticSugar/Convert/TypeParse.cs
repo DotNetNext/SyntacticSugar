@@ -19,6 +19,22 @@ namespace SyntacticSugar
     /// </summary>
     public static class TypeParseExtenions
     {
+        #region 强转成GUID 如果失败返回 0
+        /// <summary>
+        /// 强转成GUID 如果失败返回 GUID.EMPTY
+        /// </summary>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static Guid TryToGuid(this object thisValue)
+        {
+            Guid reval = Guid.Empty;
+            if (thisValue != null && Guid.TryParse(thisValue.ToString(), out reval))
+            {
+                return reval;
+            }
+            return reval;
+        }
+        #endregion
         #region 强转成bool 如果失败返回 0
         /// <summary>
         /// 强转成bool 如果失败返回 false
