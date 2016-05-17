@@ -2,3 +2,4 @@ E:\Code\Git\SyntackicSugar2\SyntacticSugar\bin\Debug\SyntacticSugar.dll
 E:\Code\Git\SyntackicSugar2\SyntacticSugar\bin\Debug\SyntacticSugar.pdb
 E:\Code\Git\SyntackicSugar2\SyntacticSugar\obj\Debug\SyntacticSugar.dll
 E:\Code\Git\SyntackicSugar2\SyntacticSugar\obj\Debug\SyntacticSugar.pdb
+E:\Code\Git\SyntackicSugar2\SyntacticSugar\obj\Debug\SyntacticSugar.csprojResolveAssemblyReference.cache

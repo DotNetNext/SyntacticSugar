@@ -77,6 +77,15 @@ namespace SyntacticSugar
                 return HttpContext.Current.Request.ServerVariables["URL"];
             }
         }
+
+        public static HttpContext Context
+        {
+            get
+            {
+                return System.Web.HttpContext.Current;
+            }
+        }
+
         /// <summary>
         /// 物理路径
         /// </summary>
