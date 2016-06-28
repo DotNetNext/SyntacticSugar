@@ -170,6 +170,7 @@ namespace SyntacticSugar
                 reval.FilePath = webDir + fileName;
                 reval.FileName = fileName;
                 reval.WebFilePath = webDir + fileName;
+                reval.WebPath = reval.WebFilePath;
                 return reval;
             }
             catch (Exception ex)
@@ -343,6 +344,8 @@ namespace SyntacticSugar
             /// </summary>
             public string FileName { get; set; }
 
+
+            public string WebPath { get; set; }
         }
         #endregion
     }

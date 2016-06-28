@@ -200,6 +200,7 @@ namespace SyntacticSugar
                 rm.FileName = NewfileName + sEx;
                 string fullPath = SaveFolder.Trim('\\') + "\\" + rm.FileName;
                 rm.WebPath = "/" + fullPath.Replace(HttpContext.Current.Server.MapPath("~/"), "").Replace("\\", "/");
+                rm.WebFilePath = rm.WebPath;
                 rm.filePath = fullPath;
                 rm.Size = PostFileSize;
                 PostedFile.SaveAs(fullPath);
@@ -1096,6 +1097,8 @@ namespace SyntacticSugar
             {
                 return string.Format("{0}{1}_{2}{3}", Directory, Path.GetFileNameWithoutExtension(FileName), index, Path.GetExtension(FileName));
             }
+
+            public string WebFilePath { get; set; }
         }
         #endregion
     }
