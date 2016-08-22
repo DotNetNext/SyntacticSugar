@@ -61,9 +61,14 @@ namespace SyntacticSugar
         public static int TryToInt(this object thisValue)
         {
             int reval = 0;
-            if (thisValue != null && int.TryParse(thisValue.ToString(), out reval))
+            try
             {
-                return reval;
+                reval = Convert.ToInt32(thisValue);
+            }
+            catch (Exception)
+            {
+                
+                 
             }
             return reval;
         }
