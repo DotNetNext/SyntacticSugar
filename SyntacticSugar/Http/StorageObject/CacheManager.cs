@@ -162,7 +162,7 @@ namespace SyntacticSugar
             var delKeyList = allKeyList.Where(removeExpression).ToList();
             foreach (var key in delKeyList)
             {
-                Remove(key);
+                HttpRuntime.Cache.Remove(key); ;
             }
         }
 
