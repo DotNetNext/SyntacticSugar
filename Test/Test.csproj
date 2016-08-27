@@ -64,6 +64,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="DateType\DateTypeTest.aspx" />
     <Content Include="Extenions\DataTable.aspx" />
     <Content Include="Extenions\EnumSugarExtenions.aspx" />
     <Content Include="Extenions\IsWhatTest.aspx" />
@@ -122,6 +123,13 @@
     </Compile>
     <Compile Include="Account\Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DateType\DateTypeTest.aspx.cs">
+      <DependentUpon>DateTypeTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DateType\DateTypeTest.aspx.designer.cs">
+      <DependentUpon>DateTypeTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Extenions\DataTable.aspx.cs">
       <DependentUpon>DataTable.aspx</DependentUpon>

@@ -3,3 +3,8 @@ E:\Code\Git\SyntackicSugar2\SyntacticSugar\bin\Debug\SyntacticSugar.pdb
 E:\Code\Git\SyntackicSugar2\SyntacticSugar\obj\Debug\SyntacticSugar.dll
 E:\Code\Git\SyntackicSugar2\SyntacticSugar\obj\Debug\SyntacticSugar.pdb
 E:\Code\Git\SyntackicSugar2\SyntacticSugar\obj\Debug\SyntacticSugar.csprojResolveAssemblyReference.cache
+C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSugar.dll
+C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSugar.pdb
+C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.csprojResolveAssemblyReference.cache
+C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.dll
+C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.pdb
