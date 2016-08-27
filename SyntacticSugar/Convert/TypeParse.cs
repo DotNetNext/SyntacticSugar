@@ -67,8 +67,8 @@ namespace SyntacticSugar
             }
             catch (Exception)
             {
-                
-                 
+
+
             }
             return reval;
         }
@@ -298,7 +298,7 @@ namespace SyntacticSugar
                     PropertyInfo info = plist.Find(p => p.Name == dt.Columns[i].ColumnName);
                     if (info != null)
                     {
-                        if (!Convert.IsDBNull(item[i]) && item[i]!=null)
+                        if (!Convert.IsDBNull(item[i]) && item[i] != null)
                         {
                             info.SetValue(s, item[i], null);
                         }
@@ -307,7 +307,7 @@ namespace SyntacticSugar
                 list.Add(s);
             }
             return list;
-        } 
+        }
         #endregion
 
         #region IO
@@ -334,8 +334,28 @@ namespace SyntacticSugar
         {
             Stream stream = new MemoryStream(bytes);
             return stream;
-        } 
+        }
         #endregion
 
+        /// <summary>
+        /// 将string转成枚举
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static TEnum TryToEnum<TEnum>(this string thisValue)
+        {
+            return (TEnum)Enum.Parse(typeof(TEnum), thisValue);
+        }
+        /// <summary>
+        /// 将int转成枚举
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <param name="thisValue"></param>
+        /// <returns></returns>
+        public static TEnum TryToEnum<TEnum>(this int thisValue)
+        {
+            return (TEnum)Enum.Parse(typeof(TEnum), thisValue.ToString());
+        }
     }
 }

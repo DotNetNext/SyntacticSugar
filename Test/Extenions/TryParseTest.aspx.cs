@@ -47,6 +47,13 @@ namespace Test.Extenions
             var dt = new List<ModelTest>().TryToDataTable();
             var list = dt.TryToList<ModelTest>();
 
+            var xx = "2".TryToEnum<x>();
+
+        }
+        public enum x
+        {
+            张三 = 1,
+            李四 = 2
         }
         public class ModelTest
         {
