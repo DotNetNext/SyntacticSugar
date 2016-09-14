@@ -12,4 +12,3 @@ G:\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSug
 G:\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.csprojResolveAssemblyReference.cache
 G:\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.dll
 G:\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.pdb
-C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.csprojResolveAssemblyReference.cache
