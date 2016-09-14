@@ -17,6 +17,18 @@ namespace SyntacticSugar
     public static class StringSugar
     {
         /// <summary>
+        /// 分割函数
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="splString">分割符号</param>
+        /// <param name="options">分割选项</param>
+        /// <returns></returns>
+        public static string[] Split(this string value, string splString, StringSplitOptions options = StringSplitOptions.RemoveEmptyEntries)
+        {
+            return value.Split(new string[] { splString }, options);
+        }
+
+        /// <summary>
         /// 获取格式化字符串,等同于string.Format
         /// </summary>
         /// <param name="value"></param>
