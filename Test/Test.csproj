@@ -65,6 +65,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="DateType\DateTypeTest.aspx" />
+    <Content Include="DateType\DynamicSugarTest.aspx" />
     <Content Include="Extenions\DataTable.aspx" />
     <Content Include="Extenions\EnumSugarExtenions.aspx" />
     <Content Include="Extenions\IsWhatTest.aspx" />
@@ -130,6 +131,13 @@
     </Compile>
     <Compile Include="DateType\DateTypeTest.aspx.designer.cs">
       <DependentUpon>DateTypeTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DateType\DynamicSugarTest.aspx.cs">
+      <DependentUpon>DynamicSugarTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DateType\DynamicSugarTest.aspx.designer.cs">
+      <DependentUpon>DynamicSugarTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Extenions\DataTable.aspx.cs">
       <DependentUpon>DataTable.aspx</DependentUpon>

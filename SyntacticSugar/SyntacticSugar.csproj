@@ -54,6 +54,7 @@
     <Compile Include="DataType\DataTableType\DataTableSugar.cs" />
     <Compile Include="DataType\DateType\DateSugar.cs" />
     <Compile Include="DataType\Dictionary\DictionaryExtensions.cs" />
+    <Compile Include="DataType\Dynamic\DynamicSugar.cs" />
     <Compile Include="DataType\EnumType\EnumSugar.cs" />
     <Compile Include="DataType\IEnumerable\IEnumerable.cs" />
     <Compile Include="DataType\IQueryable\IQueryableExtensions.cs" />

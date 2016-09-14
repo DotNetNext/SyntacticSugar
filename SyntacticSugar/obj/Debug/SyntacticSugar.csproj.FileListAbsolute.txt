@@ -7,3 +7,8 @@ C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\bin\Debug\
 C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSugar.pdb
 C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.dll
 C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.pdb
+G:\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSugar.dll
+G:\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\bin\Debug\SyntacticSugar.pdb
+G:\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.csprojResolveAssemblyReference.cache
+G:\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.dll
+G:\OneDrive\Asp.net\Project\SyntacticSugar\SyntacticSugar\obj\Debug\SyntacticSugar.pdb

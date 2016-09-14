@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SyntacticSugar</id>
+    <version>2.1</version>
+    <title>SyntacticSugar</title>
+    <authors>sunkaixuan</authors>
+    <owners>sunkaixuan</owners>
+    <licenseUrl>https://github.com/sunkaixuan</licenseUrl>
+    <projectUrl>https://github.com/sunkaixuan</projectUrl>
+    <iconUrl>https://secure.gravatar.com/avatar/a82c03402497b2e58fd65038a3699b30</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+   <description> .NET 4.0+ </description>
+    <copyright>Copyright 2016</copyright>
+    <tags>.net Syntactic Sugar</tags>
+  </metadata>
+</package>

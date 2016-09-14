@@ -33,3 +33,10 @@ C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\Test\bin\SyntacticSugar.p
 C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
 C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.dll
 C:\Users\ss去\OneDrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.pdb
+G:\OneDrive\Asp.net\Project\SyntacticSugar\Test\bin\Test.dll
+G:\OneDrive\Asp.net\Project\SyntacticSugar\Test\bin\Test.pdb
+G:\OneDrive\Asp.net\Project\SyntacticSugar\Test\bin\SyntacticSugar.dll
+G:\OneDrive\Asp.net\Project\SyntacticSugar\Test\bin\SyntacticSugar.pdb
+G:\OneDrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+G:\OneDrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.dll
+G:\OneDrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.pdb
