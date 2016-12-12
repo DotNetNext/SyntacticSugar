@@ -147,11 +147,11 @@ namespace SyntacticSugar
                 bool isCurent = pageIndex == i;
                 if (isCurent)
                 {
-                    pagestr.Append("  <a class=\"page_current\">" + i + "</a>");
+                    pagestr.Append("  <a class=\"page_current page_number\">" + i + "</a>");
                 }
                 else
                 {
-                    pagestr.Append("   <a href=\"" + query_string + "pageIndex=" + i + "\">" + i + "</a>");
+                    pagestr.Append("   <a class=\"page_number\"  href=\"" + query_string + "pageIndex=" + i + "\">" + i + "</a>");
                 }
 
             }
