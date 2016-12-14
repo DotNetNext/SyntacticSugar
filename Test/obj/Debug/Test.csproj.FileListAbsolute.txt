@@ -40,3 +40,10 @@ G:\OneDrive\Asp.net\Project\SyntacticSugar\Test\bin\SyntacticSugar.pdb
 G:\OneDrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
 G:\OneDrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.dll
 G:\OneDrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.pdb
+D:\Onedrive\Asp.net\Project\SyntacticSugar\Test\bin\Test.dll
+D:\Onedrive\Asp.net\Project\SyntacticSugar\Test\bin\Test.pdb
+D:\Onedrive\Asp.net\Project\SyntacticSugar\Test\bin\SyntacticSugar.dll
+D:\Onedrive\Asp.net\Project\SyntacticSugar\Test\bin\SyntacticSugar.pdb
+D:\Onedrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+D:\Onedrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.dll
+D:\Onedrive\Asp.net\Project\SyntacticSugar\Test\obj\Debug\Test.pdb

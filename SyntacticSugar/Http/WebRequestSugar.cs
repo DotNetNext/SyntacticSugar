@@ -21,6 +21,12 @@ namespace SyntacticSugar
     /// </summary>
     public class WebRequestSugar
     {
+
+        /// <summary>
+        ///通过对httpWebReust进行设置属性
+        /// </summary>
+        public Action<HttpWebRequest> RequestSetMethod = null;
+
         /// <summary>
         /// 设置cookie
         /// </summary>
@@ -42,9 +48,19 @@ namespace SyntacticSugar
         private string accept = "*/*";
 
         /// <summary>
+        /// http头
+        /// </summary>
+        private Dictionary<string, string> headerItems = null;
+
+        /// <summary>
         /// 过期时间
         /// </summary>
         private int time = 5000;
+
+        /// <summary>
+        /// 客户端
+        /// </summary>
+        private string userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.75 Safari/537.36";
 
         /// <summary>
         /// 设置请求过期时间（单位：毫秒）（默认：5000）
@@ -53,6 +69,15 @@ namespace SyntacticSugar
         public void SetTimeOut(int time)
         {
             this.time = time;
+        }
+
+        /// <summary>
+        /// 设置客户端
+        /// </summary>
+        /// <param name="userAgent"></param>
+        public void SetUserAgent(string userAgent)
+        {
+            this.userAgent = userAgent;
         }
 
         /// <summary>
@@ -92,6 +117,18 @@ namespace SyntacticSugar
         }
 
         /// <summary>
+        /// 设置http头
+        /// </summary>
+        /// <param name="headers"></param>
+        public void SetHeaderItems(Dictionary<string, string> headers)
+        {
+            if (headers != null)
+            {
+                this.headerItems = headers;
+            }
+        }
+
+        /// <summary>
         /// post请求返回html
         /// </summary>
         /// <param name="url"></param>
@@ -107,9 +144,14 @@ namespace SyntacticSugar
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.AllowAutoRedirect = allowAutoRedirect;
             request.Method = "POST";
+            AddHeaders(request);
+            request.UserAgent = userAgent;
             request.Accept = accept;
             request.ContentType = this.contentType;
             request.Timeout = time;
+            if (RequestSetMethod != null) {
+                RequestSetMethod(request);
+            }
             request.ContentLength = Encoding.UTF8.GetByteCount(postDataStr);
             if (cookie != null)
                 request.CookieContainer = cookie; //cookie信息由CookieContainer自行维护
@@ -171,6 +213,12 @@ namespace SyntacticSugar
             request.CookieContainer = cookie;
             request.Accept = this.accept;
             request.Timeout = time;
+            request.UserAgent = userAgent;
+            if (RequestSetMethod != null)
+            {
+                RequestSetMethod(request);
+            }
+            AddHeaders(request);
             this.SetCertificatePolicy();
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             // response.Cookies = cookie.GetCookies(response.ResponseUri);
@@ -224,7 +272,7 @@ namespace SyntacticSugar
         /// <param name="postdata">参数</param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public  string HttpUploadFile(string url, string[] files, Dictionary<string, string> postdata, Encoding encoding)
+        public string HttpUploadFile(string url, string[] files, Dictionary<string, string> postdata, Encoding encoding)
         {
             string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
             byte[] boundarybytes = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
@@ -236,8 +284,14 @@ namespace SyntacticSugar
             request.Method = "POST";
             request.KeepAlive = true;
             request.Accept = this.accept;
+            request.UserAgent = userAgent;
             request.Timeout = this.time;
             request.AllowAutoRedirect = this.allowAutoRedirect;
+            AddHeaders(request);
+            if (RequestSetMethod != null)
+            {
+                RequestSetMethod(request);
+            }
             if (cookie != null)
                 request.CookieContainer = cookie;
             request.Credentials = CredentialCache.DefaultCredentials;
@@ -284,6 +338,17 @@ namespace SyntacticSugar
             using (StreamReader stream = new StreamReader(response.GetResponseStream()))
             {
                 return stream.ReadToEnd();
+            }
+        }
+
+        private void AddHeaders(HttpWebRequest request)
+        {
+            if (headerItems != null && headerItems.Count > 0)
+            {
+                foreach (var item in headerItems)
+                {
+                    request.Headers.Add(item.Key, item.Value);
+                }
             }
         }
 
